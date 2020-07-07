@@ -48,8 +48,6 @@ class presensi extends CI_Controller
         $data['data'] = $this->list_model->get_presensi_list($config["per_page"], $data['page']);           
 
         $data['pagination'] = $this->pagination->create_links();
-
-
         $data['title'] = 'Presensi';
 
         $data['isi'] = $this->db->get_where('presensi')->result_array();
