@@ -10,7 +10,8 @@
                 </form>
             </nav>
             <div class="card-body">
-
+<a href="http://" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Tambah
+                    Dosen</a>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%">
                         <thead>
