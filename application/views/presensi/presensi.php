@@ -55,7 +55,6 @@
                 </div>
                 <form method="post" enctype="multipart/form-data" action="<?php echo base_url("presensi/upload") ?>">
                     <div class="modal-body">
-
                         <input type="file" class="form-control-file" id="file" name="file[]" multiple>
                     </div>
                     <div class="modal-footer">
