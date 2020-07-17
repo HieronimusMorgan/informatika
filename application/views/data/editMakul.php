@@ -9,7 +9,7 @@
                             <div class="form-group">
                                 <label for="kode">Kode Makul</label>
                                 <input type="text" class="form-control" id="kode" name="kode"
-                                    value="<?= $data['kodeMakul'] ?>" readonly>
+                                    value="<?= $data['kodeMakul'] ?>">
                                 <?= form_error('kode', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
@@ -33,7 +33,7 @@
                                 <?= form_error('nama', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
-                                <label for="tahun">tahun</label>
+                                <label for="tahun">Tahun</label>
                                 <input type="text" class="form-control" id="tahun" name="tahun"
                                     value="<?= $data['tahun'] ?>">
                                 <?= form_error('tahun', '<small class="text-danger pl-2">', '</small>') ?>

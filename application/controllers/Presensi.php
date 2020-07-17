@@ -21,7 +21,7 @@ class presensi extends CI_Controller
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
+        $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -81,44 +81,51 @@ class presensi extends CI_Controller
                     $tahun_ajar = $worksheet ->getCellByColumnAndRow(1,2);
                     $tahun_ajar_temp = explode(" T.A ",$tahun_ajar);
 
-                    if($tahun_ajar_temp[1] == "") {
+                    if($tahun_ajar_temp[1]== NULL) {
                         $tahun_ajar_temp = explode(" TAHUN AKADEMIK ",$tahun_ajar);
                     }
-
                     $periode = $tahun_ajar_temp[1];
+                    
+                    $waktu = $worksheet->getCellByColumnAndRow(18, 4);
+                    $waktu_temp=explode("/",$waktu);
+
                     $makulkelas = $worksheet->getCellByColumnAndRow(3, 4);
                     $makulkelas_temp = explode(" / ",$makulkelas);
-                    $makul1 = $makulkelas_temp[0];
-                    $makul = strtoupper($makul1);                    
+
+                    $makul = $makulkelas_temp[0];                                     
                     $kelas = $makulkelas_temp[1];
+                    
                     $dosen = $worksheet->getCellByColumnAndRow(6,4);
-                    $this->PresensiModel->addMakulDosen($makul1,$dosen);
-                    $dosen = strtoupper($dosen);
-                    $dosen = addslashes($dosen);
-
-                    $data1 = $this->db->query("SELECT * FROM presensi WHERE Makul LIKE '".$makul1."' AND Kelas LIKE '".$kelas."' AND Dosen LIKE '".$dosen."' AND TahunAjaran LIKE '".$periode."'")->num_rows();
-
+                    $dosen_id="";
+                   
+                    
+                    $data1 = $this->db->query("SELECT * FROM presensi WHERE Makul LIKE '".$makul."' AND Kelas LIKE '".$kelas."' AND Dosen LIKE '".$dosen."' AND TahunAjaran LIKE '".$periode."'")->num_rows();
                     if($data1 == 0) {
                         for ($row=7; $row <= $highestRow ; $row++) { 
                             $nim = $worksheet ->getCellByColumnAndRow(2,$row) ->getValue();
-                            $nama = $worksheet ->getCellByColumnAndRow(4,$row) ->getValue();
-                            if($nim == 9) {
-                                $data[] = array('Nim' => $nim,'Nama' => $nama,'Makul' =>$makul,'Kelas' => $kelas,'Dosen' => $dosen,'TahunAjaran' => $periode);                                
+                            $nama = ucwords($worksheet ->getCellByColumnAndRow(4,$row) ->getValue());
+                            
+                            if(strlen($nim) == 9) {
+                                $data[] = array('Nim' => $nim,'Nama' => $nama,'Makul' =>$makul,'Kelas' => $kelas,'Dosen' => $dosen,'TahunAjaran' => $periode);
+                            }elseif(strlen($nim) == 6){
+                                $dosen_id = $worksheet->getCellByColumnAndRow(2, $row)->getFormattedValue();
                             }
-                        }
-
+                        }                        
+                        $addDosen=['nip'=>$dosen_id,'nama'=>$dosen];
+                        $addMakul=['nama'=>$makul,'tahun'=>$periode,'ruangan'=>$waktu_temp[2]];
+                        $addRuangan=['nama'=>$waktu_temp[2],'makul'=>$makul,'jam'=>$waktu_temp[1]];
+                        $this->PresensiModel->addAll($addDosen,$addMakul,$addRuangan);
                     }else{
-
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
                         Data sudah di import!</div>');
                     }                 
                 }
             }        
-           if ($data) {
+             if ($data) {               
                $this->PresensiModel->insert($data);
                $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
                         Data berhasil di import!</div>');
-           } 
+            } 
         }
         redirect('presensi');
     } 

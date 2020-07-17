@@ -40,9 +40,9 @@
                                 <td><?php echo $row->ruangan; ?></td>
                                 <td><?php echo $row->kapasitas; ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>home/editMakul/<?= $row->kodeMakul; ?>"
+                                    <a href="<?php echo base_url(); ?>home/editMakul/<?= $row->nama; ?>"
                                         class="badge badge-success ">Edit</a>
-                                    <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row->kodeMakul; ?>"
+                                    <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row->nama; ?>"
                                         class="badge badge-danger"
                                         onclick="return confirm('Are you sure you want to delete <?= $row->nama; ?>?');">Delete</a>
                                 </td>

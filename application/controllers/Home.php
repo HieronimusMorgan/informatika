@@ -31,7 +31,7 @@ class home extends CI_Controller
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
         $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
+        $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -245,17 +245,17 @@ class home extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
     }
-    public function editMakul($kode){
-        $this->session->set_tempdata('item', $kode, 10);
+    public function editMakul($nama){
+        $this->session->set_tempdata('item', $nama, 10);
         redirect('home/editMat');
     }
     public function editMat()
     {
-        $kode=$this->session->tempdata('item');
+        $nama= urldecode($this->session->tempdata('item'));
         $data['title'] = 'Edit Mata Kuliah';
-        $data['data'] = $this->db->get_where('makul', ['kodeMakul' => $kode])->row_array();
+        $data['data'] = $this->db->get_where('makul', ['nama' => $nama])->row_array();
 
-        $this->form_validation->set_rules('kode', 'kode', 'required');
+        
         $this->form_validation->set_rules('tipe', 'Tipe', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('tahun', 'Tahun', 'required');
@@ -280,6 +280,8 @@ class home extends CI_Controller
                 'ruangan' => $this->input->post('ruangan'),
                 'kapasitas' => $this->input->post('kapasitas')
             ];
+
+            $this->data_model->editMakul($edit);
             $this->db->where('kodeMakul', $kode);
             $this->db->update('makul', $edit);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">

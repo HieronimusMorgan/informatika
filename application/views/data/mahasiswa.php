@@ -43,7 +43,7 @@
                                     <?php if ($a == '1') : ?>
                                     <?php echo 'AKTIF'; ?>
                                     <?php else :?>
-                                    <?php echo 'DO'; ?>
+                                    <?php echo 'TIDAK AKTIF'; ?>
                                     <?php endif; ?>
                                 </td>
 
