@@ -13,8 +13,7 @@
                                 <th>No</th>
                                 <th>NIM</th>
                                 <th>NAMA</th>
-                                <th>MATA KULIAH</th>
-                                <th>KELAS</th>
+
                             </tr>
                         </thead>
                         <tbody>
@@ -24,8 +23,6 @@
                                 <td><?= $i ?></td>
                                 <td><?php echo $row->Nim; ?></td>
                                 <td><?php echo $row->Nama; ?></td>
-                                <td><?php echo $row->Makul; ?></td>
-                                <td><?php echo $row->Kelas; ?></td>
                             </tr>
                             <?php $i++; ?>
                             <?php endforeach; ?>

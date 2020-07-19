@@ -84,7 +84,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url("presensi/upload") ?>">
+                <form method="post" enctype="multipart/form-data"
+                    action="<?php echo base_url("home/uploadMahasiswa") ?>">
                     <div class="modal-body">
                         <input type="file" class="form-control-file" id="file" name="file[]" multiple>
                     </div>

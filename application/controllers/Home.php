@@ -12,6 +12,7 @@ class home extends CI_Controller
         $this->load->model('list_model');
         $this->load->model('data_model');
 
+        $this->load->library('excel');
 		//$this->load->library(array('PHPExcel','PHPExcel/IOFactory'));
     }
 
@@ -30,7 +31,6 @@ class home extends CI_Controller
         
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
@@ -69,7 +69,7 @@ class home extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
     public function editMhs($nim){
-        $this->session->set_tempdata('item', $nim, 10);
+        $this->session->set_tempdata('item', $nim, 1000);
         redirect('home/editMahasiswa');
      }
     
@@ -122,8 +122,7 @@ class home extends CI_Controller
         
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
+        $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -161,7 +160,7 @@ class home extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
     public function editDsn($nip){
-        $this->session->set_tempdata('item', $nip, 10);
+        $this->session->set_tempdata('item', $nip, 1000);
         redirect('home/editDosen');
     }
     public function editDosen(){
@@ -187,7 +186,6 @@ class home extends CI_Controller
             ];
             $this->db->where('nip', $nip);
             $this->db->update('dosen', $edit);
-            $this->session->destroy();
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
             Dosen berhasil di update!</div>');
             redirect('home/dosen');
@@ -207,8 +205,7 @@ class home extends CI_Controller
         
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
+        $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -246,7 +243,7 @@ class home extends CI_Controller
         $this->load->view('templates/footer', $data);
     }
     public function editMakul($nama){
-        $this->session->set_tempdata('item', $nama, 10);
+        $this->session->set_tempdata('item', $nama, 1000);
         redirect('home/editMat');
     }
     public function editMat()
@@ -295,8 +292,7 @@ class home extends CI_Controller
         
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
-        $config["num_links"] = floor($choice);
+        $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
         $config['last_link']        = 'Last';
@@ -335,7 +331,7 @@ class home extends CI_Controller
     }
     
     public function editRuang($nama){
-        $this->session->set_tempdata('item', $nama, 10);
+        $this->session->set_tempdata('item', $nama, 1000);
         redirect('home/editRuangan');
     }
     
@@ -370,7 +366,66 @@ class home extends CI_Controller
         }
     }
     
-    
+    public function uploadMahasiswa()
+    {       
+        if(isset($_FILES["file"]["name"])) {
+            $countfiles = count($_FILES["file"]["name"]);         
 
+            for ($iii=0; $iii <  $countfiles; $iii++) { 
+                
+                $path = $_FILES["file"]["tmp_name"][$iii];
+                $object = PHPExcel_IOFactory::load($path);
+                
+                foreach ($object ->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet ->getHighestRow();
+                    $highestColumn = $worksheet ->getHighestColumn();
+                    for ($row=2; $row <= $highestRow ; $row++) { 
+                        $nim=$worksheet->getCellByColumnAndRow(0, $row)->getValue();
+                        $nama=$worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        if(strlen($nim) == 9) {
+                            $data[] = array('Nim' => $nim,'Nama' => $nama, 'status'=>1);     
+                        }
+                    }          
+                                  
+                }
+            }                        
+            $this->db->insert_batch('mahasiswa',$data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+                        Data berhasil di import!</div>');
+             
+        }
+        redirect('home/mahasiswa');
+    } 
+    public function uploadDosen()
+    {       
+        if(isset($_FILES["file"]["name"])) {
+            $countfiles = count($_FILES["file"]["name"]);         
 
+            for ($iii=0; $iii <  $countfiles; $iii++) { 
+                
+                $path = $_FILES["file"]["tmp_name"][$iii];
+                $object = PHPExcel_IOFactory::load($path);
+                
+                foreach ($object ->getWorksheetIterator() as $worksheet) {
+                    $highestRow = $worksheet ->getHighestRow();
+                    $highestColumn = $worksheet ->getHighestColumn();
+                    for ($row=2; $row <= $highestRow ; $row++) { 
+                        $nim=$worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $nama=$worksheet->getCellByColumnAndRow(1, $row)->getValue();                        
+                        if($this->db->get_where('dosen', ['nama'=>$nama])->num_rows()==0){
+                            $data[] = array('nip' => $nim,'nama' => $nama); 
+                        }
+                    }          
+                                  
+                }
+            }
+            if($data){
+                $this->db->insert_batch('dosen',$data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+                            Data berhasil di import!</div>');
+            }                    
+             
+        }
+        redirect('home/dosen');
+    } 
 }

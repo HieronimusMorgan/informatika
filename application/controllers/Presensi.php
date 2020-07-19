@@ -11,6 +11,7 @@ class presensi extends CI_Controller
         //load the department_model
         $this->load->model('list_model');
         $this->load->model('PresensiModel');
+        $this->load->model('PresensiModel');
         $this->load->library('excel');
     }
 
@@ -20,7 +21,6 @@ class presensi extends CI_Controller
         $config['total_rows'] = $this->db->count_all('presensi'); //total row
         $config['per_page'] = 25;  //show record per halaman
         $config["uri_segment"] = 3;  // uri parameter
-        $choice = $config["total_rows"] / $config["per_page"];
         $config["num_links"] = 5;
         
         $config['first_link']       = 'First';
@@ -63,9 +63,9 @@ class presensi extends CI_Controller
     {
         
     }
+   
     public function upload()
-    {        
-
+    {       
         if(isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);         
 
@@ -77,45 +77,58 @@ class presensi extends CI_Controller
                 foreach ($object ->getWorksheetIterator() as $worksheet) {
                     $highestRow = $worksheet ->getHighestRow();
                     $highestColumn = $worksheet ->getHighestColumn();
-        
-                    $tahun_ajar = $worksheet ->getCellByColumnAndRow(1,2);
-                    $tahun_ajar_temp = explode(" T.A ",$tahun_ajar);
-
-                    if($tahun_ajar_temp[1]== NULL) {
+                    $makulkelas = $worksheet->getCellByColumnAndRow(3, 4);
+                    $makulkelas_temp = explode(" / ",$makulkelas);    
+                    $tahun_ajar = $worksheet ->getCellByColumnAndRow(1,2);                   
+                    if (count(explode(" T.A ",$tahun_ajar)) == 2) {
+                        $tahun_ajar_temp = explode(" T.A ",$tahun_ajar);
+                    } else {
                         $tahun_ajar_temp = explode(" TAHUN AKADEMIK ",$tahun_ajar);
                     }
                     $periode = $tahun_ajar_temp[1];
-                    
+                    $periode_temp = explode(" ",$periode);
                     $waktu = $worksheet->getCellByColumnAndRow(18, 4);
                     $waktu_temp=explode("/",$waktu);
-
-                    $makulkelas = $worksheet->getCellByColumnAndRow(3, 4);
-                    $makulkelas_temp = explode(" / ",$makulkelas);
-
-                    $makul = $makulkelas_temp[0];                                     
-                    $kelas = $makulkelas_temp[1];
-                    
+                    #Dosen                    
                     $dosen = $worksheet->getCellByColumnAndRow(6,4);
-                    $dosen_id="";
-                   
-                    
-                    $data1 = $this->db->query("SELECT * FROM presensi WHERE Makul LIKE '".$makul."' AND Kelas LIKE '".$kelas."' AND Dosen LIKE '".$dosen."' AND TahunAjaran LIKE '".$periode."'")->num_rows();
-                    if($data1 == 0) {
+        
+                    #MAKUL
+                        #nama Makul
+                    $makul = $makulkelas_temp[0];
+                        #tahun Makul
+                    $tahun=$periode_temp[0];
+                        #semester Makul
+                    $semester=$periode_temp[3];                       
+                        #ruangan Makul
+                    $ruangan=$waktu_temp[2];
+                        #kelas Makul                                     
+                    $kelas = $makulkelas_temp[1];
+                        #hari Makul
+                    $hari=$waktu_temp[0]; 
+                        #jam Makul
+                    $jam=$waktu_temp[1];  
+                    $check=['nama'=>$makul,'tahun'=>$tahun,'semester'=>$semester,'ruangan'=>$ruangan,'kelas'=>$kelas];
+                    $data1 = $this->PresensiModel->checkMakul($check);   
+                    if($data1 == 0) {                        
+                        $idMakul = $this->PresensiModel->idMakul($check);
+                        #idDosen
+                        $idDosen = $this->PresensiModel->idDosen($dosen);
+                        $ruang = ['nama'=>$ruangan,'makul'=>$idMakul,'hari'=>$hari,'jam'=>$jam];
+                        $idRuangan =  $this->PresensiModel->idRuangan($ruang);
                         for ($row=7; $row <= $highestRow ; $row++) { 
                             $nim = $worksheet ->getCellByColumnAndRow(2,$row) ->getValue();
                             $nama = ucwords($worksheet ->getCellByColumnAndRow(4,$row) ->getValue());
-                            
                             if(strlen($nim) == 9) {
-                                $data[] = array('Nim' => $nim,'Nama' => $nama,'Makul' =>$makul,'Kelas' => $kelas,'Dosen' => $dosen,'TahunAjaran' => $periode);
-                            }elseif(strlen($nim) == 6){
-                                $dosen_id = $worksheet->getCellByColumnAndRow(2, $row)->getFormattedValue();
+                                $data[] = array('Nim' => $nim,'Nama' => $nama,'idMakul' =>$idMakul, 'idDosen' => $idDosen,'idRuangan'=>$idRuangan);     
+                            }elseif($nama == $dosen ){
+                                $id=$worksheet ->getCellByColumnAndRow(2,$row) ->getValue();
+                                if($id==""){
+                                    $id=mt_rand(0,999999);
+                                }
+                                $this->db->set('nip',$id)->where('idDosen',$idDosen)->update('dosen');
                             }
-                        }                        
-                        $addDosen=['nip'=>$dosen_id,'nama'=>$dosen];
-                        $addMakul=['nama'=>$makul,'tahun'=>$periode,'ruangan'=>$waktu_temp[2]];
-                        $addRuangan=['nama'=>$waktu_temp[2],'makul'=>$makul,'jam'=>$waktu_temp[1]];
-                        $this->PresensiModel->addAll($addDosen,$addMakul,$addRuangan);
-                    }else{
+                        }          
+                    }else{                        
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
                         Data sudah di import!</div>');
                     }                 
