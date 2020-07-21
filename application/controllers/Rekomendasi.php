@@ -15,6 +15,6 @@ class rekomendasi extends CI_Controller
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('rekomendasi/index',$data);
-        $this->load->view('templates/footer', $data);
+        //$this->load->view('templates/footer', $data);
     }
 }
