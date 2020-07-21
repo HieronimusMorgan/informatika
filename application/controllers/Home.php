@@ -67,22 +67,33 @@ class home extends CI_Controller
         $this->load->view('data/mahasiswa',$data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
-    }
-    public function editMhs($nim){
+     }
+     
+     public function detailMhs($nim)
+     {
+        $data['title'] = 'Detail Mahasiswa';
+        $data['data'] = $this->db->get_where('mahasiswa', ['nim' => $nim])->row_array();
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('data/detailMhs',$data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
+     }
+
+     public function editMhs($nim){
         $this->session->set_tempdata('item', $nim, 1000);
         redirect('home/editMahasiswa');
      }
-    
-    public function editMahasiswa(){
+     public function editMahasiswa(){
          $nim=$this->session->tempdata('item');
          $data['title'] = 'Edit Mahasiswa';
          $data['data'] = $this->db->get_where('mahasiswa', ['nim' => $nim])->row_array();
- 
+         
          $this->form_validation->set_rules('nama', 'Nama', 'required');
          $this->form_validation->set_rules('nim', 'NIM', 'required');
-         $this->form_validation->set_rules('dpa', 'DPA', 'required');
-         $this->form_validation->set_rules('ipk', 'IPK', 'required');
-         $this->form_validation->set_rules('sks', 'SKS', 'required');
+        //  $this->form_validation->set_rules('dpa', 'DPA', 'required');
+        //  $this->form_validation->set_rules('ipk', 'IPK', 'required');
+        //  $this->form_validation->set_rules('sks', 'SKS', 'required');
          
          if ($this->form_validation->run() == false) {
              $this->load->view('templates/header', $data);
@@ -98,7 +109,7 @@ class home extends CI_Controller
                  'nim' => $this->input->post('nim'),
                  'dpa' => $this->input->post('dpa'),
                  'minat' => $this->input->post('minat'),
-                 'status' => ($this->input->post('status')) ? 1 : 0
+                 'status' => $this->input->post('status')
              ];
              $this->db->where('nim', $nim);
              $this->db->update('mahasiswa', $edit);
@@ -107,15 +118,15 @@ class home extends CI_Controller
              redirect('home/mahasiswa');
          }
      }
-    public function deleteMhs($nim){
+    
+     public function deleteMhs($nim){
         $hapus = $this->db->get_where('mahasiswa', ['nim' => $nim])->row_array();
-        //$this->db->delete('mahasiswa', $hapus);
+        $this->db->delete('mahasiswa', $hapus);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
         Mahasiswa berhasil di hapus!</div>');
         redirect('home/mahasiswa');
     }
-   
-
+    
     public function dosen(){
         $config['base_url'] = site_url('home/dosen'); //site url
         $config['total_rows'] = $this->db->count_all('dosen'); //total row
@@ -158,12 +169,12 @@ class home extends CI_Controller
         $this->load->view('data/dosen',$data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
-    }
-    public function editDsn($nip){
+     }
+     public function editDsn($nip){
         $this->session->set_tempdata('item', $nip, 1000);
         redirect('home/editDosen');
-    }
-    public function editDosen(){
+     }
+     public function editDosen(){
         $nip= $this->session->tempdata('item');
         $data['title'] = 'Edit Dosen';
         $data['data'] = $this->db->get_where('dosen', ['nip' => $nip])->row_array();
@@ -190,15 +201,17 @@ class home extends CI_Controller
             Dosen berhasil di update!</div>');
             redirect('home/dosen');
         } 
-    }
-    public function deleteDsn($nip){
+     }
+     public function deleteDsn($nip){
         $hapus = $this->db->get_where('dosen', ['nip' => $nip])->row_array();
-        //$this->db->delete('mahasiswa', $hapus);
+        $this->db->delete('mahasiswa', $hapus);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
         Dosen berhasil di hapus!</div>');
         redirect('home/dosen');
-    }
+     }
 
+    
+    
     public function makul(){
         $config['base_url'] = site_url('home/makul'); //site url
         $config['total_rows'] = $this->db->count_all('makul'); //total row
@@ -241,13 +254,12 @@ class home extends CI_Controller
         $this->load->view('data/makul',$data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
-    }
-    public function editMakul($nama){
+     }
+     public function editMakul($nama){
         $this->session->set_tempdata('item', $nama, 1000);
         redirect('home/editMat');
-    }
-    public function editMat()
-    {
+     }
+     public function editMat(){
         $nama= urldecode($this->session->tempdata('item'));
         $data['title'] = 'Edit Mata Kuliah';
         $data['data'] = $this->db->get_where('makul', ['nama' => $nama])->row_array();
@@ -285,7 +297,8 @@ class home extends CI_Controller
             Mata Kuliah berhasil di update!</div>');
             redirect('home/makul');
         }
-    }
+     }
+    
     public function ruangan(){
         $config['base_url'] = site_url('home/ruangan'); //site url
         $config['total_rows'] = $this->db->count_all('ruangan'); //total row
@@ -328,14 +341,14 @@ class home extends CI_Controller
         $this->load->view('data/ruangan',$data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
-    }
+     }
     
-    public function editRuang($nama){
+     public function editRuang($nama){
         $this->session->set_tempdata('item', $nama, 1000);
         redirect('home/editRuangan');
-    }
+     }
     
-    public function editRuangan(){
+     public function editRuangan(){
         $nama=$this->session->tempdata('item');
         $data['title'] = 'Edit Ruangan';
         $data['data'] = $this->db->get_where('ruangan', ['nama' => $nama])->row_array();
@@ -364,10 +377,10 @@ class home extends CI_Controller
             Ruangan berhasil di update!</div>');
             redirect('home/ruangan');
         }
-    }
+     }
+
     
-    public function uploadMahasiswa()
-    {       
+    public function uploadMahasiswa(){       
         if(isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);         
 
@@ -382,8 +395,16 @@ class home extends CI_Controller
                     for ($row=2; $row <= $highestRow ; $row++) { 
                         $nim=$worksheet->getCellByColumnAndRow(0, $row)->getValue();
                         $nama=$worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                        $dpa=$worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                        $minat=$worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                        $status=$worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                        $ipk=$worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                        $sks=$worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                        $dosbing=$worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                        $dosbing1=$worksheet->getCellByColumnAndRow(8, $row)->getValue();
                         if(strlen($nim) == 9) {
-                            $data[] = array('Nim' => $nim,'Nama' => $nama, 'status'=>1);     
+                            $data[] = array('Nim' => $nim,'Nama' => $nama, 'dpa'=>$dpa, 'minat'=>$minat, 'status'=>$status
+                        , 'ipk'=>$ipk, 'sks'=>$sks, 'dosbing'=> $dosbing, 'dosbing1'=>$dosbing1);     
                         }
                     }          
                                   
@@ -396,8 +417,8 @@ class home extends CI_Controller
         }
         redirect('home/mahasiswa');
     } 
-    public function uploadDosen()
-    {       
+    
+    public function uploadDosen(){       
         if(isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);         
 
@@ -428,4 +449,27 @@ class home extends CI_Controller
         }
         redirect('home/dosen');
     } 
+
+    public function formatmhs(){
+        $excel = new PHPExcel();
+        $excel->getProperties()->setTitle("Format Mahasiswa");
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "NIM"); // Set kolom B3 dengan tulisan "NIS"
+        $excel->setActiveSheetIndex(0)->setCellValue('B1', "NAMA"); // Set kolom C3 dengan tulisan "NAMA"
+        $excel->setActiveSheetIndex(0)->setCellValue('C1', "DPA"); // Set kolom C3 dengan tulisan "NAMA"
+        $excel->setActiveSheetIndex(0)->setCellValue('D1', "MINAT"); // Set kolom C3 dengan tulisan "NAMA"
+        $excel->setActiveSheetIndex(0)->setCellValue('E1', "STATUS"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
+        $excel->setActiveSheetIndex(0)->setCellValue('F1', "IPK"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('G1', "SKS"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('H1', "DOSBING"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('I1', "DOSBING 1"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->getActiveSheet(0)->setTitle("Format Mahasiswa");
+        $excel->setActiveSheetIndex(0);
+        // Proses file excel
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="Format Mahasiswa.xlsx"'); // Set nama file excel nya
+        header('Cache-Control: max-age=0');
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
+    }
+    
 }

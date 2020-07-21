@@ -42,40 +42,49 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="card mb-4  ">
-                        <div class="card-header d-flex justify-content-center ">
-                            KAPASITAS SEMUA KELAS
+                        <div class="card-header d-flex justify-content-center bold ">
+                            <h5> <?= $data ?></h5>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
+
                                 <table class="table table-bordered" id="dataTable" width="100%" id="myTable">
                                     <thead>
                                         <tr style="text-align:center;">
-                                            <th>NO</th>
-                                            <th>MAKUL</th>
-                                            <th>JUMLAH</th>
+                                            <th>TAHUN</th>
+                                            <th>TELAH MENGAMBIL</th>
+                                            <th>BELUM MENGAMBIL</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <?php $i = 1; ?>
-                                        <?php $total = 0 ; ?>
+                                        <?php $total = 0 ; 
+                                        $makul =$this->db->get('tahun')->result_array();
+                                        ?>
+                                        <?php if ($kapasitas):?>
                                         <?php foreach ($makul as $m):?>
+                                        <?php  
+                                                $sql = "SELECT COUNT(Nim) AS jumlah FROM presensi a JOIN makul b ON a.idMakul = b.idMakul WHERE b.nama LIKE '".$data."' AND a.Nim LIKE '".$m['tahun']."%'  ";
+                                                $jumlah = $this->db->query($sql)->result_array();?>
+                                        <?php if ($jumlah[0]['jumlah']!=0) : ?>
                                         <tr>
-                                            <td style="text-align:center;"><?php echo $i ?></td>
-                                            <td><?php echo $m['nama'] ?></td>
+                                            <td style="text-align:center;"><?='20'.$m['tahun'] ?></td>
                                             <td style="text-align:center;"><?php  
-                                                $sql = "SELECT COUNT(Nim) AS jumlah FROM presensi a JOIN makul b ON a.idMakul = b.idMakul WHERE b.nama LIKE '".$m['nama']."'";
-                                                $jumlah = $this->db->query($sql)->result_array();
-                                                echo $jumlah[0]['jumlah'];
-                                                $total += $jumlah[0]['jumlah'];
+                                                    echo $jumlah[0]['jumlah'];
+                                                    $total += $jumlah[0]['jumlah'];
+                                            ?>
+                                            </td>
+                                            <td style="text-align:center;"><?php  
+                                                $sql = "SELECT COUNT(DISTINCT a.nim) AS jumlah FROM mahasiswa a JOIN presensi b ON a.nim = b.Nim JOIN makul c ON b.idMakul=c.idMakul WHERE a.nim LIKE '".$m['tahun']."%' AND c.nama NOT LIKE '".$data."' AND a.status = 'AKTIF' ";
+                                                $kurang = $this->db->query($sql)->result_array();
+                                                echo  abs($jumlah[0]['jumlah']-$kurang[0]['jumlah']);
                                             ?>
                                             </td>
                                         </tr>
+                                        <?php endif ?>
                                         <?php $i++; ?>
                                         <?php endforeach ?>
-                                        <tr>
-                                            <th colspan="2" class="text-right">TOTAL</th>
-                                            <td style="text-align:center;"><?php echo $total ?></td>
-                                        </tr>
+                                        <?php endif ?>
                                     </tbody>
                                 </table>
 
@@ -121,16 +130,6 @@
                                     <select name="tipe" id="tipe" class="form-control">
                                         <option value=""></option>
                                         <?php $menu =['Wajib','RD','SC','JK','Perminatan'] ?>
-                                        <?php foreach ($menu as $m) : ?>
-                                        <option value="<?= $m?>"> <?= $m?> </option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="title">SEMESTER</label>
-                                    <select name="semester" id="semester" class="form-control">
-                                        <option value=""></option>
-                                        <?php $menu =['GASAL',"GENAP"] ?>
                                         <?php foreach ($menu as $m) : ?>
                                         <option value="<?= $m?>"> <?= $m?> </option>
                                         <?php endforeach; ?>

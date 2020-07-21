@@ -49,9 +49,7 @@ class presensi extends CI_Controller
 
         $data['pagination'] = $this->pagination->create_links();
         $data['title'] = 'Presensi';
-
-        $data['isi'] = $this->db->get_where('presensi')->result_array();
-       
+        
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('presensi/presensi',$data);
@@ -119,6 +117,7 @@ class presensi extends CI_Controller
                             $nim = $worksheet ->getCellByColumnAndRow(2,$row) ->getValue();
                             $nama = ucwords($worksheet ->getCellByColumnAndRow(4,$row) ->getValue());
                             if(strlen($nim) == 9) {
+                                $this->PresensiModel->tahun($nim);
                                 $data[] = array('Nim' => $nim,'Nama' => $nama,'idMakul' =>$idMakul, 'idDosen' => $idDosen,'idRuangan'=>$idRuangan);     
                             }elseif($nama == $dosen ){
                                 $id=$worksheet ->getCellByColumnAndRow(2,$row) ->getValue();
@@ -127,6 +126,7 @@ class presensi extends CI_Controller
                                 }
                                 $this->db->set('nip',$id)->where('idDosen',$idDosen)->update('dosen');
                             }
+                           
                         }          
                     }else{                        
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">

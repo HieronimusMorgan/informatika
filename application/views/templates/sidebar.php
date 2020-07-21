@@ -26,7 +26,7 @@
                     <div class="collapse" id="kapasitas" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
                             <a class="nav-link" href="<?= base_url('presensi');?>">Data Presensi Mahasiswa</a>
-                            <a class="nav-link" href="#">Laporan Kapasitas Kelas</a>
+                            <a class="nav-link" href="<?= base_url('kapasitas');?>">Laporan Kapasitas Kelas</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Rekomendasi"

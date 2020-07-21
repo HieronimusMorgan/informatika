@@ -52,13 +52,18 @@
                                 <?= form_error('sks', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="1" name="status" id="status"
-                                        <?php if ($data['status'] == 1) : ?> checked <?php endif; ?>>
-                                    <label class="form-check-label" for="status">
-                                        Aktif?
-                                    </label>
-                                </div>
+                                <label for="title">STATUS</label>
+                                <select name="status" id="status" class="form-control">
+                                    <option value=""></option>
+                                    <?php $menu =['AKTIF','TIDAK AKTIF','DO'] ?>
+                                    <?php foreach ($menu as $m) : ?>
+                                    <?php if ($m == $data['status']) : ?>
+                                    <option value="<?= $m ?>" selected> <?= $m ?> </option>
+                                    <?php else : ?>
+                                    <option value="<?= $m?>"> <?= $m?> </option>
+                                    <?php endif ?>
+                                    <?php endforeach; ?>
+                                </select>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Edit</button>

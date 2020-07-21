@@ -23,9 +23,6 @@
                                 <th>DPA</th>
                                 <th>MINAT</th>
                                 <th>STATUS</th>
-                                <th>IPK</th>
-                                <th>SKS</th>
-                                <th>DOSBING</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
@@ -38,19 +35,10 @@
                                 <td><?php echo $row->nama; ?></td>
                                 <td><?php echo $row->dpa; ?></td>
                                 <td><?php echo $row->minat; ?></td>
+                                <td><?php echo $row->status ?></td>
                                 <td>
-                                    <?php $a=$row->status ?>
-                                    <?php if ($a == '1') : ?>
-                                    <?php echo 'AKTIF'; ?>
-                                    <?php else :?>
-                                    <?php echo 'TIDAK AKTIF'; ?>
-                                    <?php endif; ?>
-                                </td>
-
-                                <td><?php echo $row->ipk; ?></td>
-                                <td><?php echo $row->sks; ?></td>
-                                <td><?php echo $row->dosbing; ?></td>
-                                <td>
+                                    <a href="<?php echo base_url(); ?>home/detailMhs/<?= $row->nim; ?>"
+                                        class="badge badge-warning ">Detail</a>
                                     <a href="<?php echo base_url(); ?>home/editMhs/<?= $row->nim; ?>"
                                         class="badge badge-success ">Edit</a>
                                     <a href="<?php echo base_url(); ?>home/deleteMhs/<?= $row->nim; ?>"
@@ -90,8 +78,10 @@
                         <input type="file" class="form-control-file" id="file" name="file[]" multiple>
                     </div>
                     <div class="modal-footer">
+                        <a href="<?php echo base_url(); ?>home/formatmhs" class="badge badge-success ">Edit</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Import</button>
+
                     </div>
                 </form>
             </div>
