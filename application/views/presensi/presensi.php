@@ -13,16 +13,25 @@
                                 <th>No</th>
                                 <th>NIM</th>
                                 <th>NAMA</th>
+                                <th>MAKUL</th>
+                                <th>KELAS</th>
+                                <th>RUANGAN</th>
+                                <th>DOSEN</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
-                            <?php foreach ($data->result() as $row) : ?>
+                            <?php foreach ($data->result_array() as $row) : ?>
+                            <?php $c = $this->db->query("SELECT a.Nim, a.Nama, b.nama AS makul, b.kelas AS kelas, d.nama AS dosen, c.nama AS ruangan FROM presensi a JOIN makul b ON a.idMakul = b.idMakul JOIN dosen d ON a.idDosen=d.idDosen JOIN ruangan c ON a.idRuangan = c.idRuangan WHERE a.idPresensi LIKE " .$row['idPresensi'])->row_array(); ?>
                             <tr>
                                 <td><?= $i ?></td>
-                                <td><?php echo $row->Nim; ?></td>
-                                <td><?php echo $row->Nama; ?></td>
+                                <td><?php echo $c['Nim']; ?></td>
+                                <td><?php echo $c['Nama']; ?></td>
+                                <td><?php echo $c['makul'];?> </td>
+                                <td><?php echo $c['kelas'] ; ?></td>
+                                <td><?php echo $c['ruangan']; ?></td>
+                                <td><?php echo $c['dosen']; ?></td>
                             </tr>
                             <?php $i++; ?>
                             <?php endforeach; ?>
