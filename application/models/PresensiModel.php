@@ -63,11 +63,4 @@ class PresensiModel extends CI_Model {
         $this->db->insert_batch('mahasiswa', $data);
     }
 
-    public function presensi() {
-        $sql = "SELECT a.Nim, a.Nama, b.nama, b.kelas, c.nama, d.nama FROM presensi a JOIN makul b ON a.idMakul = b.idMakul JOIN ruangan c ON b.idMakul = c.makul JOIN dosen d ON a.idDosen=d.idDosen";
-        $a = $this->db->query($sql);
-        var_dump($a);
-        die;
-    }
-
 }

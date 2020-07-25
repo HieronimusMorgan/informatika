@@ -4,6 +4,7 @@ class List_model extends CI_Model {
 
     //ambil data mahasiswa dari database
     function get_presensi_list($limit, $start) {
+        $this->db->order_by('idMakul', 'ASC');
         return $this->db->get('presensi', $limit, $start);
     }
 

@@ -4,7 +4,7 @@
             <h1 class="mt-4"><?= $title?></h1>
             <div class="card-body">
                 <a href="http://" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Tambah
-                    Mahasiswa</a>
+                    Presensi</a>
                 <?= $this->session->flashdata('message'); ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%">

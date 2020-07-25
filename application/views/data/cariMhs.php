@@ -3,22 +3,26 @@
         <div class="container-fluid">
             <nav class="navbar">
                 <h1 class="mt-4"><?= $title ?></h1>
-                <form method="post" class="form-inline" action="<?php base_url('home/search'); ?>">
-                    <input class="form-control mr-sm-2" name="nama" type="text" id="nama" placeholder="Search Name"
+                <form method="get" class="form-inline" action="<?php base_url('home/searchMhs'); ?>">
+                    <input class="form-control mr-sm-2" name="nim" type="text" id="nim" placeholder="Search NIM"
                         aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </nav>
             <div class="card-body">
                 <a href="http://" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Import
-                    Data Dosen</a>
+                    Data Mahasiswa</a>
+                <?= $this->session->flashdata('message'); ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%">
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>NIP</th>
+                                <th>NIM</th>
                                 <th>NAMA</th>
+                                <th>DPA</th>
+                                <th>MINAT</th>
+                                <th>STATUS</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
@@ -27,14 +31,19 @@
                             <?php foreach ($data->result() as $row) : ?>
                             <tr>
                                 <td><?= $i ?></td>
-                                <td><?php echo $row->nip; ?></td>
+                                <td><?php echo $row->nim; ?></td>
                                 <td><?php echo $row->nama; ?></td>
+                                <td><?php echo $row->dpa; ?></td>
+                                <td><?php echo $row->minat; ?></td>
+                                <td><?php echo $row->status ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>home/editDsn/<?= $row->nip; ?>"
+                                    <a href="<?php echo base_url(); ?>home/detailMhs/<?= $row->nim; ?>"
+                                        class="badge badge-warning ">Detail</a>
+                                    <a href="<?php echo base_url(); ?>home/editMhs/<?= $row->nim; ?>"
                                         class="badge badge-success ">Edit</a>
-                                    <a href="<?php echo base_url(); ?>home/deleteDsn/<?= $row->nip; ?>"
+                                    <a href="<?php echo base_url(); ?>home/deleteMhs/<?= $row->nim; ?>"
                                         class="badge badge-danger"
-                                        onclick="return confirm('Are you sure you want to delete <?= $row->nip; ?>?');">Delete</a>
+                                        onclick="return confirm('Are you sure you want to delete <?= $row->nim; ?>?');">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
@@ -58,16 +67,18 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Import Data Dosen</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data Mahasiswa</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" enctype="multipart/form-data" action="<?php echo base_url("home/uploadDosen") ?>">
+                <form method="post" enctype="multipart/form-data"
+                    action="<?php echo base_url("home/uploadMahasiswa") ?>">
                     <div class="modal-body">
                         <input type="file" class="form-control-file" id="file" name="file[]" multiple>
                     </div>
                     <div class="modal-footer">
+                        <a class="btn btn-success" href="<?php echo base_url(); ?>home/formatmhs">Format</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Import</button>
                     </div>

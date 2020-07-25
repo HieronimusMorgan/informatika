@@ -61,7 +61,21 @@
                                     <label for="title">TAHUN AJARAN </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $tahun = $this->input->post('tahun') ?></label>
+                                    <label for="title">: <?= $tahun = $this->input->post('tahun');
+                                    if ($tahun=="" && $makul!="" && $this->input->post('dosen') ) {
+                                        $a= $this->db->query("SELECT DISTINCT b.tahun FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen  WHERE b.nama LIKE '".$makul."' AND c.nama LIKE '".$this->input->post('dosen')."'")->result();
+                                        foreach($a as $a){
+                                            $tahun = $tahun." ".$a->tahun;
+                                        }
+                                        echo $tahun;
+                                    }elseif($tahun=="" && $makul!="" ){
+                                        $a= $this->db->query("SELECT DISTINCT tahun FROM makul WHERE nama LIKE '".$makul."'")->result();
+                                        foreach($a as $a){
+                                             $tahun = $tahun." ".$a->tahun;
+                                        }  
+                                        echo $tahun;                                      
+                                    }
+                                    ?></label>
                                 </div>
                             </div>
                             <div class="row">
@@ -69,7 +83,14 @@
                                     <label for="title">TIPE MATA KULIAH </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $tipe = $this->input->post('tipe') ?></label>
+                                    <label for="title">: <?= $tipe = $this->input->post('tipe');
+                                     if ($tipe=="" && $makul!="") {
+                                        $a= $this->db->query("SELECT DISTINCT tipeMakul FROM makul WHERE nama LIKE '".$makul."'")->result();
+                                        foreach($a as $a){
+                                            echo $a->tipeMakul;
+                                            echo "  ";
+                                        }
+                                    } ?></label>
                                 </div>
                             </div>
                             <div class="row">
@@ -77,7 +98,20 @@
                                     <label for="title">SEMESTER </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $semester = $this->input->post('semester') ?></label>
+                                    <label for="title">: <?= $semester = $this->input->post('semester');
+                                    if ($semester=="" && $makul!="" && $this->input->post('dosen') != "" ) {
+                                        $a = $this->db->query("SELECT DISTINCT b.semester FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen WHERE b.nama LIKE '".$makul."' AND c.nama LIKE '".$this->input->post('dosen')."'")->result();
+                                        foreach($a as $a){
+                                            $semester=$semester." ".$a->semester;
+                                        }
+                                        echo $semester;
+                                    }elseif($semester=="" && $makul!=""){
+                                        $a= $this->db->query("SELECT DISTINCT semester FROM makul WHERE nama LIKE '".$makul."'")->result();
+                                        foreach($a as $a){
+                                            $semester=$semester." ".$a->semester;
+                                        }
+                                        echo $semester;
+                                    } ?></label>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,7 +119,14 @@
                                     <label for="title">DOSEN </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $dosen = $this->input->post('dosen') ?></label>
+                                    <label for="title">: <?= $dosen = $this->input->post('dosen');
+                                     if ($dosen=="" && $makul!="") {
+                                        $a = $this->db->query("SELECT DISTINCT c.nama AS dosen FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen WHERE b.nama LIKE '".$makul."'")->result();
+                                        foreach($a as $a){
+                                            $dosen=$dosen." ".$a->dosen;
+                                        }
+                                        echo $dosen;
+                                    } ?></label>
                                 </div>
                             </div>
                             <?php
@@ -117,55 +158,49 @@
                                     <tbody>
                                         <!-- ANGKATAN -->
                                         <?php $angkatan = $this->input->post('angkatan');
-                                        if ($angkatan != "") :
-                                            ?>
-                                            <tr style="text-align:center;">
-                                                <td>
-    <?= '20' . $angkatan; ?>
-                                                </td>
-                                                <!-- JUMLAH MAHASISWA -->
-                                                <td>
-    <?= $this->kapasitas_model->mhs($angkatan); ?>
-                                                </td>
-                                                <!-- TELAH MENGAMBIL -->
-                                                <td>
-    <?= $this->kapasitas_model->ambilMakul($data, $angkatan, $makul); ?>
-                                                </td>
-                                                <!-- BELUM MENGAMBIL MENGAMBIL -->
-                                                <td>
-    <?= $this->kapasitas_model->belumAmbil($data, $angkatan, $makul); ?>
-                                                </td>
-                                            </tr>
+                                        if ($angkatan != "") :?>
+                                        <tr style="text-align:center;">
+                                            <td><?= '20' . $angkatan; ?></td>
+                                            <!-- JUMLAH MAHASISWA -->
+                                            <td><?= $this->kapasitas_model->mhs($angkatan); ?></td>
+                                            <!-- TELAH MENGAMBIL -->
+                                            <td><?= $this->kapasitas_model->ambilMakul($data, $angkatan, $makul); ?>
+                                            </td>
+                                            <!-- BELUM MENGAMBIL MENGAMBIL -->
+                                            <td><?= $this->kapasitas_model->belumAmbil($data, $angkatan, $makul); ?>
+                                            </td>
+                                        </tr>
                                         <?php else : ?>
-
-                                            <?php $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC"; ?>
-                                            <?php $menu = $this->db->query($sql)->result_array(); ?>
-    <?php foreach ($menu as $m): ?>
-                                                <tr style="text-align:center;">
-                                                    <!-- ANGKATAN -->
-                                                    <td><?= '20' . $m['tahun']; ?></td>
-                                                    <!-- JUMLAH MAHASISWA -->
-                                                    <td><?= $this->kapasitas_model->mhs($m['tahun']); ?></td>
-                                                    <!-- TELAH MENGAMBIL -->
-                                                    <td>
-        <?= $this->kapasitas_model->ambilMakul($data, $m['tahun'], $makul); ?>
-                                                    </td>
-                                                    <!-- BELUM MENGAMBIL MENGAMBIL -->
-                                                    <td>
-                                                    <?= $this->kapasitas_model->belumAmbil($data, $m['tahun'], $makul); ?>
-                                                    </td>
-    <?php endforeach ?>
-                                            </tr>
-
-<?php endif ?>
-
+                                        <?php $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC"; ?>
+                                        <?php $menu = $this->db->query($sql)->result_array(); ?>
+                                        <?php if ($this->kapasitas_model->hitungJumlah($makul)!=0) :?>
+                                        <?php foreach ($menu as $m): ?>
+                                        <?php if ($this->kapasitas_model->mhs($m['tahun']) != 0) :?>
+                                        <tr style="text-align:center;">
+                                            <!-- ANGKATAN -->
+                                            <td><?= '20' . $m['tahun']; ?></td>
+                                            <!-- JUMLAH MAHASISWA -->
+                                            <td><?= $this->kapasitas_model->mhs($m['tahun']); ?></td>
+                                            <!-- TELAH MENGAMBIL -->
+                                            <td>
+                                                <?= $this->kapasitas_model->ambilMakul($data, $m['tahun'], $makul); ?>
+                                            </td>
+                                            <!-- BELUM MENGAMBIL MENGAMBIL -->
+                                            <td>
+                                                <?= $this->kapasitas_model->belumAmbil($data, $m['tahun'], $makul); ?>
+                                            </td>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        </tr>
+                                        <?php endif ?>
+                                        <?php endif ?>
                                     </tbody>
                                 </table>
-<?php $cetak = ['makul' => $makul, 'tahun' => $tahun, 'tipe' => $tipe, 'semester' => $semester, 'dosen' => $dosen, 'angkatan' => $angkatan, 'data' => $data];
-$sd = urlencode(json_encode($cetak));
-$this->session->set_tempdata('item', $cetak); ?>
+                                <?php $cetak = ['makul' => $makul, 'tahun' => $tahun, 'tipe' => $tipe, 'semester' => $semester, 'dosen' => $dosen, 'angkatan' => $angkatan, 'data' => $data];
+                                    $sd = urlencode(json_encode($cetak));
+                                    $this->session->set_tempdata('item', $cetak); ?>
                                 <a href="<?= base_url('kapasitas/cetak/') ?>"
-                                   class="btn btn-secondary float-right">CETAK</a>
+                                    class="btn btn-secondary float-right">CETAK</a>
                             </div>
                         </div>
                     </div>

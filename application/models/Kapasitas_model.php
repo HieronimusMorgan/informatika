@@ -8,13 +8,13 @@ class Kapasitas_model extends CI_Model {
     }
 
     public function kapasitas($statment) {
-        $sql = "SELECT DISTINCT a.Nim AS nim, b.nama AS makul, b.tahun AS tahun, b.semester AS semester  FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen WHERE a.Nim  " . $statment;
+        $sql = "SELECT DISTINCT a.Nim AS nim, b.nama AS makul, b.tahun AS tahun, b.semester AS semester  FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen JOIN mahasiswa d ON a.nim = d.nim  WHERE a.Nim  " . $statment." AND d.status = 'AKTIF' ";
         return $this->db->query($sql)->result();
     }
 
     public function ambilMakul($data, $angkatan, $cari) {
         if ($cari != NULL) {
-            $sql = "SELECT DISTINCT a.Nim AS nim , b.nama AS makul FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen WHERE a.Nim " . $data . " AND a.Nim LIKE '" . $angkatan . "%' ";
+            $sql = "SELECT DISTINCT a.Nim AS nim , b.nama AS makul FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen JOIN mahasiswa d ON a.nim = d.nim WHERE a.Nim " . $data . " AND a.Nim LIKE '" . $angkatan . "%'  AND d.status = 'AKTIF' ";
             return $this->db->query($sql)->num_rows();
         } else {
             $this->session->set_flashdata('makul', '<div class="alert alert-danger" role="danger">
@@ -27,7 +27,7 @@ class Kapasitas_model extends CI_Model {
         $hasil = 0;
         if ($cari != NULL) {
             $sql = "SELECT DISTINCT nim FROM mahasiswa WHERE nim LIKE '" . $angkatan . "%' AND status = 'AKTIF'";
-            $sql1 = "SELECT a.Nim FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen WHERE a.Nim " . $data . " AND a.Nim LIKE '" . $angkatan . "%'";
+            $sql1 = "SELECT a.Nim FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen  JOIN mahasiswa d ON a.nim = d.nim WHERE a.Nim " . $data . " AND a.Nim LIKE '" . $angkatan . "%' AND d.status = 'AKTIF'";
             $hasil = abs($this->db->query($sql)->num_rows() - $this->db->query($sql1)->num_rows());
             return $hasil;
         } else {
@@ -46,4 +46,14 @@ class Kapasitas_model extends CI_Model {
         return $menu = $this->db->query($sql)->result_array();
     }
 
+    public function hitungJumlah()
+    {
+        $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC";
+        $menu = $this->db->query($sql)->result_array();
+        $hitung=0;
+        foreach ($menu as $m) {
+            $hitung ++;
+        }
+        return $hitung
+    }
 }

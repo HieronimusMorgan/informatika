@@ -124,18 +124,21 @@ class home extends CI_Controller {
     }
 
     public function searchMhs() {
-        // Ambil data NIS yang dikirim via ajax post
-        $keyword = $this->input->post('keyword');
-        $siswa = $this->SiswaModel->search($keyword);
+        $keyword = $this->input->post('nim');
 
-        // Kita load file view.php sambil mengirim data siswa hasil query function search di SiswaModel
-        $hasil = $this->load->view('view', array('siswa' => $siswa), true);
+        $data['data'] = $this->data_model->searchMhs($keyword);
 
-        // Buat sebuah array
-        $callback = array(
-            'hasil' => $hasil, // Set array hasil dengan isi dari view.php yang diload tadi
-        );
-        echo json_encode($callback); // konversi varibael $callback menjadi JSON
+        $data['pagination'] = $this->pagination->create_links();
+
+
+        $data['title'] = 'Data Mahasiswa';
+        
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('data/mahasiswa', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
+        
     }
 
     public function dosen() {

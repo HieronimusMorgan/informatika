@@ -28,4 +28,10 @@ class Data_model extends CI_Model {
         }
     }
 
+    public function searchMhs($nim)
+    {
+        $sql = "SELECT * FROM mahasiswa WHERE nim LIKE '".$nim."%'";
+        return $this->db->query($sql);
+    }
+
 }

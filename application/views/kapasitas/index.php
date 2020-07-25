@@ -59,18 +59,18 @@
                                         <?php $i = 1; ?>
                                         <?php $total = 0; ?>
                                         <?php foreach ($makul as $m): ?>
-                                            <tr>
-                                                <td style="text-align:center;"><?php echo $i ?></td>
-                                                <td><?php echo $m['nama'] ?></td>
-                                                <td style="text-align:center;"><?php
-                                                    $sql = "SELECT COUNT(Nim) AS jumlah FROM presensi a JOIN makul b ON a.idMakul = b.idMakul WHERE b.nama LIKE '" . $m['nama'] . "'";
+                                        <tr>
+                                            <td style="text-align:center;"><?php echo $i ?></td>
+                                            <td><?php echo $m['nama'] ?></td>
+                                            <td style="text-align:center;"><?php
+                                                    $sql = "SELECT  COUNT(DISTINCT a.Nim, a.idMakul, a.idRuangan) AS jumlah FROM presensi a JOIN makul b ON a.idMakul = b.idMakul WHERE b.nama LIKE '" . $m['nama'] . "' ";
                                                     $jumlah = $this->db->query($sql)->result_array();
                                                     echo $jumlah[0]['jumlah'];
                                                     $total += $jumlah[0]['jumlah'];
                                                     ?>
-                                                </td>
-                                            </tr>
-                                            <?php $i++; ?>
+                                            </td>
+                                        </tr>
+                                        <?php $i++; ?>
                                         <?php endforeach ?>
                                         <tr>
                                             <th colspan="2" class="text-right">TOTAL</th>
