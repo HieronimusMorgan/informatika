@@ -37,7 +37,7 @@
                     </a>
                     <div class="collapse" id="Rekomendasi" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="<?= base_url('rekomendasi'); ?>">Manajemen Data Makul</a>
+                            <a class="nav-link" href="<?= base_url('rekomendasi/c_makul'); ?>">Manajemen Data Makul</a>
                             <a class="nav-link" href="#">Manajemen Ruang</a>
                             <a class="nav-link" href="#">Manajemen Data Dosen</a>
                             <a class="nav-link" href="#">Manajemen Jadwal</a>
