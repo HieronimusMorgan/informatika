@@ -9,8 +9,8 @@
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
-                                       value="<?= $data['nama'] ?>">
-                                       <?= form_error('nama', '<small class="text-danger pl-2">', '</small>') ?>
+                                    value="<?= $data['nama'] ?>">
+                                <?= form_error('nama', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
                                 <label for="nip">NPP</label>
@@ -18,6 +18,7 @@
                                 <?= form_error('nip', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
+                                <a href="<?= base_url('home/dosen'); ?>" class="btn btn-secondary">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </div>

@@ -12,6 +12,7 @@
                                 <th>NO</th>
                                 <th>NAMA</th>
                                 <th>MAKUL</th>
+                                <th>HARI</th>
                                 <th>JAM</th>
                                 <th>ACTION</th>
                             </tr>
@@ -24,6 +25,7 @@
                                 <td><?php echo $row->nama; ?></td>
                                 <td><?php echo ($this->db->query('SELECT nama FROM makul WHERE idMakul LIKE '.$row->makul)->row()->nama); ?>
                                 </td>
+                                <td><?php echo $row->hari; ?></td>
                                 <td><?php echo $row->jam; ?></td>
                                 <td>
                                     <a href="<?php echo base_url(); ?>home/editRuang/<?= $row->nama; ?>"

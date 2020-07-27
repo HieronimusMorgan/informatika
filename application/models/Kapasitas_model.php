@@ -43,17 +43,16 @@ class Kapasitas_model extends CI_Model {
 
     public function tahun() {
         $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC";
-        return $menu = $this->db->query($sql)->result_array();
+        return $this->db->query($sql)->result_array();
     }
-
-    public function hitungJumlah()
+    
+    public function hitung($data,$makul)
     {
-        $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC";
-        $menu = $this->db->query($sql)->result_array();
+        $menu = $this->kapasitas_model->tahun();
         $hitung=0;
-        foreach ($menu as $m) {
-            $hitung ++;
+        foreach ($menu as $m){
+            $hitung += $this->kapasitas_model->ambilMakul($data, $m['tahun'], $makul);
         }
-        return $hitung
+        return $hitung;
     }
 }

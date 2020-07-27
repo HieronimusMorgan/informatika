@@ -1,3 +1,5 @@
+<?php $from = "FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen"?>
+
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
@@ -51,7 +53,18 @@
                                     <label for="title">MATA KULIAH </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?php echo $makul = $this->input->post('makul');
+                                    <label for="title">: <?php                                    
+                                    $sql = "SELECT DISTINCT b.nama  ".$from." ".$data;
+                                    $makul = $this->input->post('makul');
+                                    if($makul !="" ){
+                                        echo $makul;
+                                    }elseif($this->db->query($sql)->num_rows() != 0){
+                                        $a= $this->db->query($sql)->result();
+                                        foreach($a as $a){
+                                             $makul = $makul." ".$a->nama;
+                                        }  
+                                        echo $makul;  
+                                    }
                                     ?> </label>
 
                                 </div>
@@ -61,19 +74,17 @@
                                     <label for="title">TAHUN AJARAN </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $tahun = $this->input->post('tahun');
-                                    if ($tahun=="" && $makul!="" && $this->input->post('dosen') ) {
-                                        $a= $this->db->query("SELECT DISTINCT b.tahun FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen  WHERE b.nama LIKE '".$makul."' AND c.nama LIKE '".$this->input->post('dosen')."'")->result();
-                                        foreach($a as $a){
-                                            $tahun = $tahun." ".$a->tahun;
-                                        }
+                                    <label for="title">:
+                                        <?php $tahun = $this->input->post('tahun');
+                                    $sql = "SELECT DISTINCT b.tahun ".$from." ".$data;
+                                    if($tahun !="" ){
                                         echo $tahun;
-                                    }elseif($tahun=="" && $makul!="" ){
-                                        $a= $this->db->query("SELECT DISTINCT tahun FROM makul WHERE nama LIKE '".$makul."'")->result();
+                                    }elseif($this->db->query($sql)->num_rows() != 0){
+                                        $a= $this->db->query($sql)->result();
                                         foreach($a as $a){
                                              $tahun = $tahun." ".$a->tahun;
                                         }  
-                                        echo $tahun;                                      
+                                        echo $tahun;  
                                     }
                                     ?></label>
                                 </div>
@@ -83,14 +94,19 @@
                                     <label for="title">TIPE MATA KULIAH </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $tipe = $this->input->post('tipe');
-                                     if ($tipe=="" && $makul!="") {
-                                        $a= $this->db->query("SELECT DISTINCT tipeMakul FROM makul WHERE nama LIKE '".$makul."'")->result();
+                                    <label for="title">:
+                                        <?php $tipe = $this->input->post('tipe');
+                                    $sql = "SELECT DISTINCT b.tipeMakul ".$from." ".$data;
+                                     if ($tipe != "") {
+                                    }elseif($this->db->query($sql)->num_rows() != 0){
+                                        $a= $this->db->query($sql)->result();
                                         foreach($a as $a){
-                                            echo $a->tipeMakul;
-                                            echo "  ";
+                                            $tipe = $tipe." ".$a->tipeMakul;
                                         }
-                                    } ?></label>
+                                        echo $tipe;                                      
+                                        
+                                    }
+                                    ?></label>
                                 </div>
                             </div>
                             <div class="row">
@@ -98,20 +114,19 @@
                                     <label for="title">SEMESTER </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $semester = $this->input->post('semester');
-                                    if ($semester=="" && $makul!="" && $this->input->post('dosen') != "" ) {
-                                        $a = $this->db->query("SELECT DISTINCT b.semester FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen WHERE b.nama LIKE '".$makul."' AND c.nama LIKE '".$this->input->post('dosen')."'")->result();
+                                    <label for="title">:
+                                        <?php $semester = $this->input->post('semester');
+                                         $sql = "SELECT DISTINCT b.semester ".$from." ".$data;
+                                    if ( $semester !="") {
+                                        echo $semester;
+                                    }elseif($this->db->query($sql)->num_rows() != 0){
+                                        $a = $this->db->query($sql)->result();
                                         foreach($a as $a){
                                             $semester=$semester." ".$a->semester;
                                         }
                                         echo $semester;
-                                    }elseif($semester=="" && $makul!=""){
-                                        $a= $this->db->query("SELECT DISTINCT semester FROM makul WHERE nama LIKE '".$makul."'")->result();
-                                        foreach($a as $a){
-                                            $semester=$semester." ".$a->semester;
-                                        }
-                                        echo $semester;
-                                    } ?></label>
+                                    }
+                                        ?></label>
                                 </div>
                             </div>
                             <div class="row">
@@ -119,13 +134,19 @@
                                     <label for="title">DOSEN </label>
                                 </div>
                                 <div class="col">
-                                    <label for="title">: <?= $dosen = $this->input->post('dosen');
-                                     if ($dosen=="" && $makul!="") {
-                                        $a = $this->db->query("SELECT DISTINCT c.nama AS dosen FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen WHERE b.nama LIKE '".$makul."'")->result();
+                                    <label for="title">:
+                                        <?php 
+                                    $sql = "SELECT DISTINCT  c.nama AS dosen ".$from." ".$data;
+                                    $dosen = $this->input->post('dosen');
+                                     if ($dosen != "" ) {
+                                         echo $dosen;
+                                    }elseif($this->db->query($sql)->num_rows() != 0 ){
+                                        $a = $this->db->query($sql)->result();
                                         foreach($a as $a){
                                             $dosen=$dosen." ".$a->dosen;
                                         }
                                         echo $dosen;
+
                                     } ?></label>
                                 </div>
                             </div>
@@ -171,9 +192,8 @@
                                             </td>
                                         </tr>
                                         <?php else : ?>
-                                        <?php $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC"; ?>
-                                        <?php $menu = $this->db->query($sql)->result_array(); ?>
-                                        <?php if ($this->kapasitas_model->hitungJumlah($makul)!=0) :?>
+                                        <?php $menu = $this->kapasitas_model->tahun(); ?>
+                                        <?php if ($this->kapasitas_model->hitung($data, $makul)!=0) :?>
                                         <?php foreach ($menu as $m): ?>
                                         <?php if ($this->kapasitas_model->mhs($m['tahun']) != 0) :?>
                                         <tr style="text-align:center;">
@@ -192,6 +212,9 @@
                                             <?php endif ?>
                                             <?php endforeach ?>
                                         </tr>
+                                        <?php else: ?>
+                                        <div class="alert alert-danger" role="danger" style="text-align:center;">
+                                            Mahasiswa Belum Mengambil Mata Kuliah <?= $makul ?>!</div>
                                         <?php endif ?>
                                         <?php endif ?>
                                     </tbody>

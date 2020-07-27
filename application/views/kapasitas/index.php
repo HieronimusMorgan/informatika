@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" id="myTable">
+                                <table class="table table-bordered" id="tabelku" width="100%" id="myTable">
                                     <thead>
                                         <tr style="text-align:center;">
                                             <th>NO</th>

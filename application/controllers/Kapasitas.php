@@ -6,9 +6,7 @@ class kapasitas extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
-        //load libary pagination
         $this->load->library('pagination');
-        //load the department_model
         $this->load->model('list_model');
         $this->load->model('kapasitas_model');
         $this->load->library('excel');
@@ -52,7 +50,7 @@ class kapasitas extends CI_Controller {
             $semester = $this->input->post('semester');
             $statment = $statment . " AND b.semester LIKE '" . $semester . "' ";
         }
-        //$simpan=['angkatan'=>$angkatan[2].$angkatan[3],'makul'=>$makul,'tahun'=>$tahun,'tipe'=>$tipe,'dosen'=>$dosen,'semester'=>$semester];
+        
         $data['title'] = 'Kapasitas Kelas';
         if ($statment != "") {
             $data['kapasitas'] = $this->kapasitas_model->kapasitas($statment);
@@ -73,34 +71,33 @@ class kapasitas extends CI_Controller {
     public function cetak() {
         $data = $this->session->tempdata('item');
         $data = (array) $data;
-        // Panggil class PHPExcel nya
         $excel = new PHPExcel();
-        // Settingan awal fil excel
+        
         $excel->getProperties()->setTitle("Kapasitas Kelas ");
-        // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
+        
         $style_col = array(
-            'font' => array('bold' => true, 'name' => 'Times New Roman', 'size' => 12), // Set font nya jadi bold
+            'font' => array('bold' => true, 'name' => 'Times New Roman', 'size' => 12), 
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
             ),
             'borders' => array(
-                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border right dengan garis tipis
-                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
+                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
+                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
             )
         );
-        // Buat sebuah variabel untuk menampung pengaturan style dari isi tabel
+        
         $style_row = array(
             'alignment' => array(
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
             ),
             'borders' => array(
-                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border right dengan garis tipis
-                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
+                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
+                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) 
             )
         );
         $styleArray = array(
@@ -109,26 +106,25 @@ class kapasitas extends CI_Controller {
                 'name' => 'Times New Roman'
         ));
         $style_col1 = array(
-            'font' => array('name' => 'Times New Roman'), // Set font nya jadi bold
+            'font' => array('name' => 'Times New Roman'), 
             'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, // Set text jadi ditengah secara horizontal (center)
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER // Set text jadi di tengah secara vertical (middle)
+                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 
+                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
             ),
             'borders' => array(
-                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border top dengan garis tipis
-                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border right dengan garis tipis
-                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN), // Set border bottom dengan garis tipis
-                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
+                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
+                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
+                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
             )
         );
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "KAPASITAS KELAS"); // Set kolom A1 dengan tulisan "DATA SISWA"
-        $excel->getActiveSheet()->mergeCells('A1:D1'); // Set Merge Cell pada kolom A1 sampai E1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setName('Times New Roman'); // Set bold kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18); // Set font size 15 untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER); // Set text center untuk kolom A1
-        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER); // Set text center untuk kolom A1
-        // Buat header tabel nya pada baris ke 3
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "KAPASITAS KELAS");
+        $excel->getActiveSheet()->mergeCells('A1:D1');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setName('Times New Roman');
+        $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
+        $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "MATA KULIAH");
         $excel->setActiveSheetIndex(0)->setCellValue('A4', "TAHUN AJARAN");
         $excel->setActiveSheetIndex(0)->setCellValue('A5', "TIPE MATA KULIAH");
@@ -149,58 +145,18 @@ class kapasitas extends CI_Controller {
             $excel->setActiveSheetIndex(0)->setCellValue('B4', ": " . $data['tahun']);
             $excel->getActiveSheet()->getStyle('B4')->applyFromArray($styleArray);
         }
-        // else{
-        //     $a= $this->db->query("SELECT DISTINCT tahun FROM makul WHERE nama LIKE '".$data['makul']."'")->result();
-        //     $tahun="";
-        //     foreach($a as $a){
-        //         $tahun = $tahun."". $a->tahun;
-        //     }
-            
-        //     $excel->setActiveSheetIndex(0)->setCellValue('B4', ": " . $tahun);
-        //     $excel->getActiveSheet()->getStyle('B4')->applyFromArray($styleArray);
-        // }
         if ($data['tipe'] != "") {
             $excel->setActiveSheetIndex(0)->setCellValue('B5', ": " . $data['tipe']);
             $excel->getActiveSheet()->getStyle('B5')->applyFromArray($styleArray);
         }
-        // else{
-        //     $a= $this->db->query("SELECT DISTINCT tipeMakul FROM makul WHERE nama LIKE '".$data['makul']."'")->result();
-        //     $tipe="";
-        //     foreach($a as $a){
-        //         $tipe =$tipe."". $a->tipeMakul;
-        //     }
-        //     $excel->setActiveSheetIndex(0)->setCellValue('B5', ": " . $tipe);
-        //     $excel->getActiveSheet()->getStyle('B5')->applyFromArray($styleArray);
-        // }
         if ($data['semester'] != "") {
             $excel->setActiveSheetIndex(0)->setCellValue('B6', ": " . $data['semester']);
             $excel->getActiveSheet()->getStyle('B6')->applyFromArray($styleArray);
         }
-        // else{
-        //     $a = $this->db->query("SELECT DISTINCT semester FROM makul WHERE nama LIKE '".$data['makul']."'")->result();
-        //     $semester="";
-        //     foreach($a as $a){
-        //         $semester = $semester."". $a->semester;
-        //     }
-        //     $excel->setActiveSheetIndex(0)->setCellValue('B6', ": " . $semester);
-        //     $excel->getActiveSheet()->getStyle('B6')->applyFromArray($styleArray);
-        // }
         if ($data['dosen'] != "") {
             $excel->setActiveSheetIndex(0)->setCellValue('B7', ": " . $data['dosen']);
             $excel->getActiveSheet()->getStyle('B7')->applyFromArray($styleArray);
         }
-        // else{
-        //     $a = $this->db->query("SELECT DISTINCT c.nama AS dosen FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen = c.idDosen WHERE b.nama LIKE '".$data['makul']."'")->result();
-        //     $dosen="";
-        //     foreach($a as $a){
-        //         $dosen = $dosen."".$a->dosen;
-        //     }
-        //     $excel->setActiveSheetIndex(0)->setCellValue('B7', ": " . $dosen);
-        //     $excel->getActiveSheet()->getStyle('B7')->applyFromArray($styleArray);
-        // }
-
-
-
 
         $excel->setActiveSheetIndex(0)->setCellValue('A9', "ANGKATAN");
         $excel->setActiveSheetIndex(0)->setCellValue('B9', "JUMLAH MAHASISWA");
@@ -240,30 +196,28 @@ class kapasitas extends CI_Controller {
                 $numrow++;
             }
         }
-        // Set width kolom
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25); // Set width kolom A
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(28); // Set width kolom B
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(28); // Set width kolom C
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(28); // Set width kolom D
+        
+        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25); 
+        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(28); 
+        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(28);
+        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(28); 
 
         $excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
-
         $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
         $excel->getActiveSheet()->getRowDimension('4')->setRowHeight(20);
         $excel->getActiveSheet()->getRowDimension('5')->setRowHeight(20);
         $excel->getActiveSheet()->getRowDimension('6')->setRowHeight(20);
         $excel->getActiveSheet()->getRowDimension('7')->setRowHeight(20);
-
         $excel->getActiveSheet()->getRowDimension('9')->setRowHeight(20);
 
         $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
         $excel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
-        // Set judul file excel nya
+
         $excel->getActiveSheet(0)->setTitle("Kapasitas Kelas");
         $excel->setActiveSheetIndex(0);
-        // Proses file excel
+
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="Kapasitas Kelas.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="Kapasitas Kelas.xlsx"'); 
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');

@@ -24,11 +24,11 @@ class home extends CI_Controller {
     }
 
     public function mahasiswa() {
-        $config['base_url'] = site_url('home/mahasiswa'); //site url
-        $config['total_rows'] = $this->db->count_all('mahasiswa'); //total row
+        $config['base_url'] = site_url('home/mahasiswa');
+        $config['total_rows'] = $this->db->count_all('mahasiswa'); 
 
-        $config['per_page'] = 25;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
+        $config['per_page'] = 25; 
+        $config["uri_segment"] = 3;  
         $config["num_links"] = 5;
 
         $config['first_link'] = 'First';
@@ -142,11 +142,11 @@ class home extends CI_Controller {
     }
 
     public function dosen() {
-        $config['base_url'] = site_url('home/dosen'); //site url
-        $config['total_rows'] = $this->db->count_all('dosen'); //total row
+        $config['base_url'] = site_url('home/dosen'); 
+        $config['total_rows'] = $this->db->count_all('dosen'); 
 
-        $config['per_page'] = 25;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
+        $config['per_page'] = 25;  
+        $config["uri_segment"] = 3;
         $config["num_links"] = 5;
 
         $config['first_link'] = 'First';
@@ -226,11 +226,11 @@ class home extends CI_Controller {
     }
 
     public function makul() {
-        $config['base_url'] = site_url('home/makul'); //site url
-        $config['total_rows'] = $this->db->count_all('makul'); //total row
+        $config['base_url'] = site_url('home/makul'); 
+        $config['total_rows'] = $this->db->count_all('makul'); 
 
-        $config['per_page'] = 25;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
+        $config['per_page'] = 25;
+        $config["uri_segment"] = 3;  
         $config["num_links"] = 5;
 
         $config['first_link'] = 'First';
@@ -270,7 +270,7 @@ class home extends CI_Controller {
     }
 
     public function editMakul($nama) {
-        $this->session->set_tempdata('item', $nama, 1000);
+        $this->session->set_tempdata('item', $nama);
         redirect('home/editMat');
     }
 
@@ -279,13 +279,12 @@ class home extends CI_Controller {
         $data['title'] = 'Edit Mata Kuliah';
         $data['data'] = $this->db->get_where('makul', ['nama' => $nama])->row_array();
 
-
-        $this->form_validation->set_rules('tipe', 'Tipe', 'required');
+        // $this->form_validation->set_rules('tipe', 'Tipe', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('tahun', 'Tahun', 'required');
         $this->form_validation->set_rules('semester', 'Semester', 'required');
         $this->form_validation->set_rules('ruangan', 'Ruangan', 'required');
-        $this->form_validation->set_rules('kapasitas', 'Kapasitas', 'required');
+        // $this->form_validation->set_rules('kapasitas', 'Kapasitas', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -303,8 +302,7 @@ class home extends CI_Controller {
                 'kapasitas' => $this->input->post('kapasitas')
             ];
 
-            $this->data_model->editMakul($edit);
-            $this->db->where('kodeMakul', $kode);
+            $this->db->where('nama', $nama);
             $this->db->update('makul', $edit);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
             Mata Kuliah berhasil di update!</div>');
@@ -312,32 +310,41 @@ class home extends CI_Controller {
         }
     }
 
-    public function ruangan() {
-        $config['base_url'] = site_url('home/ruangan'); //site url
-        $config['total_rows'] = $this->db->count_all('ruangan'); //total row
+    public function deleteMakul($nama)
+    {
+        $hapus = $this->db->get_where('makul', ['nama' => $nama])->row_array();
+        $this->db->delete('makul', $hapus);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
+        Mata Kuliah berhasil di hapus!</div>');
+        redirect('home/makul');
+    }
 
-        $config['per_page'] = 25;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
+    public function ruangan() {
+        $config['base_url'] = site_url('home/ruangan'); 
+        $config['total_rows'] = $this->db->count_all('ruangan'); 
+
+        $config['per_page'] = 25; 
+        $config["uri_segment"] = 3; 
         $config["num_links"] = 5;
 
-        // $config['first_link'] = 'First';
-        // $config['last_link'] = 'Last';
-        // $config['next_link'] = 'Next';
-        // $config['prev_link'] = 'Prev';
-        // $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        // $config['full_tag_close'] = '</ul></nav></div>';
-        // $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
-        // $config['num_tag_close'] = '</span></li>';
-        // $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        // $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
-        // $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
-        // $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
-        // $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
-        // $config['prev_tagl_close'] = '</span>Next</li>';
-        // $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
-        // $config['first_tagl_close'] = '</span></li>';
-        // $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
-        // $config['last_tagl_close'] = '</span></li>';
+        $config['first_link'] = 'First';
+        $config['last_link'] = 'Last';
+        $config['next_link'] = 'Next';
+        $config['prev_link'] = 'Prev';
+        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close'] = '</ul></nav></div>';
+        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close'] = '</span></li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close'] = '</span>Next</li>';
+        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close'] = '</span></li>';
 
         $this->pagination->initialize($config);
         $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
@@ -357,7 +364,7 @@ class home extends CI_Controller {
     }
 
     public function editRuang($nama) {
-        $this->session->set_tempdata('item', $nama, 1000);
+        $this->session->set_tempdata('item', $nama);
         redirect('home/editRuangan');
     }
 
@@ -417,7 +424,6 @@ class home extends CI_Controller {
 
                         if (strlen($nim) == 9) {
                             if ($this->db->get_where('mahasiswa', ['nim' => $nim])->num_rows() == 0) {
-                                # code...
                                 $data[] = array('Nim' => $nim, 'Nama' => $nama, 'dpa' => $dpa, 'minat' => $minat, 'status' => $status
                                     , 'ipk' => $ipk, 'sks' => $sks, 'dosbing' => $dosbing, 'dosbing1' => $dosbing1);
                                 $num++;
@@ -471,20 +477,20 @@ class home extends CI_Controller {
     public function formatmhs() {
         $excel = new PHPExcel();
         $excel->getProperties()->setTitle("Format Mahasiswa");
-        $excel->setActiveSheetIndex(0)->setCellValue('A1', "NIM"); // Set kolom B3 dengan tulisan "NIS"
-        $excel->setActiveSheetIndex(0)->setCellValue('B1', "NAMA"); // Set kolom C3 dengan tulisan "NAMA"
-        $excel->setActiveSheetIndex(0)->setCellValue('C1', "DPA"); // Set kolom C3 dengan tulisan "NAMA"
-        $excel->setActiveSheetIndex(0)->setCellValue('D1', "MINAT"); // Set kolom C3 dengan tulisan "NAMA"
-        $excel->setActiveSheetIndex(0)->setCellValue('E1', "STATUS"); // Set kolom D3 dengan tulisan "JENIS KELAMIN"
-        $excel->setActiveSheetIndex(0)->setCellValue('F1', "IPK"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('G1', "SKS"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('H1', "DOSBING"); // Set kolom E3 dengan tulisan "ALAMAT"
-        $excel->setActiveSheetIndex(0)->setCellValue('I1', "DOSBING 1"); // Set kolom E3 dengan tulisan "ALAMAT"
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "NIM"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('B1', "NAMA");
+        $excel->setActiveSheetIndex(0)->setCellValue('C1', "DPA"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('D1', "MINAT"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('E1', "STATUS");
+        $excel->setActiveSheetIndex(0)->setCellValue('F1', "IPK"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('G1', "SKS"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('H1', "DOSBING"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('I1', "DOSBING 1");
         $excel->getActiveSheet(0)->setTitle("Format Mahasiswa");
         $excel->setActiveSheetIndex(0);
-        // Proses file excel
+        
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="Format Mahasiswa.xlsx"'); // Set nama file excel nya
+        header('Content-Disposition: attachment; filename="Format Mahasiswa.xlsx"'); 
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');

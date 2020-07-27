@@ -86,10 +86,3 @@
             </div>
         </div>
     </div>
-
-    <script>
-    $(document).ready(function(){
-        alert("hallo");
- 
-    });
-</script>

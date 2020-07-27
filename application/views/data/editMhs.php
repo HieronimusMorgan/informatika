@@ -9,8 +9,8 @@
                             <div class="form-group">
                                 <label for="nama">Nama</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
-                                       value="<?= $data['nama'] ?>">
-                                       <?= form_error('nama', '<small class="text-danger pl-2">', '</small>') ?>
+                                    value="<?= $data['nama'] ?>">
+                                <?= form_error('nama', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
                                 <label for="nim">NIM</label>
@@ -28,18 +28,18 @@
                                     <option value=""></option>
                                     <?php $menu = ['SC', 'RD', 'JAR'] ?>
                                     <?php foreach ($menu as $m) : ?>
-                                        <?php if ($m == $data['minat']) : ?>
-                                            <option value="<?= $m ?>" selected> <?= $m ?> </option>
-                                        <?php else : ?>
-                                            <option value="<?= $m ?>"> <?= $m ?> </option>
-                                        <?php endif ?>
+                                    <?php if ($m == $data['minat']) : ?>
+                                    <option value="<?= $m ?>" selected> <?= $m ?> </option>
+                                    <?php else : ?>
+                                    <option value="<?= $m ?>"> <?= $m ?> </option>
+                                    <?php endif ?>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="dosbing">DOSBING</label>
                                 <input type="text" class="form-control" id="dosbing" name="dosbing"
-                                       value="<?= $data['dosbing'] ?>">
+                                    value="<?= $data['dosbing'] ?>">
                             </div>
                             <div class="form-group">
                                 <label for="ipk">IPK</label>
@@ -57,15 +57,16 @@
                                     <option value=""></option>
                                     <?php $menu = ['AKTIF', 'TIDAK AKTIF', 'DO'] ?>
                                     <?php foreach ($menu as $m) : ?>
-                                        <?php if ($m == $data['status']) : ?>
-                                            <option value="<?= $m ?>" selected> <?= $m ?> </option>
-                                        <?php else : ?>
-                                            <option value="<?= $m ?>"> <?= $m ?> </option>
-                                        <?php endif ?>
+                                    <?php if ($m == $data['status']) : ?>
+                                    <option value="<?= $m ?>" selected> <?= $m ?> </option>
+                                    <?php else : ?>
+                                    <option value="<?= $m ?>"> <?= $m ?> </option>
+                                    <?php endif ?>
                                     <?php endforeach; ?>
                                 </select>
                             </div>
                             <div class="form-group">
+                                <a href="<?= base_url('home/mahasiswa'); ?>" class="btn btn-secondary">Kembali</a>
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </div>
