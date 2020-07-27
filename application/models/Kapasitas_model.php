@@ -8,7 +8,7 @@ class Kapasitas_model extends CI_Model {
     }
 
     public function kapasitas($statment) {
-        $sql = "SELECT DISTINCT a.Nim AS nim, b.nama AS makul, b.tahun AS tahun, b.semester AS semester  FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen JOIN mahasiswa d ON a.nim = d.nim  WHERE a.Nim  " . $statment." AND d.status = 'AKTIF' ";
+        $sql = "SELECT DISTINCT a.Nim AS nim, b.nama AS makul, b.tahun AS tahun, b.semester AS semester  FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen JOIN mahasiswa d ON a.nim = d.nim  WHERE a.Nim  " . $statment . " AND d.status = 'AKTIF' ";
         return $this->db->query($sql)->result();
     }
 
@@ -45,14 +45,14 @@ class Kapasitas_model extends CI_Model {
         $sql = "SELECT DISTINCT tahun FROM tahun ORDER BY tahun ASC";
         return $this->db->query($sql)->result_array();
     }
-    
-    public function hitung($data,$makul)
-    {
+
+    public function hitung($data, $makul) {
         $menu = $this->kapasitas_model->tahun();
-        $hitung=0;
-        foreach ($menu as $m){
+        $hitung = 0;
+        foreach ($menu as $m) {
             $hitung += $this->kapasitas_model->ambilMakul($data, $m['tahun'], $makul);
         }
         return $hitung;
     }
+
 }

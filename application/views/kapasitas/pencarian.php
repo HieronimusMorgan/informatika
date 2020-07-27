@@ -10,13 +10,13 @@
                     <label for="title">ANGKATAN</label>
                     <select name="angkatan" id="angkatan" class="form-control">
                         <option value=""></option>
-                        <?php $menu = $this->kapasitas_model->tahun();  ?>
+                        <?php $menu = $this->kapasitas_model->tahun(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('angkatan') == $m['tahun']): ?>
-                        <option value="<?= $m['tahun'] ?>" selected><?= '20' . $m['tahun']; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['tahun'] ?>"><?= '20' . $m['tahun']; ?> </option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('angkatan') == $m['tahun']): ?>
+                                <option value="<?= $m['tahun'] ?>" selected><?= '20' . $m['tahun']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['tahun'] ?>"><?= '20' . $m['tahun']; ?> </option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -27,11 +27,11 @@
                         <?php $sql = "SELECT DISTINCT nama FROM makul ORDER BY nama ASC"; ?>
                         <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('makul') == $m['nama']): ?>
-                        <option value="<?= $m['nama'] ?>" selected><?= $m['nama'] ?></option>
-                        <?php else : ?>
-                        <option value="<?= $m['nama'] ?>"><?= $m['nama'] ?></option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('makul') == $m['nama']): ?>
+                                <option value="<?= $m['nama'] ?>" selected><?= $m['nama'] ?></option>
+                            <?php else : ?>
+                                <option value="<?= $m['nama'] ?>"><?= $m['nama'] ?></option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -42,11 +42,11 @@
                         <?php $sql = "SELECT DISTINCT tahun FROM makul ORDER BY tahun ASC"; ?>
                         <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('tahun') == $m['tahun']): ?>
-                        <option value="<?= $m['tahun'] ?>" selected><?= $m['tahun']; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['tahun'] ?>"><?= $m['tahun']; ?> </option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('tahun') == $m['tahun']): ?>
+                                <option value="<?= $m['tahun'] ?>" selected><?= $m['tahun']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['tahun'] ?>"><?= $m['tahun']; ?> </option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -57,11 +57,11 @@
                         <?php $sql = "SELECT DISTINCT tipeMakul FROM makul"; ?>
                         <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('tipe') == $m): ?>
-                        <option value="<?= $m['tipeMakul']  ?>" selected><?= $m['tipeMakul']  ; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['tipeMakul']   ?>"><?= $m['tipeMakul']  ; ?> </option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('tipe') == $m): ?>
+                                <option value="<?= $m['tipeMakul'] ?>" selected><?= $m['tipeMakul']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['tipeMakul'] ?>"><?= $m['tipeMakul']; ?> </option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -72,11 +72,11 @@
                         <?php $sql = "SELECT DISTINCT semester FROM makul ORDER BY semester ASC"; ?>
                         <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('semester') == $m): ?>
-                        <option value="<?= $m['semester'] ?>" selected><?= $m['semester'] ; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['semester']  ?>"><?= $m['semester'] ; ?> </option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('semester') == $m): ?>
+                                <option value="<?= $m['semester'] ?>" selected><?= $m['semester']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['semester'] ?>"><?= $m['semester']; ?> </option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -87,12 +87,12 @@
                         <?php $sql = "SELECT DISTINCT nama FROM dosen ORDER BY nama ASC"; ?>
                         <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('dosen') == $m['nama']): ?>
-                        <option value="<?= $m['nama'] ?>" selected><?= $m['nama']; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['nama'] ?>"><?= $m['nama']; ?> </option>
-                        <?php endif; ?>
-                        </option>
+                            <?php if ($this->input->post('dosen') == $m['nama']): ?>
+                                <option value="<?= $m['nama'] ?>" selected><?= $m['nama']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['nama'] ?>"><?= $m['nama']; ?> </option>
+                            <?php endif; ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>

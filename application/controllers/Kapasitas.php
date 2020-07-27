@@ -50,73 +50,75 @@ class kapasitas extends CI_Controller {
             $semester = $this->input->post('semester');
             $statment = $statment . " AND b.semester LIKE '" . $semester . "' ";
         }
-        
+
         $data['title'] = 'Kapasitas Kelas';
         if ($statment != "") {
-            $data['kapasitas'] = $this->kapasitas_model->kapasitas($statment);
-            $data['data'] = $statment;
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
+        $data['kapasitas'] = $this->kapasitas_model->kapasitas($statment);
+        $data['data'] = $statment;
+    } else {
+    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
                         Filter kosong!</div>');
-            redirect('kapasitas');
+    redirect('kapasitas');
+}
+$this->load->view('templates/header', $data) ;
+$this->load->view('templates/sidebar', $data) ;
+$this->load->view('kapasitas/cari', $data) ;
+$this->load->view('kapasitas/pencarian', $data) ;
+$this->load->view('templates/topbar', $data) ;
+$this->load->view('templates/footer', $data) ;
         }
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('kapasitas/cari', $data);
-        $this->load->view('kapasitas/pencarian', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/footer', $data);
-    }
 
-    public function cetak() {
-        $data = $this->session->tempdata('item');
-        $data = (array) $data;
-        $excel = new PHPExcel();
-        
-        $excel->getProperties()->setTitle("Kapasitas Kelas ");
-        
-        $style_col = array(
-            'font' => array('bold' => true, 'name' => 'Times New Roman', 'size' => 12), 
-            'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
-            ),
-            'borders' => array(
-                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
-                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
-                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-            )
+public
+
+function cetak() {
+$data = $this->session->tempdata('item');
+$data = (array) $data;
+$excel = new PHPExcel();
+
+$excel->getProperties()->setTitle("Kapasitas Kelas ");
+
+$style_col = array(
+        'font' => array('bold' => true, 'name' => 'Times New Roman', 'size' => 12),
+    'alignment' => array(
+    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+    ),
+    'borders' => array(
+    'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+        'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+        'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+        'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+        )
         );
-        
+
         $style_row = array(
-            'alignment' => array(
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
-            ),
-            'borders' => array(
-                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
-                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
-                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN) 
-            )
-        );
-        $styleArray = array(
-            'font' => array(
-                'size' => 12,
-                'name' => 'Times New Roman'
+'alignment' => array(
+    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+    ),
+    'borders' => array(
+    'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+ 'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+ 'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+ 'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+)
+);
+$styleArray = array(
+'font' => array(
+        'size' => 12,
+        'name' => 'Times New Roman'
         ));
         $style_col1 = array(
-            'font' => array('name' => 'Times New Roman'), 
-            'alignment' => array(
-                'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER, 
-                'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER 
-            ),
-            'borders' => array(
-                'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
-                'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN), 
-                'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
-                'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
-            )
+'font' => array('name' => 'Times New Roman'),
+        'alignment' => array(
+    'horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER,
+    'vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER
+    ),
+    'borders' => array(
+    'top' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+    'right' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+        'bottom' => array('style' => PHPExcel_Style_Border::BORDER_THIN),
+        'left' => array('style' => PHPExcel_Style_Border::BORDER_THIN)
+        )
         );
         $excel->setActiveSheetIndex(0)->setCellValue('A1', "KAPASITAS KELAS");
         $excel->getActiveSheet()->mergeCells('A1:D1');
@@ -137,90 +139,84 @@ class kapasitas extends CI_Controller {
         $excel->getActiveSheet()->getStyle('A6')->applyFromArray($styleArray)->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('A7')->applyFromArray($styleArray)->getFont()->setBold(TRUE);
 
-        if ($data['makul'] != "") {
-            $excel->setActiveSheetIndex(0)->setCellValue('B3', ": " . $data['makul']);
-            $excel->getActiveSheet()->getStyle('B3')->applyFromArray($styleArray);
-        }
-        if ($data['tahun'] != "") {
-            $excel->setActiveSheetIndex(0)->setCellValue('B4', ": " . $data['tahun']);
-            $excel->getActiveSheet()->getStyle('B4')->applyFromArray($styleArray);
-        }
-        if ($data['tipe'] != "") {
-            $excel->setActiveSheetIndex(0)->setCellValue('B5', ": " . $data['tipe']);
-            $excel->getActiveSheet()->getStyle('B5')->applyFromArray($styleArray);
-        }
-        if ($data['semester'] != "") {
-            $excel->setActiveSheetIndex(0)->setCellValue('B6', ": " . $data['semester']);
-            $excel->getActiveSheet()->getStyle('B6')->applyFromArray($styleArray);
-        }
-        if ($data['dosen'] != "") {
-            $excel->setActiveSheetIndex(0)->setCellValue('B7', ": " . $data['dosen']);
-            $excel->getActiveSheet()->getStyle('B7')->applyFromArray($styleArray);
-        }
+        if($data[ 'makul']  !=  "") {
+        $excel-> setActiveSheetIndex ( 0 )-> setCellValue('B3', ": " . $data['makul']);
+        $excel ->getActiveSheet ( )->getStyle('B3')->applyFromArray($styleArray);
+                }
+if ($data['tahun'] != "") {
+$excel->setActiveSheetIndex ( 0)->setCellValue('B4', ": " . $data['tahun']);
+        $excel ->getActiveSheet ( )->getStyle('B4')->applyFromArray($styleArray);
+                }
+if ($data['tipe'] != "") {
+$excel->setActiveSheetIndex ( 0)->setCellValue('B5', ": " . $data['tipe']);
+        $excel-> getActiveSheet ( )->getStyle('B5')->applyFromArray($styleArray);
+                }
+if ($data['semester'] !=  "") {
+$excel->setActiveSheetIndex ( 0)->setCellValue('B6', ": " . $data['semester']);
+         $excel->getActiveSheet ( )->getStyle('B6')->applyFromArray($styleArray);
+                }
+if ($data['dosen'] != "") {
+$excel->setActiveSheetIndex ( 0)->setCellValue('B7', ": " . $data['dosen']);
+        $excel ->getActiveSheet ( )->getStyle('B7')->applyFromArray($styleArray);
+                }
 
-        $excel->setActiveSheetIndex(0)->setCellValue('A9', "ANGKATAN");
-        $excel->setActiveSheetIndex(0)->setCellValue('B9', "JUMLAH MAHASISWA");
-        $excel->setActiveSheetIndex(0)->setCellValue('C9', "TELAH MENGAMBIL");
-        $excel->setActiveSheetIndex(0)->setCellValue('D9', "BELUM MENGAMBIL");
+$excel->setActiveSheetIndex(0)->setCellValue('A9', "ANGKATAN");
+        $excel->setActiveSheetIndex (0)->setCellValue('B9', "JUMLAH MAHASISWA");
+        $excel->setActiveSheetIndex (0)->setCellValue('C9', "TELAH MENGAMBIL");
+        $excel->setActiveSheetIndex (0)->setCellValue('D9', "BELUM MENGAMBIL");
 
-        $excel->getActiveSheet()->getStyle('A9')->applyFromArray($style_col);
-        $excel->getActiveSheet()->getStyle('B9')->applyFromArray($style_col);
-        $excel->getActiveSheet()->getStyle('C9')->applyFromArray($style_col);
-        $excel->getActiveSheet()->getStyle('D9')->applyFromArray($style_col);
+        $excel->getActiveSheet ()->getStyle('A9')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('B9')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('C9')->applyFromArray($style_col);
+                $excel->getActiveSheet()->getStyle('D9')->applyFromArray($style_col);
 
 
-        if ($data['angkatan'] != "") {
-            $angkatan = $data['angkatan'];
-            $excel->setActiveSheetIndex(0)->setCellValue('A10', "20" . $angkatan);
-            $excel->setActiveSheetIndex(0)->setCellValue('B10', $this->kapasitas_model->mhs($angkatan));
-            $excel->setActiveSheetIndex(0)->setCellValue('C10', $this->kapasitas_model->ambilMakul($data['data'], $angkatan, $data['makul']));
-            $excel->setActiveSheetIndex(0)->setCellValue('D10', $this->kapasitas_model->belumAmbil($data['data'], $angkatan, $data['makul']));
+                if($data['angkatan']  != "") {
+        $angkatan = $data['angkatan'];
+$excel->setActiveSheetIndex(0)->setCellValue('A10', "20" . $angkatan);
+        $excel-> setActiveSheetIndex ( 0)->setCellValue('B10', $this->kapasitas_model->mhs($angkatan)); $excel->setActiveSheetIndex(0)->setCellValue('C10', $this->kapasitas_model->ambilMakul($data[ 'data'], $angkatan, $data['makul']));
+                 $excel-> setActiveSheetIndex(0)->setCellValue('D10', $this->kapasitas_model->belumAmbil($data[ 'data'], $angkatan, $data['makul']));
 
-            $excel->getActiveSheet()->getStyle('A10')->applyFromArray($style_col1);
-            $excel->getActiveSheet()->getStyle('B10')->applyFromArray($style_col1);
-            $excel->getActiveSheet()->getStyle('C10')->applyFromArray($style_col1);
-            $excel->getActiveSheet()->getStyle('D10')->applyFromArray($style_col1);
+                 $excel-> getActiveSheet()->getStyle('A10')->applyFromArray($style_col1);
+        $excel->getActiveSheet()->getStyle('B10')->applyFromArray($style_col1);
+        $excel->getActiveSheet()->getStyle('C10')->applyFromArray($style_col1);
+        $excel->getActiveSheet()->getStyle('D10')->applyFromArray($style_col1);
         } else {
-            $menu = $this->kapasitas_model->tahun();
-            $numrow = 10;
-            foreach ($menu as $m) {
-                $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, "20" . $m['tahun']);
-                $excel->setActiveSheetIndex(0)->setCellValue('B' . $numrow, $this->kapasitas_model->mhs($m['tahun']));
-                $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $this->kapasitas_model->ambilMakul($data['data'], $m['tahun'], $data['makul']));
-                $excel->setActiveSheetIndex(0)->setCellValue('D' . $numrow, $this->kapasitas_model->belumAmbil($data['data'], $m['tahun'], $data['makul']));
-
-                $excel->getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_col1);
-                $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_col1);
-                $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_col1);
-                $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_col1);
-                $numrow++;
-            }
+        $menu = $this->kapasitas_model->tahun();
+        $numrow = 10;
+foreach ($menu as $m) {
+$excel-> setActiveSheetIndex(0)->setCellValue('A' . $numrow, "20" . $m['tahun']);
+        $excel ->setActiveSheetIndex ( 0)->setCellValue('B' . $numrow, $this->kapasitas_model->mhs($m['tahun'] )); $excel->setActiveSheetIndex(0)->setCellValue('C' . $numrow, $this->kapasitas_model->ambilMakul ( $data[ 'data'], $m['tahun'], $data['makul'])); $excel-> setActiveSheetIndex(0)->setCellValue('D' . $numrow, $this->kapasitas_model->belumAmbil ( $data[ 'data'], $m['tahun'], $data['makul'])); $excel-> getActiveSheet()->getStyle('A' . $numrow)->applyFromArray($style_col1);
+        $excel->getActiveSheet()->getStyle('B' . $numrow)->applyFromArray($style_col1);
+        $excel->getActiveSheet()->getStyle('C' . $numrow)->applyFromArray($style_col1);
+        $excel->getActiveSheet()->getStyle('D' . $numrow)->applyFromArray($style_col1);
+        $numrow++;
         }
-        
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25); 
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(28); 
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(28);
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(28); 
+}
 
-        $excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
-        $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('4')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('5')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('6')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('7')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('9')->setRowHeight(20);
+$excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
+$excel->getActiveSheet()->getColumnDimension('B')->setWidth(28);
+$excel->getActiveSheet()->getColumnDimension('C')->setWidth(28);
+$excel->getActiveSheet()->getColumnDimension('D')->setWidth(28);
 
-        $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
+$excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
+$excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
+$excel->getActiveSheet()->getRowDimension('4')->setRowHeight(20);
+$excel->getActiveSheet()->getRowDimension('5')->setRowHeight(20);
+$excel->getActiveSheet()->getRowDimension('6')->setRowHeight(20);
+$excel->getActiveSheet()->getRowDimension('7')->setRowHeight(20);
+$excel->getActiveSheet()->getRowDimension('9')->setRowHeight(20);
+
+$excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
         $excel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);
 
         $excel->getActiveSheet(0)->setTitle("Kapasitas Kelas");
-        $excel->setActiveSheetIndex(0);
+$excel->setActiveSheetIndex(0);
 
-        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="Kapasitas Kelas.xlsx"'); 
+header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="Kapasitas Kelas.xlsx"');
         header('Cache-Control: max-age=0');
-        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
-        $write->save('php://output');
-    }
+$write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output'); }
 
-}
+                }
