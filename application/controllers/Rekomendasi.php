@@ -115,18 +115,17 @@ class rekomendasi extends CI_Controller
          $tahun = $key['tahun'];
      }
      $data['id'] = $id;
-
-        //load view
+     
+     //load view
      $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
      $this->load->view('templates/header');
      $this->load->view('templates/sidebar', $data);
      $this->load->view('templates/topbar', $data);
-
-        //get detail jadwal
+     
+     //get detail jadwal
      $dataa = $this->Jadwal_model->getDetailJadwal($id);
-
-     print_r($dataa);
-     die();
+     $data['jadwal'] = $dataa;
+     
      $this->load->view('rekomendasi/detailjadwal',$data);
      $this->load->view('templates/footer');
 
