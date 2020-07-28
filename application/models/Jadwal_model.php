@@ -28,16 +28,9 @@ class Jadwal_model extends CI_Model{
             $data = $this->db->get("detailjadwal")->result_array();
              return $data;
         }else{
-            $this->db->SELECT('detailjadwal.*,makul.*,ruang.*,dosen.nama as dosen_nama');
+           
             $this->db->FROM('detailjadwal');
-            $this->db->join('presensi','presensi.idMakul = detailjadwal.idMakul');
-            $this->db->join('makul','makul.idMakul = presensi.idMakul');
-            $this->db->join('dosen','dosen.idDosen = presensi.idDosen' );
-            $this->db->join('ruang','ruang.idRuangan = detailjadwal.idRuangan');
-            $this->db->group_by('presensi.idMakul,presensi.idDosen');
-
-            $this->db->where('detailjadwal.idJadwal',$id);
-
+            $this->db->JOIN('presensi','presensi.idMakul = detailjadwal.idMakul');
             $data = $this->db->get();
             return $data->result_array();
             
