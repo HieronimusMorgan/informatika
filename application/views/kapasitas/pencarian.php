@@ -10,7 +10,7 @@
                     <label for="title">ANGKATAN</label>
                     <select name="angkatan" id="angkatan" class="form-control">
                         <option value=""></option>
-                        <?php $menu = $this->kapasitas_model->tahun() ?>
+                        <?php $menu = $this->kapasitas_model->tahun(); ?>
                         <?php foreach ($menu as $m) : ?>
                             <?php if ($this->input->post('angkatan') == $m['tahun']): ?>
                                 <option value="<?= $m['tahun'] ?>" selected><?= '20' . $m['tahun']; ?> </option>
@@ -54,9 +54,14 @@
                     <label for="title">TIPE MAKUL</label>
                     <select name="tipe" id="tipe" class="form-control">
                         <option value=""></option>
-                        <?php $menu = ['Wajib', 'RD', 'SC', 'JK', 'Perminatan'] ?>
+                        <?php $sql = "SELECT DISTINCT tipeMakul FROM makul"; ?>
+                        <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
-                            <option value="<?= $m ?>"> <?= $m ?> </option>
+                            <?php if ($this->input->post('tipe') == $m): ?>
+                                <option value="<?= $m['tipeMakul'] ?>" selected><?= $m['tipeMakul']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['tipeMakul'] ?>"><?= $m['tipeMakul']; ?> </option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -64,12 +69,13 @@
                     <label for="title">SEMESTER</label>
                     <select name="semester" id="semester" class="form-control">
                         <option value=""></option>
-                        <?php $menu = ['GASAL', "GENAP"] ?>
+                        <?php $sql = "SELECT DISTINCT semester FROM makul ORDER BY semester ASC"; ?>
+                        <?php $menu = $this->db->query($sql)->result_array(); ?>
                         <?php foreach ($menu as $m) : ?>
                             <?php if ($this->input->post('semester') == $m): ?>
-                                <option value="<?= $m ?>" selected><?= $m; ?> </option>
+                                <option value="<?= $m['semester'] ?>" selected><?= $m['semester']; ?> </option>
                             <?php else : ?>
-                                <option value="<?= $m ?>"><?= $m; ?> </option>
+                                <option value="<?= $m['semester'] ?>"><?= $m['semester']; ?> </option>
                             <?php endif; ?>
                         <?php endforeach; ?>
                     </select>

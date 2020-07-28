@@ -5,7 +5,7 @@
                 <h1 class="mt-4"><?= $title ?></h1>
                 <form method="post" class="form-inline" action="<?php base_url('home/search'); ?>">
                     <input class="form-control mr-sm-2" name="nama" type="text" id="nama" placeholder="Search Name"
-                           aria-label="Search">
+                        aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </nav>
@@ -25,19 +25,19 @@
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($data->result() as $row) : ?>
-                                <tr>
-                                    <td><?= $i ?></td>
-                                    <td><?php echo $row->nip; ?></td>
-                                    <td><?php echo $row->nama; ?></td>
-                                    <td>
-                                        <a href="<?php echo base_url(); ?>home/editDsn/<?= $row->nip; ?>"
-                                           class="badge badge-success ">Edit</a>
-                                        <a href="<?php echo base_url(); ?>home/deleteDsn/<?= $row->nip; ?>"
-                                           class="badge badge-danger"
-                                           onclick="return confirm('Are you sure you want to delete <?= $row->nip; ?>?');">Delete</a>
-                                    </td>
-                                </tr>
-                                <?php $i++; ?>
+                            <tr>
+                                <td><?= $i ?></td>
+                                <td><?php echo $row->nip; ?></td>
+                                <td><?php echo $row->nama; ?></td>
+                                <td>
+                                    <a href="<?php echo base_url(); ?>home/editDsn/<?= $row->nip; ?>"
+                                        class="badge badge-success ">Edit</a>
+                                    <a href="<?php echo base_url(); ?>home/deleteDsn/<?= $row->nip; ?>"
+                                        class="badge badge-danger"
+                                        onclick="return confirm('Are you sure you want to delete <?= $row->nip; ?>?');">Delete</a>
+                                </td>
+                            </tr>
+                            <?php $i++; ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
@@ -54,11 +54,11 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Add New Menu</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Import Data Dosen</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

@@ -3,14 +3,14 @@
         <div class="container-fluid">
             <nav class="navbar">
                 <h1 class="mt-4"><?= $title ?></h1>
-                <form class="form-inline" action="<?= base_url('home/searchMhs'); ?>" method="post">
+                <form method="get" class="form-inline" action="<?php base_url('home/searchMhs'); ?>">
                     <input class="form-control mr-sm-2" name="nim" type="text" id="nim" placeholder="Search NIM"
                         aria-label="Search">
                     <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                 </form>
             </nav>
             <div class="card-body">
-                <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Import
+                <a href="http://" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Import
                     Data Mahasiswa</a>
                 <?= $this->session->flashdata('message'); ?>
                 <div class="table-responsive">
@@ -38,7 +38,7 @@
                                 <td><?php echo $row->status ?></td>
                                 <td>
                                     <a href="<?php echo base_url(); ?>home/detailMhs/<?= $row->nim; ?>"
-                                        class="badge badge-primary ">Detail</a>
+                                        class="badge badge-warning ">Detail</a>
                                     <a href="<?php echo base_url(); ?>home/editMhs/<?= $row->nim; ?>"
                                         class="badge badge-success ">Edit</a>
                                     <a href="<?php echo base_url(); ?>home/deleteMhs/<?= $row->nim; ?>"
@@ -85,10 +85,4 @@
                 </form>
             </div>
         </div>
-<<<<<<< HEAD
     </div>
-
-   
-=======
-    </div>
->>>>>>> e5ccfd05b74d3ba66b626bb0ff47913bd22a36cc

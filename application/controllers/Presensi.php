@@ -55,10 +55,7 @@ class presensi extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function makul() {
-        
-    }
-
+   
     public function upload() {
         if (isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);
