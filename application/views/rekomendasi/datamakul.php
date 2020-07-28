@@ -31,9 +31,9 @@
                                     <td><?php echo $row['semester'] ?></td>
 
                                     <td>
-                                        <a href="<?php echo base_url(); ?>home/editMakul/<?= $row['nama']; ?>"
+                                        <a href="<?php echo base_url(); ?>home/editMakul/<?= $row['idMakul']; ?>"
                                          class="badge badge-success ">Edit</a>
-                                         <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row['nama']; ?>"
+                                        <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row['idMakul']; ?>"
                                              class="badge badge-danger"
                                              onclick="return confirm('Are you sure you want to delete <?= $row['nama']; ?>?');">Delete</a>
                                          </td>
