@@ -1,21 +1,21 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
-            <nav class="navbar">
-                <h1 class="mt-4"><?= $title ?></h1>
-                <form method="post" class="form-inline" action="<?php base_url('home/search'); ?>">
-                    <input class="form-control mr-sm-2" name="nama" type="text" id="nama" placeholder="Search Name"
-                        aria-label="Search">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                </form>
-            </nav>
             <div class="card-body">
-                <a href="http://" class="btn btn-primary mb-2" data-toggle="modal" data-target="#exampleModal">Import
-                    Data Dosen</a>
+                <div class="row">
+                    <div class="col-auto mr-auto">
+                        <h2 class=""><?= $title ?></h2>
+                    </div>
+                    <div class="col-auto ml-3">
+                        <a href="http://" class="btn btn-success pull-right" data-toggle="modal"
+                            data-target="#exampleModal"> <span class="glyphicon glyphicon-upload"></span> Import
+                            Data Dosen</a>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%">
+                    <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>No</th>
                                 <th>NIP</th>
                                 <th>NAMA</th>
@@ -26,7 +26,7 @@
                             <?php $i = 1; ?>
                             <?php foreach ($data->result() as $row) : ?>
                             <tr>
-                                <td><?= $i ?></td>
+                                <td class="text-center"><?= $i ?></td>
                                 <td><?php echo $row->nip; ?></td>
                                 <td><?php echo $row->nama; ?></td>
                                 <td>
@@ -41,12 +41,6 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <!--Tampilkan pagination-->
-                    <div class="row">
-                        <div class="col">
-                            <?php echo $pagination; ?>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -75,3 +69,14 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabelku').dataTable({
+            "scrollY": "400px",
+            "scrollCollapse": true,
+            "paging": true,
+            "bAutoWidth": false,
+            "bInfo": false
+        });
+    });
+    </script>

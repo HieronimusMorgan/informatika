@@ -24,39 +24,8 @@ class home extends CI_Controller {
     }
 
     public function mahasiswa() {
-        $config['base_url'] = site_url('home/mahasiswa');
-        $config['total_rows'] = $this->db->count_all('mahasiswa'); 
-
-        $config['per_page'] = 25; 
-        $config["uri_segment"] = 3;  
-        $config["num_links"] = 5;
-
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
-        $config['next_link'] = 'Next';
-        $config['prev_link'] = 'Prev';
-        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close'] = '</ul></nav></div>';
-        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close'] = '</span></li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close'] = '</span>Next</li>';
-        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close'] = '</span></li>';
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $data['data'] = $this->list_model->get_mahasiswa_list($config["per_page"], $data['page']);
-
-        $data['pagination'] = $this->pagination->create_links();
-
+        
+        $data['data'] = $this->list_model->get_mahasiswa_list();
 
         $data['title'] = 'Data Mahasiswa';
 
@@ -123,58 +92,9 @@ class home extends CI_Controller {
         redirect('home/mahasiswa');
     }
 
-    public function searchMhs() {
-        $keyword = $this->input->post('nim');
-
-        $data['data'] = $this->data_model->searchMhs($keyword);
-
-        $data['pagination'] = $this->pagination->create_links();
-
-
-        $data['title'] = 'Data Mahasiswa';
-        
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('data/mahasiswa', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/footer', $data);
-        
-    }
-
     public function dosen() {
-        $config['base_url'] = site_url('home/dosen'); 
-        $config['total_rows'] = $this->db->count_all('dosen'); 
-
-        $config['per_page'] = 25;  
-        $config["uri_segment"] = 3;
-        $config["num_links"] = 5;
-
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
-        $config['next_link'] = 'Next';
-        $config['prev_link'] = 'Prev';
-        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close'] = '</ul></nav></div>';
-        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close'] = '</span></li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close'] = '</span>Next</li>';
-        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close'] = '</span></li>';
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $data['data'] = $this->list_model->get_dosen_list($config["per_page"], $data['page']);
-
-        $data['pagination'] = $this->pagination->create_links();
-
+       
+        $data['data'] = $this->list_model->get_dosen_list();
 
         $data['title'] = 'Data Dosen';
 
@@ -226,39 +146,8 @@ class home extends CI_Controller {
     }
 
     public function makul() {
-        $config['base_url'] = site_url('home/makul'); 
-        $config['total_rows'] = $this->db->count_all('makul'); 
-
-        $config['per_page'] = 25;
-        $config["uri_segment"] = 3;  
-        $config["num_links"] = 5;
-
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
-        $config['next_link'] = 'Next';
-        $config['prev_link'] = 'Prev';
-        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close'] = '</ul></nav></div>';
-        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close'] = '</span></li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close'] = '</span>Next</li>';
-        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close'] = '</span></li>';
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $data['data'] = $this->list_model->get_makul_list($config["per_page"], $data['page']);
-
-        $data['pagination'] = $this->pagination->create_links();
-
+       
+        $data['data'] = $this->list_model->get_makul_list();
 
         $data['title'] = 'Data Mata Kuliah';
 
@@ -310,9 +199,11 @@ class home extends CI_Controller {
         }
     }
 
-    public function deleteMakul($nama)
+    public function deleteMakul($idMakul)
     {
-        $hapus = $this->db->get_where('makul', ['nama' => $nama])->row_array();
+        $hapus = array (
+            "idMakul" => $idMakul
+        );
         $this->db->delete('makul', $hapus);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
         Mata Kuliah berhasil di hapus!</div>');
@@ -320,39 +211,8 @@ class home extends CI_Controller {
     }
 
     public function ruangan() {
-        $config['base_url'] = site_url('home/ruangan'); 
-        $config['total_rows'] = $this->db->count_all('ruangan'); 
-
-        $config['per_page'] = 25; 
-        $config["uri_segment"] = 3; 
-        $config["num_links"] = 5;
-
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
-        $config['next_link'] = 'Next';
-        $config['prev_link'] = 'Prev';
-        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close'] = '</ul></nav></div>';
-        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close'] = '</span></li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close'] = '</span>Next</li>';
-        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close'] = '</span></li>';
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $data['data'] = $this->list_model->get_ruangan_list($config["per_page"], $data['page']);
-
-        $data['pagination'] = $this->pagination->create_links();
-
+        
+        $data['data'] = $this->list_model->get_ruangan_list();
 
         $data['title'] = 'Data Ruangan';
 

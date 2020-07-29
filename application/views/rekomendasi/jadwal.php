@@ -4,9 +4,9 @@
             <nav class="navbar">
                 <h1 class="mt-2"><?= $title ?></h1>
             </nav>
-            <div class="card-body">
+            <div>
                 <a href="" class="btn btn-primary mb-2" data-toggle="modal" data-target="#ModalInput">Tambah Ujian</a>
-                <div class="table-responsive">
+                <div >
                     <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>
                             <tr>
@@ -44,10 +44,10 @@
 
                                  <?php endforeach; ?>
                              </tbody>
-                         </table>
-                     </div>
-                 </div>
-             </div>
+                    </table>
+                </div>
+            </div>
+        </div>
 
              <!-- Modal HTML Markup -->
              <div id="ModalInput" class="modal fade">
@@ -102,8 +102,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('#tabelku').dataTable({
-            "scrollY":        "400px",
-            "scrollCollapse": true,
+            
             "paging":         false,
             "language": {
                 "emptyTable": "Data Kosong"

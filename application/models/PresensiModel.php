@@ -15,7 +15,7 @@ class PresensiModel extends CI_Model {
 
     public function idMakul($data) {
         $this->db->insert('makul', $data);
-        $query = $this->db->select('idMakul')->from('makul')->where('nama', $data['nama'])->get();
+        $query = $this->db->select('idMakul')->from('makul')->where($data)->get();
         $row = $query->row();
         return $row->idMakul;
     }

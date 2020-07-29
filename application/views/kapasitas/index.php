@@ -47,7 +47,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="tabelku" width="100%" id="myTable">
+                                <table class="table table-bordered" id="tabelku" width="100%">
                                     <thead>
                                         <tr style="text-align:center;">
                                             <th>NO</th>
@@ -59,27 +59,38 @@
                                         <?php $i = 1; ?>
                                         <?php $total = 0; ?>
                                         <?php foreach ($makul as $m): ?>
-                                            <tr>
-                                                <td style="text-align:center;"><?php echo $i ?></td>
-                                                <td><?php echo $m['nama'] ?></td>
-                                                <td style="text-align:center;"><?php
+                                        <tr>
+                                            <td style="text-align:center;"><?php echo $i ?></td>
+                                            <td><?php echo $m['nama'] ?></td>
+                                            <td style="text-align:center;"><?php
                                                     $sql = "SELECT  COUNT(DISTINCT a.Nim, a.idMakul, a.idRuangan) AS jumlah FROM presensi a JOIN makul b ON a.idMakul = b.idMakul WHERE b.nama LIKE '" . $m['nama'] . "' ";
                                                     $jumlah = $this->db->query($sql)->result_array();
                                                     echo $jumlah[0]['jumlah'];
                                                     $total += $jumlah[0]['jumlah'];
                                                     ?>
-                                                </td>
-                                            </tr>
-                                            <?php $i++; ?>
-                                        <?php endforeach ?>
-                                        <tr>
-                                            <th colspan="2" class="text-right">TOTAL</th>
-                                            <td style="text-align:center;"><?php echo $total ?></td>
+                                            </td>
                                         </tr>
+                                        <?php $i++; ?>
+                                        <?php endforeach ?>
                                     </tbody>
+                                    <tr>
+                                        <th colspan="2" class="text-right">TOTAL</th>
+                                        <td style="text-align:center;"><?php echo $total ?></td>
+                                    </tr>
                                 </table>
 
                             </div>
                         </div>
                     </div>
                 </div>
+                <script type="text/javascript">
+                $(document).ready(function() {
+                    $('#tabelku').dataTable({
+                        "scrollY": "400px",
+                        "scrollCollapse": false,
+                        "paging": false,
+                        "bAutoWidth": false,
+                        "bInfo": false
+                    });
+                });
+                </script>

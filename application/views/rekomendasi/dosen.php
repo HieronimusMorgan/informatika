@@ -45,9 +45,8 @@
         <script type="text/javascript">
             $(document).ready(function(){
                 $('#tabelku').dataTable({
-                    "scrollY":        "400px",
-                    "scrollCollapse": true,
-                    "paging":         false
+
+                    
                 });
             });
         </script>

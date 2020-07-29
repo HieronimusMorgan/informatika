@@ -184,43 +184,43 @@
                                         $angkatan = $this->input->post('angkatan');
                                         if ($angkatan != "") :
                                             ?>
-                                            <tr style="text-align:center;">
-                                                <td><?= '20' . $angkatan; ?></td>
-                                                <!-- JUMLAH MAHASISWA -->
-                                                <td><?= $this->kapasitas_model->mhs($angkatan); ?></td>
-                                                <!-- TELAH MENGAMBIL -->
-                                                <td><?= $this->kapasitas_model->ambilMakul($data, $angkatan, $makul); ?>
-                                                </td>
-                                                <!-- BELUM MENGAMBIL MENGAMBIL -->
-                                                <td><?= $this->kapasitas_model->belumAmbil($data, $angkatan, $makul); ?>
-                                                </td>
-                                            </tr>
+                                        <tr style="text-align:center;">
+                                            <td><?= '20' . $angkatan; ?></td>
+                                            <!-- JUMLAH MAHASISWA -->
+                                            <td><?= $this->kapasitas_model->mhs($angkatan); ?></td>
+                                            <!-- TELAH MENGAMBIL -->
+                                            <td><?= $this->kapasitas_model->ambilMakul($data, $angkatan, $makul); ?>
+                                            </td>
+                                            <!-- BELUM MENGAMBIL MENGAMBIL -->
+                                            <td><?= $this->kapasitas_model->belumAmbil($data, $angkatan, $makul); ?>
+                                            </td>
+                                        </tr>
                                         <?php else : ?>
-                                            <?php $menu = $this->kapasitas_model->tahun(); ?>
-                                            <!-- CHECK MAHASISWA -->
-                                            <?php if ($this->kapasitas_model->hitung($data, $makul) != 0) : ?>
+                                        <?php $menu = $this->kapasitas_model->tahun(); ?>
+                                        <!-- CHECK MAHASISWA -->
+                                        <?php if ($this->kapasitas_model->hitung($data, $makul) != 0) : ?>
 
-                                                <?php foreach ($menu as $m): ?>
-                                                    <?php if ($this->kapasitas_model->mhs($m['tahun']) != 0) : ?>
-                                                        <tr style="text-align:center;">
-                                                            <!-- ANGKATAN -->
-                                                            <td><?= '20' . $m['tahun']; ?></td>
-                                                            <!-- JUMLAH MAHASISWA -->
-                                                            <td><?= $this->kapasitas_model->mhs($m['tahun']); ?></td>
-                                                            <!-- TELAH MENGAMBIL -->
-                                                            <td><?= $this->kapasitas_model->ambilMakul($data, $m['tahun'], $makul); ?>
-                                                            </td>
-                                                            <!-- BELUM MENGAMBIL MENGAMBIL -->
-                                                            <td><?= $this->kapasitas_model->belumAmbil($data, $m['tahun'], $makul); ?>
-                                                            </td>
-                                                        <?php endif ?>
-                                                    <?php endforeach ?>
-                                                </tr>
-                                            <?php else: ?>
-                                            <div class="alert alert-danger" role="danger" style="text-align:center;">
-                                                Mahasiswa Belum Mengambil Mata Kuliah <?= $makul ?>!</div>
+                                        <?php foreach ($menu as $m): ?>
+                                        <?php if ($this->kapasitas_model->mhs($m['tahun']) != 0) : ?>
+                                        <tr style="text-align:center;">
+                                            <!-- ANGKATAN -->
+                                            <td><?= '20' . $m['tahun']; ?></td>
+                                            <!-- JUMLAH MAHASISWA -->
+                                            <td><?= $this->kapasitas_model->mhs($m['tahun']); ?></td>
+                                            <!-- TELAH MENGAMBIL -->
+                                            <td><?= $this->kapasitas_model->ambilMakul($data, $m['tahun'], $makul); ?>
+                                            </td>
+                                            <!-- BELUM MENGAMBIL MENGAMBIL -->
+                                            <td><?= $this->kapasitas_model->belumAmbil($data, $m['tahun'], $makul); ?>
+                                            </td>
+                                            <?php endif ?>
+                                            <?php endforeach ?>
+                                        </tr>
+                                        <?php else: ?>
+                                        <div class="alert alert-danger" role="danger" style="text-align:center;">
+                                            Mahasiswa Belum Mengambil Mata Kuliah <?= $makul ?>!</div>
                                         <?php endif ?>
-                                    <?php endif ?>
+                                        <?php endif ?>
                                     </tbody>
                                 </table>
                                 <?php
@@ -228,8 +228,8 @@
                                 $sd = urlencode(json_encode($cetak));
                                 $this->session->set_tempdata('item', $cetak);
                                 ?>
-                                <a href="<?= base_url('kapasitas/cetak/') ?>"
-                                   class="btn btn-secondary float-right">CETAK</a>
+                                <a href="<?= base_url('kapasitas/cetak/') ?>" class="btn btn-success float-right">
+                                    <i class="fas fa-file-excel" aria-hidden="true"></i> CETAK EXCEL</a>
                             </div>
                         </div>
                     </div>

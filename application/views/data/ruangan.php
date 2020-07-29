@@ -1,14 +1,16 @@
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
-            <nav class="navbar">
-                <h1 class="mt-4"><?= $title ?></h1>
-            </nav>
             <div class="card-body">
+                <div class="row">
+                    <div class="col-auto mr-auto">
+                        <h2 class=""><?= $title ?></h2>
+                    </div>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%">
+                    <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>
-                            <tr>
+                            <tr class="text-center">
                                 <th>NO</th>
                                 <th>NAMA</th>
                                 <th>MAKUL</th>
@@ -21,7 +23,7 @@
                             <?php $i = 1; ?>
                             <?php foreach ($data->result() as $row) : ?>
                             <tr>
-                                <td><?= $i ?></td>
+                                <td class="text-center"><?= $i ?></td>
                                 <td><?php echo $row->nama; ?></td>
                                 <td><?php echo ($this->db->query('SELECT nama FROM makul WHERE idMakul LIKE '.$row->makul)->row()->nama); ?>
                                 </td>
@@ -39,13 +41,17 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    <!--Tampilkan pagination-->
-                    <div class="row">
-                        <div class="col">
-                            <?php echo $pagination; ?>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </main>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('#tabelku').dataTable({
+            "scrollY": "400px",
+            "scrollCollapse": true,
+            "paging": true,
+            "bAutoWidth": false
+        });
+    });
+    </script>
