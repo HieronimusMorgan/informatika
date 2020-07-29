@@ -38,8 +38,7 @@
                                 <td><?php echo $row->ruangan; ?></td>
                                 <td><?php echo $row->kapasitas; ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>home/editMakul/<?= $row->nama; ?>"
-                                        class="badge badge-success ">Edit</a>
+                                    
                                     <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row->idMakul; ?>"
                                         class="badge badge-danger"
                                         onclick="return confirm('Are you sure you want to delete <?= $row->nama; ?>?');">Delete</a>
@@ -55,6 +54,7 @@
     </main>
     <script type="text/javascript">
 <<<<<<< HEAD
+<<<<<<< HEAD
     $(document).ready(function(){
         $('#tabelku').dataTable({   
             "paging":         false,
@@ -65,6 +65,8 @@
     });
 </script>
 =======
+=======
+>>>>>>> 812f2457f669c8faa0461d3edf9d3e49b887ae6e
     $(document).ready(function() {
         $('#tabelku').dataTable({
             "scrollY": "400px",
@@ -73,5 +75,9 @@
             "bAutoWidth": false
         });
     });
+<<<<<<< HEAD
+    </script>
+>>>>>>> 812f2457f669c8faa0461d3edf9d3e49b887ae6e
+=======
     </script>
 >>>>>>> 812f2457f669c8faa0461d3edf9d3e49b887ae6e
