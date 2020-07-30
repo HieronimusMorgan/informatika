@@ -37,7 +37,10 @@ class List_model extends CI_Model {
 
     function get_makul_list() {
         $this->db->order_by('nama', 'ASC');
-        $query = $this->db->get('makul');
+        $this->db->select('makul.*,ruangan.nama as ruangan');
+        $this->db->from('makul');
+        $this->db->join('ruangan','ruangan.makul = makul.idMakul');
+        $query = $this->db->get();
         return $query;
     }
 

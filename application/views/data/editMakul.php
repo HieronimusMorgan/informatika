@@ -47,7 +47,7 @@
                             <div class="form-group">
                                 <label for="ruangan">Ruangan</label>
                                 <input type="text" class="form-control" id="ruangan" name="ruangan"
-                                    value="<?= $data['ruangan'] ?>">
+                                    value="<?= $data['ruangan'] ?>" readonly>
                                 <?= form_error('ruangan', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">

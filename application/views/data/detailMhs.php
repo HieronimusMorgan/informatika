@@ -57,7 +57,7 @@
                         <div class="form-group text-right">
                             <a href="<?= base_url('home/mahasiswa'); ?>" class="btn btn-secondary">Kembali</a>
                             <a class="btn btn-primary btn-lg-5"
-                                href="<?php echo base_url(); ?>home/editMhs/<?= $data['nim']; ?>">Edit Data</a>
+                                href="<?php echo base_url(); ?>home/editMhs/<?= $data['idMahasiswa']; ?>">Edit Data</a>
                         </div>
                     </div>
                 </div>

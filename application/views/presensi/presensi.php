@@ -12,6 +12,7 @@
                             Presensi</a>
                     </div>
                 </div>
+                <hr>
                 <?= $this->session->flashdata('message'); ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tabelku" width="100%">

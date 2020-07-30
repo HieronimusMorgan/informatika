@@ -76,7 +76,7 @@ class home extends CI_Controller {
                 'minat' => $this->input->post('minat'),
                 'status' => $this->input->post('status')
             ];
-            $this->db->where('nim', $nim);
+            $this->db->where('idMahasiswa', $idMahasiswa);
             $this->db->update('mahasiswa', $edit);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
              Mahasiswa berhasil di update!</div>');
@@ -166,7 +166,11 @@ class home extends CI_Controller {
     public function editMat() {
         $idMakul = urldecode($this->session->tempdata('item'));
         $data['title'] = 'Edit Mata Kuliah';
-        $data['data'] = $this->db->get_where('makul', ['idMakul' => $idMakul])->row_array();
+        $this->db->select('makul.* , ruangan.nama as ruangan');
+        $this->db->from('makul');
+        $this->db->join('ruangan','ruangan.makul = makul.idMakul');
+        $this->db->where('makul.idMakul', $idMakul);
+        $data['data'] = $this->db->get()->row_array();
 
         // $this->form_validation->set_rules('tipe', 'Tipe', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -201,6 +205,13 @@ class home extends CI_Controller {
 
     public function deleteMakul($idMakul)
     {
+        #delete presensi
+        $this->db->where('idMakul',$idMakul);
+        $this->db->delete('presensi');
+        #delete ruangan
+        $this->db->where('makul',$idMakul);
+        $this->db->delete('ruangan');
+
         $hapus = array (
             "idMakul" => $idMakul
         );
@@ -246,11 +257,11 @@ class home extends CI_Controller {
         } else {
             $edit = [
                 'nama' => $this->input->post('nama'),
-                'makul' => $this->input->post('makul'),
                 'jam' => $this->input->post('jam')
             ];
-            $this->db->where('nama', $nama);
+            $this->db->where('idRuangan', $idRuangan);
             $this->db->update('ruangan', $edit);
+            
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
             Ruangan berhasil di update!</div>');
             redirect('home/ruangan');

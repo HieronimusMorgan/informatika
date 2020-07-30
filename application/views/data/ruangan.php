@@ -7,6 +7,7 @@
                         <h2 class=""><?= $title ?></h2>
                     </div>
                 </div>
+                <hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>

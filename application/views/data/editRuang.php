@@ -14,8 +14,12 @@
                             </div>
                             <div class="form-group">
                                 <label for="makul">MAKUL</label>
-                                <input type="text" class="form-control" id="makul" name="makul"
-                                    value="<?= $data['makul'] ?>">
+                                <input type="text" class="form-control" id="makul" name="makul" value="<?php $this->db->where('idMakul',$data['makul']);
+                                                $this->db->from('makul');
+                                                $da = $this->db->get()->row();
+                                                echo $da->nama;
+
+                                    ?>" readonly>
                                 <?= form_error('makul', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
