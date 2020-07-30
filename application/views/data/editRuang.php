@@ -9,7 +9,7 @@
                             <div class="form-group">
                                 <label for="nama">NAMA</label>
                                 <input type="text" class="form-control" id="nama" name="nama"
-                                    value="<?= $data['nama'] ?>" readonly>
+                                    value="<?= $data['nama'] ?>">
                                 <?= form_error('nama', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">
