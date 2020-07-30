@@ -65,4 +65,12 @@ class Jadwal_model extends CI_Model{
         $this->db->delete("detailjadwal",$data);
     }
 
+    //edit jadwal
+    function editjadwal($data,$id){
+        //edit jadwal
+        $this->db->where("idJadwal",$id);
+        $this->db->update("jadwal",$data);
+        
+    }
+
 }
