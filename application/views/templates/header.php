@@ -24,8 +24,6 @@
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/dateindo/css/ilmudetil.css'?>">
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/dateindo/css/bootstrap-datetimepicker.css'?>" />
     <link rel="stylesheet" href="<?php echo base_url() . 'assets/dateindo/css/bootstrap-datetimepicker.min.css'?>" />
-    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/font-awesome.min.css'?>" />
-
 
     <script src="<?php echo base_url() . 'assets/dateindo/js/bootstrap.min.js'?>"></script>
     <script src="<?php echo base_url() . 'assets/dateindo/js/moment-with-locales.js'?>"></script>

@@ -28,7 +28,7 @@ class Kapasitas_model extends CI_Model {
         if ($cari != NULL) {
             $sql = "SELECT DISTINCT nim FROM mahasiswa WHERE nim LIKE '" . $angkatan . "%' AND status = 'AKTIF'";
             $sql1 = "SELECT a.Nim FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen  JOIN mahasiswa d ON a.nim = d.nim WHERE a.Nim " . $data . " AND a.Nim LIKE '" . $angkatan . "%' AND d.status = 'AKTIF'";
-            $hasil = abs($this->db->query($sql)->num_rows() - $this->db->query($sql1)->num_rows());
+            $hasil = abs($this->db->query($sql)->num_rows() -  $this->kapasitas_model->ambilMakul($data, $angkatan, $cari));
             return $hasil;
         } else {
             return $hasil;

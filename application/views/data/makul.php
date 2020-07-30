@@ -6,8 +6,8 @@
                     <div class="col-auto mr-auto">
                         <h2 class=""><?= $title ?></h2>
                     </div>
-
                 </div>
+                <hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>
@@ -38,10 +38,11 @@
                                 <td><?php echo $row->ruangan; ?></td>
                                 <td><?php echo $row->kapasitas; ?></td>
                                 <td>
-                                    
+                                    <a href="<?php echo base_url(); ?>home/editMakul/<?= $row->idMakul; ?>"
+                                        class="badge badge-success">Edit</a>
                                     <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row->idMakul; ?>"
                                         class="badge badge-danger"
-                                        onclick="return confirm('Are you sure you want to delete <?= $row->nama; ?>?');">Delete</a>
+                                        onclick="return confirm('Are you sure you want to delete <?= $row->idMakul; ?>?');">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
@@ -53,31 +54,13 @@
         </div>
     </main>
     <script type="text/javascript">
-<<<<<<< HEAD
-<<<<<<< HEAD
-    $(document).ready(function(){
-        $('#tabelku').dataTable({   
-            "paging":         false,
+    $(document).ready(function() {
+        $('#tabelku').dataTable({
+            "scrollY": "400px",
+            "paging": false,
             "language": {
                 "emptyTable": "Data Kosong"
             }
         });
     });
-</script>
-=======
-=======
->>>>>>> 812f2457f669c8faa0461d3edf9d3e49b887ae6e
-    $(document).ready(function() {
-        $('#tabelku').dataTable({
-            "scrollY": "400px",
-            "scrollCollapse": true,
-            "paging": true,
-            "bAutoWidth": false
-        });
-    });
-<<<<<<< HEAD
     </script>
->>>>>>> 812f2457f669c8faa0461d3edf9d3e49b887ae6e
-=======
-    </script>
->>>>>>> 812f2457f669c8faa0461d3edf9d3e49b887ae6e

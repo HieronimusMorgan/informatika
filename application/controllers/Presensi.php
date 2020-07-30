@@ -15,39 +15,8 @@ class presensi extends CI_Controller {
     }
 
     public function index() {
-        $config['base_url'] = site_url('presensi/index'); //site url
-        $config['total_rows'] = $this->db->count_all('presensi'); //total row
-        $config['per_page'] = 25;  //show record per halaman
-        $config["uri_segment"] = 3;  // uri parameter
-        $config["num_links"] = 5;
-
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
-        $config['next_link'] = 'Next';
-        $config['prev_link'] = 'Prev';
-        $config['full_tag_open'] = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
-        $config['full_tag_close'] = '</ul></nav></div>';
-        $config['num_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['num_tag_close'] = '</span></li>';
-        $config['cur_tag_open'] = '<li class="page-item active"><span class="page-link">';
-        $config['cur_tag_close'] = '<span class="sr-only">(current)</span></span></li>';
-        $config['next_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['next_tagl_close'] = '<span aria-hidden="true">&raquo;</span></span></li>';
-        $config['prev_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['prev_tagl_close'] = '</span>Next</li>';
-        $config['first_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['first_tagl_close'] = '</span></li>';
-        $config['last_tag_open'] = '<li class="page-item"><span class="page-link">';
-        $config['last_tagl_close'] = '</span></li>';
-
-        $this->pagination->initialize($config);
-        $data['page'] = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
-
-        $data['data'] = $this->list_model->get_presensi_list($config["per_page"], $data['page']);
-
-        $data['pagination'] = $this->pagination->create_links();
+        $data['data'] = $this->list_model->get_presensi_list();
         $data['title'] = 'Presensi';
-
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('presensi/presensi', $data);
@@ -55,7 +24,17 @@ class presensi extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-   
+   public function isi($id)
+   {
+       $data['makul'] = $this->PresensiModel->cariMakul($id);
+       $data['mahasiswa'] = $this->PresensiModel->mahasiswaPresensi($id);
+       $data['title'] = 'Presensi';
+       $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('presensi/isi', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
+   }
     public function upload() {
         if (isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);
@@ -66,7 +45,7 @@ class presensi extends CI_Controller {
                
 
                 $object = PHPExcel_IOFactory::load($path);
-
+                $hitung = 0;
                 foreach ($object->getWorksheetIterator() as $worksheet) {
                     $highestRow = $worksheet->getHighestRow();
                     $highestColumn = $worksheet->getHighestColumn();
@@ -118,6 +97,7 @@ class presensi extends CI_Controller {
                             if (strlen($nim) == 9) {
                                 $this->PresensiModel->tahun($nim);
                                 $data[] = array('Nim' => $nim, 'Nama' => $nama, 'idMakul' => $idMakul, 'idDosen' => $idDosen, 'idRuangan' => $idRuangan);
+                                $hitung++;
                             } elseif ($nama == $dosen) {
                                 $id = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                                 if ($id == "") {
@@ -126,6 +106,8 @@ class presensi extends CI_Controller {
                                 $this->db->set('nip', $id)->where('idDosen', $idDosen)->update('dosen');
                             }
                         }
+                        $this->PresensiModel->tambahKapasitas($idMakul,$hitung);
+                        $hitung=0;
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
                         Data sudah di import!</div>');
@@ -134,6 +116,7 @@ class presensi extends CI_Controller {
             }
 
             if ($data) {
+                
                 $this->PresensiModel->insert($data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
                         Data berhasil di import!</div>');

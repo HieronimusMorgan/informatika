@@ -30,11 +30,11 @@
                                 <td><?php echo $row->hari; ?></td>
                                 <td><?php echo $row->jam; ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>home/editRuang/<?= $row->nama; ?>"
+                                    <a href="<?php echo base_url(); ?>home/editRuang/<?= $row->idRuangan; ?>"
                                         class="badge badge-success ">Edit</a>
-                                    <a href="<?php echo base_url(); ?>home/deleteRuang/<?= $row->nama; ?>"
+                                    <a href="<?php echo base_url(); ?>home/deleteRuang/<?= $row->idRuangan; ?>"
                                         class="badge badge-danger"
-                                        onclick="return confirm('Are you sure you want to delete <?= $row->nama; ?>?');">Delete</a>
+                                        onclick="return confirm('Are you sure you want to delete <?= $row->idRuangan; ?>?');">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>
