@@ -59,10 +59,12 @@ class presensi extends CI_Controller {
     public function upload() {
         if (isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);
-
+             
             for ($iii = 0; $iii < $countfiles; $iii++) {
 
                 $path = $_FILES["file"]["tmp_name"][$iii];
+               
+
                 $object = PHPExcel_IOFactory::load($path);
 
                 foreach ($object->getWorksheetIterator() as $worksheet) {
@@ -76,8 +78,11 @@ class presensi extends CI_Controller {
                     } else {
                         $tahun_ajar_temp = explode(" TAHUN AKADEMIK ", $tahun_ajar);
                     }
+                    
                     $periode = $tahun_ajar_temp[1];
+
                     $periode_temp = explode(" ", $periode);
+                   
                     $waktu = $worksheet->getCellByColumnAndRow(18, 4);
                     $waktu_temp = explode("/", $waktu);
                     #Dosen                    
@@ -99,6 +104,7 @@ class presensi extends CI_Controller {
                     #jam Makul
                     $jam = $waktu_temp[1];
                     $check = ['nama' => $makul, 'tahun' => $tahun, 'semester' => $semester, 'ruangan' => $ruangan, 'kelas' => $kelas];
+                   
                     $data1 = $this->PresensiModel->checkMakul($check);
                     if ($data1 == 0) {
                         $idMakul = $this->PresensiModel->idMakul($check);
