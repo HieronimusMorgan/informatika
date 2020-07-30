@@ -17,28 +17,36 @@
                     <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>
                             <tr class="text-center">
-                                <th>No</th>
-                                <th>NIM</th>
-                                <th>NAMA</th>
+                                <th>NO</th>
                                 <th>MAKUL</th>
-                                <th>KELAS</th>
+                                <th>TAHUN</th>
                                 <th>RUANGAN</th>
+                                <th>KELAS</th>
                                 <th>DOSEN</th>
+                                <th>JUMLAH MAHASISWA</th>
+                                <th>ACTION</th>
 
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
                             <?php foreach ($data->result_array() as $row) : ?>
-                            <?php $c = $this->db->query("SELECT a.Nim, a.Nama, b.nama AS makul, b.kelas AS kelas, d.nama AS dosen, c.nama AS ruangan FROM presensi a JOIN makul b ON a.idMakul = b.idMakul JOIN dosen d ON a.idDosen=d.idDosen JOIN ruangan c ON a.idRuangan = c.idRuangan WHERE a.idPresensi LIKE " .$row['idPresensi'])->row_array(); ?>
                             <tr>
                                 <td class="text-center"><?= $i ?></td>
-                                <td><?php echo $c['Nim']; ?></td>
-                                <td><?php echo $c['Nama']; ?></td>
-                                <td><?php echo $c['makul'];?> </td>
-                                <td><?php echo $c['kelas'] ; ?></td>
-                                <td><?php echo $c['ruangan']; ?></td>
-                                <td><?php echo $c['dosen']; ?></td>
+                                <td><?php echo $row['makul']; ?></td>
+                                <td><?php echo $row['tahun']; ?></td>
+                                <td><?php echo $row['ruang'];?> </td>
+                                <td class="text-center"><?php echo $row['kelas'] ; ?></td>
+                                <td><?php echo $row['dosen']; ?></td>
+                                <td class="text-center">
+                                    <?php echo $row['kapasitas'];  ?>
+                                </td>
+                                <td class="text-center">
+                                    <a href="<?php echo base_url(); ?>presensi/isi/<?= $row['idMakul']; ?>"
+                                        class=" badge badge-success text-center"> <i
+                                            class="glyphicon glyphicon-edit"></i>
+                                        Detail</a>
+                                </td>
                             </tr>
                             <?php $i++; ?>
                             <?php endforeach; ?>

@@ -12,6 +12,7 @@
                             Data Dosen</a>
                     </div>
                 </div>
+                <hr>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tabelku" width="100%">
                         <thead>
@@ -30,11 +31,11 @@
                                 <td><?php echo $row->nip; ?></td>
                                 <td><?php echo $row->nama; ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>home/editDsn/<?= $row->nip; ?>"
+                                    <a href="<?php echo base_url(); ?>home/editDsn/<?= $row->idDosen; ?>"
                                         class="badge badge-success ">Edit</a>
-                                    <a href="<?php echo base_url(); ?>home/deleteDsn/<?= $row->nip; ?>"
+                                    <a href="<?php echo base_url(); ?>home/deleteDsn/<?= $row->idDosen; ?>"
                                         class="badge badge-danger"
-                                        onclick="return confirm('Are you sure you want to delete <?= $row->nip; ?>?');">Delete</a>
+                                        onclick="return confirm('Are you sure you want to delete <?= $row->idDosen; ?>?');">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>

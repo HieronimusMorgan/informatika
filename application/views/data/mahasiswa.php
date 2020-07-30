@@ -12,6 +12,7 @@
                             Data Mahasiswa</a>
                     </div>
                 </div>
+                <hr>
                 <?= $this->session->flashdata('message'); ?>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="tabelku" width="100%">
@@ -37,11 +38,11 @@
                                 <td><?php echo $row->minat; ?></td>
                                 <td><?php echo $row->status ?></td>
                                 <td>
-                                    <a href="<?php echo base_url(); ?>home/detailMhs/<?= $row->nim; ?>"
+                                    <a href="<?php echo base_url(); ?>home/detailMhs/<?= $row->idMahasiswa; ?>"
                                         class="badge badge-primary ">Detail</a>
-                                    <a href="<?php echo base_url(); ?>home/editMhs/<?= $row->nim; ?>"
+                                    <a href="<?php echo base_url(); ?>home/editMhs/<?= $row->idMahasiswa; ?>"
                                         class="badge badge-success ">Edit</a>
-                                    <a href="<?php echo base_url(); ?>home/deleteMhs/<?= $row->nim; ?>"
+                                    <a href="<?php echo base_url(); ?>home/deleteMhs/<?= $row->idMahasiswa; ?>"
                                         class="badge badge-danger"
                                         onclick="return confirm('Are you sure you want to delete <?= $row->nim; ?>?');">Delete</a>
                                 </td>

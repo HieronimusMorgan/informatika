@@ -36,9 +36,9 @@ class home extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function detailMhs($nim) {
+    public function detailMhs($idMahasiswa) {
         $data['title'] = 'Detail Mahasiswa';
-        $data['data'] = $this->db->get_where('mahasiswa', ['nim' => $nim])->row_array();
+        $data['data'] = $this->db->get_where('mahasiswa', ['idMahasiswa' => $idMahasiswa])->row_array();
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('data/detailMhs', $data);
@@ -46,15 +46,15 @@ class home extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function editMhs($nim) {
-        $this->session->set_tempdata('item', $nim, 1000);
+    public function editMhs($idMahasiswa) {
+        $this->session->set_tempdata('item', $idMahasiswa, 1000);
         redirect('home/editMahasiswa');
     }
 
     public function editMahasiswa() {
-        $nim = $this->session->tempdata('item');
+        $idMahasiswa = $this->session->tempdata('item');
         $data['title'] = 'Edit Mahasiswa';
-        $data['data'] = $this->db->get_where('mahasiswa', ['nim' => $nim])->row_array();
+        $data['data'] = $this->db->get_where('mahasiswa', ['idMahasiswa' => $idMahasiswa])->row_array();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('nim', 'NIM', 'required');
@@ -84,8 +84,8 @@ class home extends CI_Controller {
         }
     }
 
-    public function deleteMhs($nim) {
-        $hapus = $this->db->get_where('mahasiswa', ['nim' => $nim])->row_array();
+    public function deleteMhs($idMahasiswa) {
+        $hapus = $this->db->get_where('mahasiswa', ['idMahasiswa' => $idMahasiswa])->row_array();
         $this->db->delete('mahasiswa', $hapus);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
         Mahasiswa berhasil di hapus!</div>');
@@ -105,15 +105,15 @@ class home extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function editDsn($nip) {
-        $this->session->set_tempdata('item', $nip, 1000);
+    public function editDsn($idDosen) {
+        $this->session->set_tempdata('item', $idDosen, 1000);
         redirect('home/editDosen');
     }
 
     public function editDosen() {
-        $nip = $this->session->tempdata('item');
+        $idDosen = $this->session->tempdata('item');
         $data['title'] = 'Edit Dosen';
-        $data['data'] = $this->db->get_where('dosen', ['nip' => $nip])->row_array();
+        $data['data'] = $this->db->get_where('dosen', ['idDosen' => $idDosen])->row_array();
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('nip', 'nip', 'required');
@@ -137,8 +137,8 @@ class home extends CI_Controller {
         }
     }
 
-    public function deleteDsn($nip) {
-        $hapus = $this->db->get_where('dosen', ['nip' => $nip])->row_array();
+    public function deleteDsn($idDosen) {
+        $hapus = $this->db->get_where('dosen', ['idDosen' => $idDosen])->row_array();
         $this->db->delete('mahasiswa', $hapus);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
         Dosen berhasil di hapus!</div>');
@@ -158,15 +158,15 @@ class home extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function editMakul($nama) {
-        $this->session->set_tempdata('item', $nama);
+    public function editMakul($idMakul) {
+        $this->session->set_tempdata('item', $idMakul);
         redirect('home/editMat');
     }
 
     public function editMat() {
-        $nama = urldecode($this->session->tempdata('item'));
+        $idMakul = urldecode($this->session->tempdata('item'));
         $data['title'] = 'Edit Mata Kuliah';
-        $data['data'] = $this->db->get_where('makul', ['nama' => $nama])->row_array();
+        $data['data'] = $this->db->get_where('makul', ['idMakul' => $idMakul])->row_array();
 
         // $this->form_validation->set_rules('tipe', 'Tipe', 'required');
         $this->form_validation->set_rules('nama', 'Nama', 'required');
@@ -223,15 +223,15 @@ class home extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-    public function editRuang($nama) {
-        $this->session->set_tempdata('item', $nama);
+    public function editRuang($idRuangan) {
+        $this->session->set_tempdata('item', $idRuangan);
         redirect('home/editRuangan');
     }
 
     public function editRuangan() {
-        $nama = $this->session->tempdata('item');
+        $idRuangan = $this->session->tempdata('item');
         $data['title'] = 'Edit Ruangan';
-        $data['data'] = $this->db->get_where('ruangan', ['nama' => $nama])->row_array();
+        $data['data'] = $this->db->get_where('ruangan', ['idRuangan' => $idRuangan])->row_array();
 
         $this->form_validation->set_rules('nama', 'nama', 'required');
         $this->form_validation->set_rules('makul', 'Makul', 'required');

@@ -1,8 +1,5 @@
 <?php
 
-/**
- * 
- */
 class PresensiModel extends CI_Model {
 
     public function view() {
@@ -46,6 +43,12 @@ class PresensiModel extends CI_Model {
         }
     }
 
+    public function tambahKapasitas($id,$hitung)
+    {
+        $this->db->where('idMakul', $id);
+        $this->db->update('makul', ['kapasitas'=>$hitung]);
+    }
+
     public function tahun($nim) {
         $th = str_split($nim);
         $data = $th[0] . $th[1];
@@ -63,4 +66,35 @@ class PresensiModel extends CI_Model {
         $this->db->insert_batch('mahasiswa', $data);
     }
 
+    public function mahasiswaPresensi($id)
+    {
+        $this->db->distinct();
+        $this->db->select('*');
+        $this->db->from('presensi');
+        $this->db->where('idMakul',$id);
+        $data = $this->db->get();
+        return $data;
+    }
+
+    public function cariMakul($id)
+    {
+        $this->db->from('makul');
+        $this->db->where('idMakul',$id);
+        $data = $this->db->get();
+        return $data->row();
+    }
+
+    public function cariDosen($id)
+    {
+        $this->db->order_by('makul.idMakul', 'ASC');
+        $this->db->distinct();
+        $this->db->select('dosen.nama as dosen');
+        $this->db->from('makul');
+        $this->db->join('presensi','presensi.idMakul = makul.idMakul');
+        $this->db->join('ruangan','ruangan.idRuangan = presensi.idRuangan');
+        $this->db->join('dosen','dosen.idDosen = presensi.idDosen' );
+        $this->db->where(' makul.idMakul',$id);
+        $data = $this->db->get()->row();
+        return $data;
+    }
 }
