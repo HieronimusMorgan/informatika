@@ -24,25 +24,25 @@ class presensi extends CI_Controller {
         $this->load->view('templates/footer', $data);
     }
 
-   public function isi($id)
-   {
-       $data['makul'] = $this->PresensiModel->cariMakul($id);
-       $data['mahasiswa'] = $this->PresensiModel->mahasiswaPresensi($id);
-       $data['title'] = 'Presensi';
-       $this->load->view('templates/header', $data);
+    public function isi($id) {
+        $data['makul'] = $this->PresensiModel->cariMakul($id);
+        $data['mahasiswa'] = $this->PresensiModel->mahasiswaPresensi($id);
+        $data['title'] = 'Presensi';
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('presensi/isi', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
-   }
+    }
+
     public function upload() {
         if (isset($_FILES["file"]["name"])) {
             $countfiles = count($_FILES["file"]["name"]);
-             
+
             for ($iii = 0; $iii < $countfiles; $iii++) {
 
                 $path = $_FILES["file"]["tmp_name"][$iii];
-               
+
 
                 $object = PHPExcel_IOFactory::load($path);
                 $hitung = 0;
@@ -57,11 +57,11 @@ class presensi extends CI_Controller {
                     } else {
                         $tahun_ajar_temp = explode(" TAHUN AKADEMIK ", $tahun_ajar);
                     }
-                    
+
                     $periode = $tahun_ajar_temp[1];
 
                     $periode_temp = explode(" ", $periode);
-                   
+
                     $waktu = $worksheet->getCellByColumnAndRow(18, 4);
                     $waktu_temp = explode("/", $waktu);
                     #Dosen                    
@@ -82,8 +82,8 @@ class presensi extends CI_Controller {
                     $hari = $waktu_temp[0];
                     #jam Makul
                     $jam = $waktu_temp[1];
-                    $check = ['nama' => $makul, 'tahun' => $tahun, 'semester' => $semester, 'ruangan' => $ruangan, 'kelas' => $kelas];
-                   
+                    $check = ['nama' => $makul, 'tahun' => $tahun, 'semester' => $semester, 'kelas' => $kelas];
+
                     $data1 = $this->PresensiModel->checkMakul($check);
                     if ($data1 == 0) {
                         $idMakul = $this->PresensiModel->idMakul($check);
@@ -106,8 +106,8 @@ class presensi extends CI_Controller {
                                 $this->db->set('nip', $id)->where('idDosen', $idDosen)->update('dosen');
                             }
                         }
-                        $this->PresensiModel->tambahKapasitas($idMakul,$hitung);
-                        $hitung=0;
+                        $this->PresensiModel->tambahKapasitas($idMakul, $hitung);
+                        $hitung = 0;
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
                         Data sudah di import!</div>');
@@ -116,7 +116,7 @@ class presensi extends CI_Controller {
             }
 
             if ($data) {
-                
+
                 $this->PresensiModel->insert($data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
                         Data berhasil di import!</div>');

@@ -20,6 +20,8 @@
                                 <th>No</th>
                                 <th>NIP</th>
                                 <th>NAMA</th>
+                                <th>PRODI</th>
+                                <th>STATUS</th>
                                 <th>ACTION</th>
                             </tr>
                         </thead>
@@ -30,6 +32,8 @@
                                 <td class="text-center"><?= $i ?></td>
                                 <td><?php echo $row->nip; ?></td>
                                 <td><?php echo $row->nama; ?></td>
+                                <td><?php echo $row->prodi; ?></td>
+                                <td><?php echo $row->status; ?></td>
                                 <td>
                                     <a href="<?php echo base_url(); ?>home/editDsn/<?= $row->idDosen; ?>"
                                         class="badge badge-success ">Edit</a>

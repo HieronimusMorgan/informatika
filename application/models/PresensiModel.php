@@ -7,7 +7,7 @@ class PresensiModel extends CI_Model {
     }
 
     public function checkMakul($data) {
-        return $this->db->get_where('makul', ['nama' => $data['nama'], 'tahun' => $data['tahun'], 'semester' => $data['semester'], 'ruangan' => $data['ruangan'], 'kelas' => $data['kelas']])->num_rows();
+        return $this->db->get_where('makul', ['nama' => $data['nama'], 'tahun' => $data['tahun'], 'semester' => $data['semester'], 'kelas' => $data['kelas']])->num_rows();
     }
 
     public function idMakul($data) {

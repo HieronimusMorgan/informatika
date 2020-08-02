@@ -117,6 +117,8 @@ class home extends CI_Controller {
 
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('nip', 'nip', 'required');
+        // $this->form_validation->set_rules('prodi', 'prodi', 'required');
+        // $this->form_validation->set_rules('status', 'status', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -126,10 +128,12 @@ class home extends CI_Controller {
             $this->load->view('templates/footer', $data);
         } else {
             $edit = [
+                'nip' => $this->input->post('nip'),
                 'nama' => $this->input->post('nama'),
-                'nip' => $this->input->post('nip')
+                'prodi' => $this->input->post('prodi'),
+                'status' => $this->input->post('status'),
             ];
-            $this->db->where('nip', $nip);
+            $this->db->where('idDosen', $idDosen);
             $this->db->update('dosen', $edit);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
             Dosen berhasil di update!</div>');
@@ -139,7 +143,7 @@ class home extends CI_Controller {
 
     public function deleteDsn($idDosen) {
         $hapus = $this->db->get_where('dosen', ['idDosen' => $idDosen])->row_array();
-        $this->db->delete('mahasiswa', $hapus);
+        $this->db->delete('dosen', $hapus);
         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
         Dosen berhasil di hapus!</div>');
         redirect('home/dosen');
@@ -195,7 +199,7 @@ class home extends CI_Controller {
                 'kapasitas' => $this->input->post('kapasitas')
             ];
 
-            $this->db->where('nama', $nama);
+            $this->db->where('idMakul', $idMakul);
             $this->db->update('makul', $edit);
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
             Mata Kuliah berhasil di update!</div>');

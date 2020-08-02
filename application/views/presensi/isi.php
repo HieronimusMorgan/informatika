@@ -2,12 +2,12 @@
     <main>
         <div class="container-fluid">
 
-            <div class="row font-weight-normal">
-                <div class="col-auto mr-auto">
+            <div class="row">
+                <div class="col-8 mr-auto">
                     <div class="card-body">
                         <h2 class="mt-3 mb-3"><?= $title." ".$makul->nama ?></h2>
                         <div class="row ">
-                            <div class="col-3">
+                            <div class="col-5">
                                 <label for="title">MATA KULIAH </label>
                             </div>
                             <div class="col">
@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 ">
+                            <div class="col-5">
                                 <label for="title">TAHUN AJARAN </label>
                             </div>
                             <div class="col">
@@ -24,7 +24,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-5">
                                 <label for="title">SEMESTER </label>
                             </div>
                             <div class="col">
@@ -33,7 +33,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-3 ">
+                            <div class="col-5">
                                 <label for="title">DOSEN </label>
                             </div>
                             <div class="col">
@@ -41,10 +41,25 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-auto">
+                                <a type="button" class="btn btn-secondary" href="<?= base_url('presensi'); ?>">
+                                    <i class="fas fa-chevron-left"></i> Kembali</a>
+                                <a type="button" class="btn btn-success"
+                                    href="<?= base_url('home/editMakul/').$makul->idMakul; ?>">
+                                    <i class="fas fa-edit"></i> Edit Presensi</a>
+                                <a type="button" class="btn btn-danger"
+                                    href="<?= base_url('home/hapusMakul/'.$makul->idMakul); ?>"
+                                    onclick="return confirm('Are you sure you want to delete <?= $makul->nama; ?>?');">
+                                    <i class="far fa-trash-alt"></i> Hapus Presensi</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <hr>
             <div class="table-responsive mt-1">
+
                 <table class="table table-bordered" id="tabelku" width="100%">
                     <thead>
                         <tr class="text-center">
@@ -66,7 +81,6 @@
                         <?php endforeach; ?>
                     </tbody>
                 </table>
-                <a href="<?= base_url('presensi'); ?>" class="btn btn-secondary"> Kembali </a>
             </div>
         </div>
     </main>

@@ -26,6 +26,7 @@ class List_model extends CI_Model {
     function get_dosen_list() {
         $this->db->order_by('nama', 'ASC');
         $query = $this->db->get('dosen');
+        // var_dump($query->result_array());die;
         return $query;
     }
 

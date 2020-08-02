@@ -70,6 +70,26 @@
                             </div>
                             <div class="row">
                                 <div class="col-3 font-weight-bold">
+                                    <label for="title">SEMESTER </label>
+                                </div>
+                                <div class="col">
+                                    <label for="title">: <?php
+                                        $sql = "SELECT DISTINCT b.idSemester  " . $from . " " . $data;
+                                        $idSemester = $this->input->post('idSemester');
+                                        if ($idSemester != "") {
+                                            echo $idSemester;
+                                        } elseif ($this->db->query($sql)->num_rows() != 0) {
+                                            $a = $this->db->query($sql)->result();
+                                            foreach ($a as $a) {
+                                                $idSemester = $idSemester . " " . $a->idSemester;
+                                            }
+                                            echo $idSemester;
+                                        }
+                                        ?> </label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3 font-weight-bold">
                                     <label for="title">TAHUN AJARAN </label>
                                 </div>
                                 <div class="col">
@@ -196,7 +216,7 @@
                                             </td>
                                         </tr>
                                         <?php else : ?>
-                                        <?php $menu = $this->kapasitas_model->tahun(); ?>
+                                        <?php $menu = $this->kapasitas_model->angkatan(); ?>
                                         <!-- CHECK MAHASISWA -->
                                         <?php if ($this->kapasitas_model->hitung($data, $makul) != 0) : ?>
 
