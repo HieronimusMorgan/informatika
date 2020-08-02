@@ -110,30 +110,31 @@ class rekomendasi extends CI_Controller
         
         foreach ($jadwal as $key) {
             # code...
-           $jenisUjian = $key['jenisUjian'];
-           $semester = $key['semester'];
-           $tahun = $key['tahun'];
-       }
-       $data['id'] = $id;
+         $jenisUjian = $key['jenisUjian'];
+         $semester = $key['semester'];
+         $tahun = $key['tahun'];
+     }
+     $data['id'] = $id;
 
      //load view
-       $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
-       $this->load->view('templates/header');
-       $this->load->view('templates/sidebar', $data);
-       $this->load->view('templates/topbar', $data);
+     $data['semesterGas_Gen'] = $semester;
+     $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
+     $this->load->view('templates/header');
+     $this->load->view('templates/sidebar', $data);
+     $this->load->view('templates/topbar', $data);
 
      //get detail jadwal
-       $dataa = $this->Jadwal_model->getDetailJadwal($id);
-       $data['jadwal'] = $dataa;
+     $dataa = $this->Jadwal_model->getDetailJadwal($id);
+     $data['jadwal'] = $dataa;
 
-       $this->load->view('rekomendasi/detailjadwal',$data);
-       $this->load->view('templates/footer');
+     $this->load->view('rekomendasi/detailjadwal',$data);
+     $this->load->view('templates/footer');
 
 
 
-   }
+ }
 
-   function inputjadwal() {
+ function inputjadwal() {
     $tanggal = $this->input->post('datepicker');
     $tahun = $this->input->post('tahun');
     $semester = $this->input -> post('semester');
@@ -147,13 +148,13 @@ class rekomendasi extends CI_Controller
     $newtanggal = date("Y-m-d",strtotime($tanggal));
 
     $data = array(
-       "idJadwal" => $idJadwal,
-       "idMakul" => $makul,
-       "idRuangan" => $ruang,
-       "jamMulai" => $jam1,
-       "jamSelesai" => $jam2,
-       "tanggal" => $newtanggal
-   );
+     "idJadwal" => $idJadwal,
+     "idMakul" => $makul,
+     "idRuangan" => $ruang,
+     "jamMulai" => $jam1,
+     "jamSelesai" => $jam2,
+     "tanggal" => $newtanggal
+ );
     $key = "";
     $cek = $this->Jadwal_model->getDetailJadwal($key);
 
@@ -161,73 +162,78 @@ class rekomendasi extends CI_Controller
     $cekdata = $this->Jadwal_model->getDetailJadwal($idJadwal);
     if (empty($cek)) {
             # code...
-     $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-        Jadwal berhasil disimpan.</div>');
-     $this->Jadwal_model->inputdetailjadwal($data);
-     redirect("rekomendasi/detailjadwal/$idJadwal");
 
- }
- else{
-    foreach ($cekdata as $key) {
-        $time = date("G:i:s", strtotime($jam1));
-
-        if ($key['tanggal'] == $newtanggal && $key['jamMulai'] == $time){
-            if($key['idRuangan'] != $ruang ) {
-                $mhs1 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$key[idMakul]'")->result();
-
-                $mhs2 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$makul'")->result();
-
-                foreach ($mhs2 as $mhsInput) {
-                        # code...
-
-                    foreach ($mhs1 as $mhsCek) {
-                            # code...
-                        if($mhsInput->nim == $mhsCek->nim ) {
-                            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
-                                Jadwal tidak disimpan karena ada mahasiswa yang berbenturan jadwal!</div>');
-                            redirect("rekomendasi/detailjadwal/$idJadwal");
-                        }else{
-                            $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-                                Jadwal berhasil disimpan.</div>');
-                            $this->Jadwal_model->inputdetailjadwal($data);
-                            redirect("rekomendasi/detailjadwal/$idJadwal");
-                        }
-                    }
-                }
-
-            }
-            else {
-             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
-                Jadwal tidak disimpan! Ruangan sudah terpakai pada hari dan jam yang sama! </div>');
-             redirect("rekomendasi/detailjadwal/$idJadwal");
-         }
-     }
-     else{
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
             Jadwal berhasil disimpan.</div>');
         $this->Jadwal_model->inputdetailjadwal($data);
         redirect("rekomendasi/detailjadwal/$idJadwal");
 
     }
+    else{
+        foreach ($cekdata as $key) {
+            $time = date("G:i:s", strtotime($jam1));
+            $timeP = date("G:i:s", strtotime($key['jamMulai']));
+           
+            if ($key['tanggal'] == $newtanggal && $timeP == $time){
+              
 
-}      
-}
+                if($key['idRuangan'] != $ruang ) {
+                 
+                    $mhs1 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$key[idMakul]'")->result();
+
+                    $mhs2 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$makul'")->result();
+
+                    foreach ($mhs2 as $mhsInput) {
+                        # code...
+
+                        foreach ($mhs1 as $mhsCek) {
+                            # code...
+                            if($mhsInput->nim == $mhsCek->nim ) {
+                                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
+                                    Jadwal tidak disimpan karena ada mahasiswa yang berbenturan jadwal!</div>');
+                                redirect("rekomendasi/detailjadwal/$idJadwal");
+                            }else{
+                                $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+                                    Jadwal berhasil disimpan.</div>');
+                                $this->Jadwal_model->inputdetailjadwal($data);
+                                redirect("rekomendasi/detailjadwal/$idJadwal");
+                            }
+                        }
+                    }
+
+                }
+                else {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
+                        Jadwal tidak disimpan! Ruangan sudah terpakai pada hari dan jam yang sama! </div>');
+                    redirect("rekomendasi/detailjadwal/$idJadwal");
+                }
+            }
+            else{
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+                    Jadwal berhasil disimpan.</div>');
+                $this->Jadwal_model->inputdetailjadwal($data);
+                redirect("rekomendasi/detailjadwal/$idJadwal");
+
+            }
+
+        }      
+    }
 }
 
 //edit jadwal
 function editjadwal(){
     $id = $this->input->post('idJadwal');
     $data = array(
-       
+
         'jenisUjian' => $this->input->post('jenis'),
         'semester' => $this->input->post('semester'),
         'tahun' => $this->input->post('tahun')
     );
     $this->Jadwal_model->editjadwal($data,$id);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-                Data berhasil diperbaharui. </div>');
+        Data berhasil diperbaharui. </div>');
     redirect('rekomendasi/c_jadwal');
-   
+
 }
 
 //delet jadwal detail
@@ -239,7 +245,7 @@ function deletedetailjadwal() {
     );
     $this->Jadwal_model->del_jadwaldetail($data);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-       Data berhasil dihapus. </div>');
+     Data berhasil dihapus. </div>');
     redirect("rekomendasi/detailjadwal/$idJadwal");
 }
 

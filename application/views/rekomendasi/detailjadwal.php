@@ -39,7 +39,7 @@
                                     echo $jamMulai." WIB -".$jamSelesai?> WIB</td>
                                     <td><?php echo $row['nama']; ?></td>
                                     <td> <?php echo $row['kelas']; ?></td>
-                                    <td><?php echo $row['semester'] ?></td>
+                                    <td><?php echo $row['idSemester'] ?></td>
                                     <td><?php echo $row['dosen_nama']; ?></td>
                                     <td><?php echo $row['ruangan']; ?></td>
 
@@ -86,8 +86,8 @@
                                     <label class="control-label col-sm-1">:</label>
                                     <div class="col-md-7">
                                         <select name="semester" id="semester" class="form-control">
-                                            <option>GASAL</option>
-                                            <option>GENAP</option>
+                                            <option><?= $semesterGas_Gen; ?></option>
+                                            
                                         </select>
                                     </div>
                                 </div>
