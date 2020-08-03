@@ -280,6 +280,7 @@ function matakuliah() {
                 }
             }
         }
+        
         echo json_encode($newdata);
     }
     

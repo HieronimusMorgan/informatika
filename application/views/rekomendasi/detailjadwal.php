@@ -31,8 +31,9 @@
                                     <td><?= $i ?></td>
                                     <td><?php 
                                     $date = date('d-m-Y',strtotime($row['tanggal']));
-                                    $hari = hari_ini('D');
-                                    echo $hari.", ".$date ?></td>
+                                    $hari = date('D', strtotime($row['tanggal']));
+                                    $hari_ini = hari_ini($hari);
+                                    echo $hari_ini.", ".$date ?></td>
                                     <td><?php
                                     $jamMulai = date("G:i",strtotime( $row['jamMulai'])); 
                                     $jamSelesai = date("G:i", strtotime($row['jamSelesai']));
@@ -277,7 +278,7 @@
         <!-- fungsi hari indo -->
         <?php  
         function hari_ini($d){
-            $hari = date ($d);
+            $hari = $d;
 
             switch($hari){
               case 'Sun':
