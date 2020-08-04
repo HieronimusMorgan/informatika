@@ -35,6 +35,7 @@ class Jadwal_model extends CI_Model{
             $this->db->join('dosen','dosen.idDosen = presensi.idDosen' );
             $this->db->join('ruang','ruang.idRuangan = detailjadwal.idRuangan');
             $this->db->group_by('presensi.idMakul,presensi.idDosen');
+            $this->db->order_by('detailjadwal.tanggal ASC,detailjadwal.jamMulai ASC');
 
             $this->db->where('detailjadwal.idJadwal',$id);
 
@@ -44,6 +45,11 @@ class Jadwal_model extends CI_Model{
 
         } 	
        
+    }
+    function cetakLaporanUjian($id) {
+     $this->db->where("idJadwal",$id);
+     $data = $this->db->get("detailjadwal")->result_array();
+     return $data;
     }
     function tambahJadwal($data) {
     	$this->db->insert("jadwal",$data);

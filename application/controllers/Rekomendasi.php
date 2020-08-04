@@ -7,7 +7,7 @@ class rekomendasi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Jadwal_model');
-        $this->load->library('pdf');
+        
     }
 
     public function index()
@@ -20,47 +20,40 @@ class rekomendasi extends CI_Controller
         //$this->load->view('templates/footer', $data);
     }
     function exportPdf() {
-       $pdf = new FPDF('P', 'mm','Letter');
-        // membuat halaman baru
-        $pdf->AddPage();
-        // setting jenis font yang akan digunakan
-        $pdf->SetFont('Arial','B',12);
-        // mencetak string 
-        $pdf->Cell(190,7,'JADWAL  UJIAN AKHIR SEMESTER PRODI INFORMATIKA ',0,1);
-        
-        $pdf->Cell(190,7,'SEMESTER GASAL TAHUN AJARAN 2019/2020',0,1);
-        // Memberikan space kebawah agar tidak terlalu rapat
-        $pdf->Cell(10,7,'',0,1);
-        $pdf->SetFont('Arial','B',10);
-        $pdf->Cell(20,6,'NIM',1,0);
-        $pdf->Cell(85,6,'NAMA MAHASISWA',1,0);
-        $pdf->Cell(27,6,'NO HP',1,0);
-        $pdf->Cell(25,6,'TANGGAL LHR',1,1);
-        $pdf->SetFont('Arial','',10);
-        // $mahasiswa = $this->db->get('mahasiswa')->result();
-        // foreach ($mahasiswa as $row){
-        //     $pdf->Cell(20,6,$row->nim,1,0);
-        //     $pdf->Cell(85,6,$row->nama_lengkap,1,0);
-        //     $pdf->Cell(27,6,$row->no_hp,1,0);
-        //     $pdf->Cell(25,6,$row->tanggal_lahir,1,1); 
-        // }
-        $pdf->Output();
+        $this->load->library('pdf');
+        $id = $this->uri->segment(3);
+        $jadwal = $this->Jadwal_model->getDataJadwalWhere($id);
 
-    }
-    function c_makul() {
-        $data['title'] = 'Manajemen Data Makul'; 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+        foreach ($jadwal as $key) {
+            # code...
+           $jenisUjian = $key['jenisUjian'];
+           $semester = $key['semester'];
+           $tahun = $key['tahun'];
+       }
+       //jumlah mahasiswa per matkul
+
+       $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
+       $data['laporan']= $this->Jadwal_model->getDetailJadwal($id);
+       //jumlah mahasiswa per matkul
+     
+       $this->pdf->setPaper('Letter','portrait');
+       $this->pdf->filename = "Jadwal Ujian.pdf";
+       $this->pdf->load_view('rekomendasi/pdf',$data);
+   }
+   function c_makul() {
+    $data['title'] = 'Manajemen Data Makul'; 
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
 
 
         //get data makul
-        $data['makul'] = $this->Jadwal_model->getDataMatkul();
+    $data['makul'] = $this->Jadwal_model->getDataMatkul();
 
-        $this->load->view('rekomendasi/datamakul',$data);
-        $this->load->view('templates/footer', $data);
+    $this->load->view('rekomendasi/datamakul',$data);
+    $this->load->view('templates/footer', $data);
 
-    }
+}
     // function pindah() {
     //     $data = $this->db->query("SELECT DISTINCT ruangan FROM makul order by ruangan asc  ")->result();
 
@@ -72,98 +65,98 @@ class rekomendasi extends CI_Controller
     //             $newdata[$index++] = $key;
     //         }
     //     }
-    
+
     //     $this->db->insert_batch('ruang',$newdata);
     //     print("masuk");
 
 
     // }
-    function c_dosen() {
-        $data['title'] = 'Dosen'; 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        
+function c_dosen() {
+    $data['title'] = 'Dosen'; 
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
+
         //get data dosen 
-        $data['dosen'] = $this->Jadwal_model->getDataDosen();
+    $data['dosen'] = $this->Jadwal_model->getDataDosen();
 
-        $this->load->view('rekomendasi/dosen', $data);
+    $this->load->view('rekomendasi/dosen', $data);
 
-        $this->load->view('templates/footer', $data);
+    $this->load->view('templates/footer', $data);
 
-    }
-    function c_ruang() {
-        $data['title'] = 'Rekomendasi Jadwal'; 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+}
+function c_ruang() {
+    $data['title'] = 'Rekomendasi Jadwal'; 
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
 
         //get data ruangan
-        $data['ruangan'] = $this->Jadwal_model->getDataRuangan();
-        $this->load->view('rekomendasi/ruang',$data);
-        $this->load->view('templates/footer', $data);
+    $data['ruangan'] = $this->Jadwal_model->getDataRuangan();
+    $this->load->view('rekomendasi/ruang',$data);
+    $this->load->view('templates/footer', $data);
 
-    }
-    function c_jadwal() {
-        $data['title'] = 'Rekomendasi Jadwal'; 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
+}
+function c_jadwal() {
+    $data['title'] = 'Rekomendasi Jadwal'; 
+    $this->load->view('templates/header', $data);
+    $this->load->view('templates/sidebar', $data);
+    $this->load->view('templates/topbar', $data);
 
         //get data jadwal
 
-        $data['jadwal'] = $this->Jadwal_model->getDataJadwal();
+    $data['jadwal'] = $this->Jadwal_model->getDataJadwal();
 
-        $this->load->view('rekomendasi/jadwal',$data);
-        $this->load->view('templates/footer', $data);
-    }
-    function jadwal() {
-        $jenis = $this->input->post('jenis');
-        $semester = $this->input->post('semester');
-        $tahun = $this->input->post('tahun');
+    $this->load->view('rekomendasi/jadwal',$data);
+    $this->load->view('templates/footer', $data);
+}
+function jadwal() {
+    $jenis = $this->input->post('jenis');
+    $semester = $this->input->post('semester');
+    $tahun = $this->input->post('tahun');
 
-        $data = array(
-            "jenisUjian" => $jenis,
-            "semester" => $semester,
-            "tahun" => $tahun
-        );
+    $data = array(
+        "jenisUjian" => $jenis,
+        "semester" => $semester,
+        "tahun" => $tahun
+    );
 
         //insert ke database jadwal
-        $this->Jadwal_model->tambahJadwal($data);
-        redirect('rekomendasi/c_jadwal');
-    }
+    $this->Jadwal_model->tambahJadwal($data);
+    redirect('rekomendasi/c_jadwal');
+}
 
-    function detailjadwal($id) {
+function detailjadwal($id) {
         //get data jadwal
-        $jadwal = $this->Jadwal_model->getDataJadwalWhere($id);
-        
-        foreach ($jadwal as $key) {
+    $jadwal = $this->Jadwal_model->getDataJadwalWhere($id);
+
+    foreach ($jadwal as $key) {
             # code...
-         $jenisUjian = $key['jenisUjian'];
-         $semester = $key['semester'];
-         $tahun = $key['tahun'];
-     }
-     $data['id'] = $id;
+       $jenisUjian = $key['jenisUjian'];
+       $semester = $key['semester'];
+       $tahun = $key['tahun'];
+   }
+   $data['id'] = $id;
 
      //load view
-     $data['semesterGas_Gen'] = $semester;
-     $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
-     $this->load->view('templates/header');
-     $this->load->view('templates/sidebar', $data);
-     $this->load->view('templates/topbar', $data);
+   $data['semesterGas_Gen'] = $semester;
+   $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
+   $this->load->view('templates/header');
+   $this->load->view('templates/sidebar', $data);
+   $this->load->view('templates/topbar', $data);
 
      //get detail jadwal
-     $dataa = $this->Jadwal_model->getDetailJadwal($id);
-     $data['jadwal'] = $dataa;
+   $dataa = $this->Jadwal_model->getDetailJadwal($id);
+   $data['jadwal'] = $dataa;
 
-     $this->load->view('rekomendasi/detailjadwal',$data);
-     $this->load->view('templates/footer');
+   $this->load->view('rekomendasi/detailjadwal',$data);
+   $this->load->view('templates/footer');
 
 
 
- }
+}
 
- function inputjadwal() {
+function inputjadwal() {
     $tanggal = $this->input->post('datepicker');
     $tahun = $this->input->post('tahun');
     $semester = $this->input -> post('semester');
@@ -177,13 +170,13 @@ class rekomendasi extends CI_Controller
     $newtanggal = date("Y-m-d",strtotime($tanggal));
 
     $data = array(
-     "idJadwal" => $idJadwal,
-     "idMakul" => $makul,
-     "idRuangan" => $ruang,
-     "jamMulai" => $jam1,
-     "jamSelesai" => $jam2,
-     "tanggal" => $newtanggal
- );
+       "idJadwal" => $idJadwal,
+       "idMakul" => $makul,
+       "idRuangan" => $ruang,
+       "jamMulai" => $jam1,
+       "jamSelesai" => $jam2,
+       "tanggal" => $newtanggal
+   );
     $key = "";
     $cek = $this->Jadwal_model->getDetailJadwal($key);
 
@@ -274,7 +267,7 @@ function deletedetailjadwal() {
     );
     $this->Jadwal_model->del_jadwaldetail($data);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-     Data berhasil dihapus. </div>');
+       Data berhasil dihapus. </div>');
     redirect("rekomendasi/detailjadwal/$idJadwal");
 }
 

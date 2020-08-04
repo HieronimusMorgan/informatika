@@ -6,7 +6,7 @@
             </nav>
             <div class="card-body">
                 <a href="#" class="btn btn-primary mb-2" data-toggle="modal" data-target="#ModalInput">Tambah Ujian</a>
-                <a href="<?= base_url() ?>rekomendasi/exportPdf" class="btn btn-success mb-2 float-right" >Export PDF</a>
+                <a href="<?= base_url() ?>rekomendasi/exportPdf/<?= $id; ?>" class="btn btn-success mb-2 float-right" >Export PDF</a>
                 <div class="table-responsive">
                     <?= $this->session->flashdata('message'); ?>
                     <table class="table table-bordered" id="tabelku" width="100%">
