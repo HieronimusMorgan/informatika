@@ -7,6 +7,7 @@ class rekomendasi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Jadwal_model');
+        $this->load->library('pdf');
     }
 
     public function index()
@@ -17,6 +18,34 @@ class rekomendasi extends CI_Controller
         $this->load->view('templates/topbar', $data);
         $this->load->view('rekomendasi/index',$data);
         //$this->load->view('templates/footer', $data);
+    }
+    function exportPdf() {
+       $pdf = new FPDF('P', 'mm','Letter');
+        // membuat halaman baru
+        $pdf->AddPage();
+        // setting jenis font yang akan digunakan
+        $pdf->SetFont('Arial','B',12);
+        // mencetak string 
+        $pdf->Cell(190,7,'JADWAL  UJIAN AKHIR SEMESTER PRODI INFORMATIKA ',0,1);
+        
+        $pdf->Cell(190,7,'SEMESTER GASAL TAHUN AJARAN 2019/2020',0,1);
+        // Memberikan space kebawah agar tidak terlalu rapat
+        $pdf->Cell(10,7,'',0,1);
+        $pdf->SetFont('Arial','B',10);
+        $pdf->Cell(20,6,'NIM',1,0);
+        $pdf->Cell(85,6,'NAMA MAHASISWA',1,0);
+        $pdf->Cell(27,6,'NO HP',1,0);
+        $pdf->Cell(25,6,'TANGGAL LHR',1,1);
+        $pdf->SetFont('Arial','',10);
+        // $mahasiswa = $this->db->get('mahasiswa')->result();
+        // foreach ($mahasiswa as $row){
+        //     $pdf->Cell(20,6,$row->nim,1,0);
+        //     $pdf->Cell(85,6,$row->nama_lengkap,1,0);
+        //     $pdf->Cell(27,6,$row->no_hp,1,0);
+        //     $pdf->Cell(25,6,$row->tanggal_lahir,1,1); 
+        // }
+        $pdf->Output();
+
     }
     function c_makul() {
         $data['title'] = 'Manajemen Data Makul'; 
@@ -173,12 +202,12 @@ class rekomendasi extends CI_Controller
         foreach ($cekdata as $key) {
             $time = date("G:i:s", strtotime($jam1));
             $timeP = date("G:i:s", strtotime($key['jamMulai']));
-           
+
             if ($key['tanggal'] == $newtanggal && $timeP == $time){
-              
+
 
                 if($key['idRuangan'] != $ruang ) {
-                 
+
                     $mhs1 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$key[idMakul]'")->result();
 
                     $mhs2 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$makul'")->result();
@@ -259,8 +288,7 @@ function matakuliah() {
     $tahun = $this->input->post('id');
     $semester = $this->input->post('semester');
     $idJadwal = $this->input->post('idJadwal');
-        //getmatakuliah
-    $data = $this->db->query("SELECT * FROM makul WHERE tahun = '$tahun' AND semester = '$semester'")->result();
+
         //getjadwalmasuk
     $jadwal = $this->db->query("SELECT * FROM detailjadwal WHERE idJadwal = '$idJadwal'")->result();
         //data terbaru setelah di filter data yang sudah masukk
@@ -268,20 +296,20 @@ function matakuliah() {
     $index = 0;
 
     if (empty($jadwal)) {
+              //getmatakuliah
+        $data = $this->db->query("SELECT * FROM makul WHERE tahun = '$tahun' AND semester = '$semester'")->result();
         echo json_encode($data);
     }
     else{
         foreach ($jadwal as $key) {
-            # code...
-            foreach ($data as $key2) {
-                # notes_copy_db(from_database_name, to_database_name)e...
-                if($key->idMakul != $key2->idMakul) {
-                    $newdata[$index++] = $key2;
-                }
-            }
+            $newdata[$index++] = $key->idMakul;
         }
+        $this->db->where_not_in('idMakul',$newdata);
+        $this->db->where('tahun',$tahun);
+        $this->db->where('semester', $semester);
+        $dataa = $this->db->get('makul')->result();
         
-        echo json_encode($newdata);
+        echo json_encode($dataa);
     }
     
 
