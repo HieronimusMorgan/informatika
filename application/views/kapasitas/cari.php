@@ -55,8 +55,9 @@
                                     <label for="title">: <?php
                                         $sql = "SELECT DISTINCT b.nama  " . $from . " " . $data;
                                         $makul = $this->input->post('makul');
+                                        $idSemester = $this->input->post('idSemester');
                                         if ($makul != "") {
-                                            echo $makul;
+                                            echo $makul.' / '.$idSemester;
                                         } elseif ($this->db->query($sql)->num_rows() != 0) {
                                             $a = $this->db->query($sql)->result();
                                             foreach ($a as $a) {
@@ -66,26 +67,6 @@
                                         }
                                         ?> </label>
 
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-3 font-weight-bold">
-                                    <label for="title">SEMESTER </label>
-                                </div>
-                                <div class="col">
-                                    <label for="title">: <?php
-                                        $sql = "SELECT DISTINCT b.idSemester  " . $from . " " . $data;
-                                        $idSemester = $this->input->post('idSemester');
-                                        if ($idSemester != "") {
-                                            echo $idSemester;
-                                        } elseif ($this->db->query($sql)->num_rows() != 0) {
-                                            $a = $this->db->query($sql)->result();
-                                            foreach ($a as $a) {
-                                                $idSemester = $idSemester . " " . $a->idSemester;
-                                            }
-                                            echo $idSemester;
-                                        }
-                                        ?> </label>
                                 </div>
                             </div>
                             <div class="row">
@@ -244,7 +225,7 @@
                                     </tbody>
                                 </table>
                                 <?php
-                                $cetak = ['makul' => $makul, 'tahun' => $tahun, 'tipe' => $tipe, 'semester' => $semester, 'dosen' => $dosen, 'angkatan' => $angkatan, 'data' => $data];
+                                $cetak = ['makul' => $makul, 'tahun' => $tahun, 'tipe' => $tipe, 'semester' => $semester, 'dosen' => $dosen, 'angkatan' => $angkatan, 'data' => $data, 'idSemester'=>$idSemester];
                                 $sd = urlencode(json_encode($cetak));
                                 $this->session->set_tempdata('item', $cetak);
                                 ?>

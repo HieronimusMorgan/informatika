@@ -180,8 +180,6 @@ class home extends CI_Controller {
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('tahun', 'Tahun', 'required');
         $this->form_validation->set_rules('semester', 'Semester', 'required');
-        $this->form_validation->set_rules('ruangan', 'Ruangan', 'required');
-        // $this->form_validation->set_rules('kapasitas', 'Kapasitas', 'required');
 
         if ($this->form_validation->run() == false) {
             $this->load->view('templates/header', $data);
@@ -195,7 +193,6 @@ class home extends CI_Controller {
                 'nama' => $this->input->post('nama'),
                 'tahun' => $this->input->post('tahun'),
                 'semester' => $this->input->post('semester'),
-                'ruangan' => $this->input->post('ruangan'),
                 'kapasitas' => $this->input->post('kapasitas')
             ];
 

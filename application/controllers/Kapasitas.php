@@ -254,7 +254,7 @@ class kapasitas extends CI_Controller {
             $excel->getActiveSheet()->getStyle('C10')->applyFromArray($style_col1);
             $excel->getActiveSheet()->getStyle('D10')->applyFromArray($style_col1);
         } else {
-            $menu = $this->kapasitas_model->tahun();
+            $menu = $this->kapasitas_model->angkatan();
             $numrow = 10;
             foreach ($menu as $m) {
                 $excel->setActiveSheetIndex(0)->setCellValue('A' . $numrow, "20" . $m['tahun']);
