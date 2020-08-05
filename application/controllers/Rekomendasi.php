@@ -168,7 +168,9 @@ function inputjadwal() {
     $idJadwal = $this->input->post('idjadwal');
 
     $newtanggal = date("Y-m-d",strtotime($tanggal));
-
+    
+    $jam = substr($jam1,0,2);
+   
     $data = array(
        "idJadwal" => $idJadwal,
        "idMakul" => $makul,
@@ -181,7 +183,7 @@ function inputjadwal() {
     $cek = $this->Jadwal_model->getDetailJadwal($key);
 
         // cek-er
-    $cekdata = $this->Jadwal_model->getDetailJadwal($idJadwal);
+    $cekdata = $this->Jadwal_model->getDetailJadwall($idJadwal,$newtanggal,$jam1,$ruang);
     if (empty($cek)) {
             # code...
 
@@ -193,12 +195,14 @@ function inputjadwal() {
     }
     else{
         foreach ($cekdata as $key) {
+            
             $time = date("G:i:s", strtotime($jam1));
             $timeP = date("G:i:s", strtotime($key['jamMulai']));
+            $timeOut =  date("G:i:s", strtotime($key['jamSelesai']));
 
-            if ($key['tanggal'] == $newtanggal && $timeP == $time){
-
-
+            if ($key['tanggal'] == $newtanggal && $timeP == $time ){
+               
+               
                 if($key['idRuangan'] != $ruang ) {
 
                     $mhs1 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$key[idMakul]'")->result();
@@ -240,6 +244,18 @@ function inputjadwal() {
 
         }      
     }
+}
+
+function getIntervalJam($current,$start,$finish) {
+    $jam = array();
+    $k = 0;
+    $jamMulai = (int)$start;
+    $jamSelesai = (int)$finish;
+
+    for ($i=$jamMulai; $i <= $jamSelesai ; $i++) { 
+        $jam[$k++] = $i;
+    }
+    return $jam;
 }
 
 //edit jadwal

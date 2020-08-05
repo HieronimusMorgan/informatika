@@ -43,7 +43,7 @@
                         <nav class="sb-sidenav-menu-nested nav">
 
                             <a class="nav-link" href="<?= base_url('rekomendasi/c_jadwal');  ?>">Manajemen Jadwal</a>
-                            <a class="nav-link" href="#">Laporan Jadwal</a>
+                          
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pendadaran"
