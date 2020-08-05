@@ -6,6 +6,8 @@ class presensi extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        
+        $this->load->library('form_validation');
         //load libary pagination
         $this->load->library('pagination');
         //load the department_model
@@ -34,6 +36,69 @@ class presensi extends CI_Controller {
         $this->load->view('templates/topbar', $data);
         $this->load->view('templates/footer', $data);
     }
+
+    
+    public function editPresensi($idMakul) {
+        $this->session->set_tempdata('item', $idMakul);
+        redirect('presensi/editPresensi1');
+    }
+
+    public function editPresensi1() {
+        $idMakul = urldecode($this->session->tempdata('item'));
+        $data['mahasiswa'] = $this->PresensiModel->mahasiswaPresensi($idMakul);
+        $data['title'] = 'Edit Mata Kuliah';
+        $this->db->select('makul.* , ruangan.nama as ruangan');
+        $this->db->from('makul');
+        $this->db->join('ruangan','ruangan.makul = makul.idMakul');
+        $this->db->where('makul.idMakul', $idMakul);
+        $data['data'] = $this->db->get()->row_array();
+
+        // $this->form_validation->set_rules('tipe', 'Tipe', 'required');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('tahun', 'Tahun', 'required');
+        $this->form_validation->set_rules('semester', 'Semester', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('presensi/editPresensi', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $edit = [
+                'tipeMakul' => $this->input->post('tipe'),
+                'nama' => $this->input->post('nama'),
+                'tahun' => $this->input->post('tahun'),
+                'semester' => $this->input->post('semester'),
+                'kapasitas' => $this->input->post('kapasitas')
+            ];
+
+            $this->db->where('idMakul', $idMakul);
+            $this->db->update('makul', $edit);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+            Presensi berhasil di update!</div>');
+            redirect('presensi/isi/'.$idMakul);
+        }
+    }
+
+    public function deletePresensi($idMakul)
+    {
+        #delete presensi
+        $this->db->where('idMakul',$idMakul);
+        $this->db->delete('presensi');
+        #delete ruangan
+        $this->db->where('makul',$idMakul);
+        $this->db->delete('ruangan');
+
+        $hapus = array (
+            "idMakul" => $idMakul
+        );
+        $this->db->delete('makul', $hapus);
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
+        Presensi berhasil di hapus!</div>');
+        redirect('presensi');
+    }
+
 
     public function upload() {
         if (isset($_FILES["file"]["name"])) {

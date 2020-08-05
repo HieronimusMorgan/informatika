@@ -222,14 +222,12 @@ function tahun(id) {
         async: false,
         dataType: 'json',
         success: function(data) {
-            var html = '';
-
+            var html = '<option value="">-</option>';
             var i;
             for (i = 0; i < data.length; i++) {
 
                 html += '<option value="' + data[i].tahun + '">' + data[i].tahun + '</option>';
             }
-            html += '<option value="">-</option>';
             $('#tahun').html(html);
         }
     });
@@ -246,14 +244,12 @@ function semester(id) {
         async: false,
         dataType: 'json',
         success: function(data) {
-            var html = '';
-
+            var html = '<option value="">-</option>';
             var i;
             for (i = 0; i < data.length; i++) {
 
                 html += '<option value="' + data[i].semester + '">' + data[i].semester + '</option>';
             }
-            html += '<option value="">-</option>';
             $('#semester').html(html);
         }
     });
