@@ -54,11 +54,11 @@ class Jadwal_model extends CI_Model{
         }else{
 
             $this->db->WHERE('jamMulai',$jam);
-           
+            $this->db->WHERE('idRuangan',$ruang);
             $hasil = $this->db->get("detailjadwal")->result();
             if($hasil){
                
-
+             
                 $this->db->SELECT('detailjadwal.*,makul.*,ruang.*,dosen.nama as dosen_nama');
                 $this->db->FROM('detailjadwal');
                 $this->db->join('presensi','presensi.idMakul = detailjadwal.idMakul');
@@ -76,6 +76,7 @@ class Jadwal_model extends CI_Model{
                 return $data->result_array();
                 
             }else{
+               
              $this->db->SELECT('detailjadwal.*,makul.*,ruang.*,dosen.nama as dosen_nama');
              $this->db->FROM('detailjadwal');
              $this->db->join('presensi','presensi.idMakul = detailjadwal.idMakul');

@@ -184,6 +184,7 @@ function inputjadwal() {
 
         // cek-er
     $cekdata = $this->Jadwal_model->getDetailJadwall($idJadwal,$newtanggal,$jam1,$ruang);
+  
     if (empty($cek)) {
             # code...
 
