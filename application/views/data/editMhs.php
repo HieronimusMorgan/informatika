@@ -55,7 +55,7 @@
                                 <label for="title">STATUS</label>
                                 <select name="status" id="status" class="form-control">
                                     <option value=""></option>
-                                    <?php $menu = ['AKTIF', 'TIDAK AKTIF', 'DO'] ?>
+                                    <?php $menu = ['AKTIF', 'TIDAK AKTIF', 'DO', 'CUTI', 'LULUS'] ?>
                                     <?php foreach ($menu as $m) : ?>
                                     <?php if ($m == $data['status']) : ?>
                                     <option value="<?= $m ?>" selected> <?= $m ?> </option>

@@ -57,7 +57,7 @@
     $(document).ready(function() {
         $('#tabelku').dataTable({
             "scrollY": "400px",
-            "paging": false,
+            "paging": true,
             "language": {
                 "emptyTable": "Data Kosong"
             }
