@@ -468,7 +468,6 @@ class kapasitas extends CI_Controller {
         );
 
         $excel->setActiveSheetIndex(0)->setCellValue('A1', "KAPASITAS KELAS");
-        $excel->getActiveSheet()->mergeCells('A1:D1');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setName('Times New Roman');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(18);
@@ -478,22 +477,27 @@ class kapasitas extends CI_Controller {
         $excel->setActiveSheetIndex(0)->setCellValue('A3', "MATA KULIAH");
         $angkatan = $this->kapasitas_model->angkatan();
         $makul = $this->kapasitas_model->makul();
+        $col = 1;
+        $row = 3;
+        foreach ($angkatan as $a) {
+            # code...
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, '20'.$a['tahun']);
+            $col++;
+        }
+        $excel->getActiveSheet()->mergeCellsByColumnAndRow(0,1,$col,1);
+
         $col = 0;
-        $colTahun = 1;
         $row = 4;
         foreach ($makul as $mat) {
-            $rowTahun = 4;
-
+            $colTahun = 1;
             $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $mat['nama']);
             $excel->getActiveSheet()->getStyle($col, $row)->applyFromArray($style_col);
             // $excel->getActiveSheet()->setCellValueByColumnAndRow($colTahun, $rowTahun, $ang['tahun']);
             foreach ($angkatan as $ang) {
                 $data = "AND a.Nim LIKE '".$ang['tahun']."%'";
-                $excel->getActiveSheet()->setCellValueByColumnAndRow($colTahun, $rowTahun, $this->kapasitas_model->ambilMakulAngkatan($data, $mat['nama']));
-               
-                $rowTahun++;
+                $excel->getActiveSheet()->setCellValueByColumnAndRow($colTahun, $row, $this->kapasitas_model->ambilMakulAngkatan($data, $mat['nama']));
+                $colTahun++;
             }
-            $colTahun++;
             $row++;
         }
         
