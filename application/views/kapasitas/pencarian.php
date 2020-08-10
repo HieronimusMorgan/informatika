@@ -14,11 +14,11 @@
                                 <option value="">-</option>
                                 <?php $menu = $this->kapasitas_model->angkatan(); ?>
                                 <?php foreach ($menu as $m) : ?>
-                                <?php if ($this->input->post('angkatan') == $m['tahun']): ?>
-                                <option value="<?= $m['tahun'] ?>" selected><?= '20' . $m['tahun']; ?> </option>
-                                <?php else : ?>
-                                <option value="<?= $m['tahun'] ?>"><?= '20' . $m['tahun']; ?> </option>
-                                <?php endif; ?>
+                                    <?php if ($this->input->post('angkatan') == $m['tahun']): ?>
+                                        <option value="<?= $m['tahun'] ?>" selected><?= '20' . $m['tahun']; ?> </option>
+                                    <?php else : ?>
+                                        <option value="<?= $m['tahun'] ?>"><?= '20' . $m['tahun']; ?> </option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -30,11 +30,11 @@
                                 <option value="">-</option>
                                 <?php $menu = $this->kapasitas_model->idSemester(); ?>
                                 <?php foreach ($menu as $m) : ?>
-                                <?php if ($this->input->post('idSemester') == $m['idSemester']): ?>
-                                <option value="<?= $m['idSemester'] ?>" selected><?= $m['idSemester']; ?> </option>
-                                <?php else : ?>
-                                <option value="<?= $m['idSemester'] ?>"><?= $m['idSemester']; ?> </option>
-                                <?php endif; ?>
+                                    <?php if ($this->input->post('idSemester') == $m['idSemester']): ?>
+                                        <option value="<?= $m['idSemester'] ?>" selected><?= $m['idSemester']; ?> </option>
+                                    <?php else : ?>
+                                        <option value="<?= $m['idSemester'] ?>"><?= $m['idSemester']; ?> </option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -47,11 +47,11 @@
                         <option value="">-</option>
                         <?php $menu = $this->kapasitas_model->makul(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('makul') == $m['nama']): ?>
-                        <option value="<?= $m['nama'] ?>" selected><?= $m['nama'] ?></option>
-                        <?php else : ?>
-                        <option value="<?= $m['nama'] ?>"><?= $m['nama'] ?></option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('makul') == $m['nama']): ?>
+                                <option value="<?= $m['nama'] ?>" selected><?= $m['nama'] ?></option>
+                            <?php else : ?>
+                                <option value="<?= $m['nama'] ?>"><?= $m['nama'] ?></option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -64,11 +64,11 @@
                                 <option value="">-</option>
                                 <?php $menu = $this->kapasitas_model->tahunAjar() ?>
                                 <?php foreach ($menu as $m) : ?>
-                                <?php if ($this->input->post('tahun') == $m['tahun']): ?>
-                                <option value="<?= $m['tahun'] ?>" selected><?= $m['tahun']; ?> </option>
-                                <?php else : ?>
-                                <option value="<?= $m['tahun'] ?>"><?= $m['tahun']; ?> </option>
-                                <?php endif; ?>
+                                    <?php if ($this->input->post('tahun') == $m['tahun']): ?>
+                                        <option value="<?= $m['tahun'] ?>" selected><?= $m['tahun']; ?> </option>
+                                    <?php else : ?>
+                                        <option value="<?= $m['tahun'] ?>"><?= $m['tahun']; ?> </option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -80,11 +80,11 @@
                                 <option value="">-</option>
                                 <?php $menu = $this->kapasitas_model->semester(); ?>
                                 <?php foreach ($menu as $m) : ?>
-                                <?php if ($this->input->post('semester') == $m['semester']): ?>
-                                <option value="<?= $m['semester'] ?>" selected><?= $m['semester']; ?> </option>
-                                <?php else : ?>
-                                <option value="<?= $m['semester'] ?>"><?= $m['semester']; ?> </option>
-                                <?php endif; ?>
+                                    <?php if ($this->input->post('semester') == $m['semester']): ?>
+                                        <option value="<?= $m['semester'] ?>" selected><?= $m['semester']; ?> </option>
+                                    <?php else : ?>
+                                        <option value="<?= $m['semester'] ?>"><?= $m['semester']; ?> </option>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -96,11 +96,11 @@
                         <option value="">-</option>
                         <?php $menu = $this->kapasitas_model->tipeMakul(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('tipe') == $m): ?>
-                        <option value="<?= $m['tipeMakul'] ?>" selected><?= $m['tipeMakul']; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['tipeMakul'] ?>"><?= $m['tipeMakul']; ?> </option>
-                        <?php endif; ?>
+                            <?php if ($this->input->post('tipe') == $m): ?>
+                                <option value="<?= $m['tipeMakul'] ?>" selected><?= $m['tipeMakul']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['tipeMakul'] ?>"><?= $m['tipeMakul']; ?> </option>
+                            <?php endif; ?>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -111,12 +111,12 @@
                         <option value="">-</option>
                         <?php $menu = $this->kapasitas_model->dosen(); ?>
                         <?php foreach ($menu as $m) : ?>
-                        <?php if ($this->input->post('dosen') == $m['nama']): ?>
-                        <option value="<?= $m['nama'] ?>" selected><?= $m['nama']; ?> </option>
-                        <?php else : ?>
-                        <option value="<?= $m['nama'] ?>"><?= $m['nama']; ?> </option>
-                        <?php endif; ?>
-                        </option>
+                            <?php if ($this->input->post('dosen') == $m['nama']): ?>
+                                <option value="<?= $m['nama'] ?>" selected><?= $m['nama']; ?> </option>
+                            <?php else : ?>
+                                <option value="<?= $m['nama'] ?>"><?= $m['nama']; ?> </option>
+                            <?php endif; ?>
+                            </option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="col-auto">
                             <button href="" type="button" class="btn btn-secondary btn-lg btn-block"
-                                onclick="clear_form_elements(this.form)"><i class="fas fa-undo"></i> RESET
+                                    onclick="clear_form_elements(this.form)"><i class="fas fa-undo"></i> RESET
                             </button>
                         </div>
                     </div>
@@ -143,146 +143,146 @@
 
 <!-- RESET PENCARIAN -->
 <script>
-function clear_form_elements(ele) {
+    function clear_form_elements(ele) {
 
-    tags = ele.getElementsByTagName('select');
-    for (i = 0; i < tags.length; i++) {
-        if (tags[i].type == 'select-one') {
-            tags[i].selectedIndex = 0;
-        } else {
-            for (j = 0; j < tags[i].options.length; j++) {
-                tags[i].options[j].selected = false;
+        tags = ele.getElementsByTagName('select');
+        for (i = 0; i < tags.length; i++) {
+            if (tags[i].type == 'select-one') {
+                tags[i].selectedIndex = 0;
+            } else {
+                for (j = 0; j < tags[i].options.length; j++) {
+                    tags[i].options[j].selected = false;
+                }
             }
         }
-    }
 
-}
+    }
 </script>
 
 <!-- ISI OTOMATIS -->
 <!-- semester -->
 <script>
-$('#makul').change(function() {
-    var id = $(this).val();
-    idSemester(id);
-    dosen(id);
-    tahun(id);
-    semester(id);
-});
-
-function idSemester(id) {
-    $.ajax({
-        url: "<?php echo base_url(); ?>kapasitas/idSemester",
-        method: "POST",
-        data: {
-            id: id
-        },
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            var html = '';
-            var i;
-            for (i = 0; i < data.length; i++) {
-                html += '<option value="' + data[i].idSemester + '">' + data[i].idSemester + '</option>';
-            }
-            html += '<option value="">-</option>';
-            $('#idSemester').html(html);
-        }
+    $('#makul').change(function () {
+        var id = $(this).val();
+        idSemester(id);
+        dosen(id);
+        tahun(id);
+        semester(id);
     });
-}
 
-function dosen(id) {
-    $.ajax({
-        url: "<?php echo base_url(); ?>kapasitas/dosen",
-        method: "POST",
-        data: {
-            id: id
-        },
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            var html = '<option value="">-</option>';
-            var i;
-            for (i = 0; i < data.length; i++) {
-                html += '<option value="' + data[i].nama + '">' + data[i].nama + '</option>';
+    function idSemester(id) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>kapasitas/idSemester",
+            method: "POST",
+            data: {
+                id: id
+            },
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var html = '';
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    html += '<option value="' + data[i].idSemester + '">' + data[i].idSemester + '</option>';
+                }
+                html += '<option value="">-</option>';
+                $('#idSemester').html(html);
             }
-            $('#dosen').html(html);
-        }
-    });
-}
+        });
+    }
 
-function tahun(id) {
-
-    $.ajax({
-        url: "<?php echo base_url(); ?>kapasitas/tahun",
-        method: "POST",
-        data: {
-            id: id
-        },
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            var html = '<option value="">-</option>';
-            var i;
-            for (i = 0; i < data.length; i++) {
-
-                html += '<option value="' + data[i].tahun + '">' + data[i].tahun + '</option>';
+    function dosen(id) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>kapasitas/dosen",
+            method: "POST",
+            data: {
+                id: id
+            },
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var html = '<option value="">-</option>';
+                var i;
+                for (i = 0; i < data.length; i++) {
+                    html += '<option value="' + data[i].nama + '">' + data[i].nama + '</option>';
+                }
+                $('#dosen').html(html);
             }
-            $('#tahun').html(html);
-        }
-    });
-}
+        });
+    }
 
-function semester(id) {
+    function tahun(id) {
 
-    $.ajax({
-        url: "<?php echo base_url(); ?>kapasitas/semester",
-        method: "POST",
-        data: {
-            id: id
-        },
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            var html = '<option value="">-</option>';
-            var i;
-            for (i = 0; i < data.length; i++) {
+        $.ajax({
+            url: "<?php echo base_url(); ?>kapasitas/tahun",
+            method: "POST",
+            data: {
+                id: id
+            },
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var html = '<option value="">-</option>';
+                var i;
+                for (i = 0; i < data.length; i++) {
 
-                html += '<option value="' + data[i].semester + '">' + data[i].semester + '</option>';
+                    html += '<option value="' + data[i].tahun + '">' + data[i].tahun + '</option>';
+                }
+                $('#tahun').html(html);
             }
-            $('#semester').html(html);
-        }
-    });
-}
+        });
+    }
+
+    function semester(id) {
+
+        $.ajax({
+            url: "<?php echo base_url(); ?>kapasitas/semester",
+            method: "POST",
+            data: {
+                id: id
+            },
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var html = '<option value="">-</option>';
+                var i;
+                for (i = 0; i < data.length; i++) {
+
+                    html += '<option value="' + data[i].semester + '">' + data[i].semester + '</option>';
+                }
+                $('#semester').html(html);
+            }
+        });
+    }
 </script>
 
 <!-- dosen -->
 <script>
-$('#makul').change(function() {
-    var nama = $(this).val();
-    dosen(nama);
-});
-
-function dosen(nama) {
-
-    $.ajax({
-        url: "<?php echo base_url(); ?>kapasitas/dosen",
-        method: "POST",
-        data: {
-            nama: nama
-        },
-        async: false,
-        dataType: 'json',
-        success: function(data) {
-            var html = '<option value="">-</option>';
-
-            var i;
-            for (i = 0; i < data.length; i++) {
-
-                html += '<option value="' + data[i].nama + '">' + data[i].nama + '</option>';
-            }
-            $('#dosen').html(html);
-        }
+    $('#makul').change(function () {
+        var nama = $(this).val();
+        dosen(nama);
     });
-}
+
+    function dosen(nama) {
+
+        $.ajax({
+            url: "<?php echo base_url(); ?>kapasitas/dosen",
+            method: "POST",
+            data: {
+                nama: nama
+            },
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                var html = '<option value="">-</option>';
+
+                var i;
+                for (i = 0; i < data.length; i++) {
+
+                    html += '<option value="' + data[i].nama + '">' + data[i].nama + '</option>';
+                }
+                $('#dosen').html(html);
+            }
+        });
+    }
 </script>

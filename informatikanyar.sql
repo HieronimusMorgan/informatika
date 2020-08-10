@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 30, 2020 at 06:27 AM
+-- Generation Time: Aug 10, 2020 at 12:31 PM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -43,9 +43,12 @@ CREATE TABLE `detailjadwal` (
 --
 
 INSERT INTO `detailjadwal` (`id`, `idJadwal`, `idMakul`, `idRuangan`, `jamMulai`, `jamSelesai`, `tanggal`) VALUES
-(14, 1, 2, '1', '09:30:00', '09:30:00', '2020-07-30'),
-(16, 1, 3, '1', '09:30:00', '09:30:00', '2020-07-30'),
-(17, 1, 6, '1', '11:20:00', '11:20:00', '2020-07-30');
+(3, 1, 6, '6', '11:47:00', '11:47:00', '2020-08-05'),
+(4, 1, 4, '5', '14:03:00', '14:03:00', '2020-08-05'),
+(5, 1, 7, '9', '14:03:00', '14:03:00', '2020-08-05'),
+(6, 1, 2, '6', '14:04:00', '14:04:00', '2020-08-05'),
+(7, 1, 31, '6', '14:05:00', '14:05:00', '2020-08-05'),
+(8, 1, 8, '13', '15:23:00', '17:23:00', '2020-08-05');
 
 -- --------------------------------------------------------
 
@@ -56,49 +59,51 @@ INSERT INTO `detailjadwal` (`id`, `idJadwal`, `idMakul`, `idRuangan`, `jamMulai`
 CREATE TABLE `dosen` (
   `idDosen` int(11) NOT NULL,
   `nip` varchar(255) NOT NULL,
-  `nama` varchar(255) NOT NULL
+  `nama` varchar(255) NOT NULL,
+  `prodi` varchar(255) NOT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `dosen`
 --
 
-INSERT INTO `dosen` (`idDosen`, `nip`, `nama`) VALUES
-(1, 'P.1193', 'Drs. Johanes Eka Priyatma M.Sc., Ph.D.'),
-(2, 'P.1507', 'Henricus Agung Hernawan S.T., M.Kom.'),
-(3, 'P.2053', 'Alb. Agung Hadhiatma M.T.'),
-(4, 'P.2467', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.'),
-(5, 'P.1365', 'Dr. Anastasia Rita Widiarti'),
-(6, 'P.1380', 'Drs. Silverio Raden Lilik Aji Sampurno M.Hum.'),
-(7, 'T.991603', 'Emmanuel Satyo Yuwono S.Psi., M.Hum.'),
-(8, 'T.991244', 'Drs. Kartono M.Hum.'),
-(9, 'T.991736', 'Martina Winarni Ekaningsih S.Pd.'),
-(10, 'T.991164', 'Diana Christanti S.Pd.'),
-(11, 'T.991755', 'Agatha Pepy Yerinta M.Hum.'),
-(12, 'T.991203', 'Cicilia Dwi Setyorini S.Pd.'),
-(13, 'T.991760', 'Angela Bayu Pertama Sari M.Pd.'),
-(14, 'T.991679', 'Catharina Brameswari S.Pd., M.Hum.'),
-(15, 'P.2449', 'Elisabeth Oseanita Pukan S.S., M.A.'),
-(16, 'P.1442', 'Maria Vianney Any Herawati M.Si.'),
-(17, 'P.1669', 'Eko Hari Parmadi S.Si., M.Kom.'),
-(18, 'P.2096', 'Puspaningtyas Sanjoyo Adi S.T., M.T.'),
-(19, 'P.2083', 'Drs. Haris Sriwindono M.Kom'),
-(20, 'P.1473', 'Agnes Maria Polina S.Kom., M.Sc.'),
-(21, 'P.1446', 'Paulina Heruningsih Prima Rosa M.Sc.'),
-(22, 'P.1885', 'JB. Budi Darmawan S.T., M.Sc.'),
-(23, 'P.1240', 'Dr. Cyprianus Kuntoro Adi, S.J. M.A., M.Sc.'),
-(24, 'P.2083', 'Haris Sriwindono M.Kom, Ph.D.'),
-(25, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.'),
-(26, 'P.2413', 'Febi Sanjaya M.Sc.'),
-(27, 'P.2446', 'Dewa Putu Wiadnyana Putra S.Pd., M.Sc.'),
-(28, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.  Eko Hari Parmadi S.Si., M.Kom.'),
-(29, 'P.1171', 'Drs. Y.B. Adimassana M.A.'),
-(30, 'T.991629', 'Drs. Yosephus Sudiantara B.Th., M.S.'),
-(31, 'P.2444', 'Yosep Dwi Kristanto M.Pd.'),
-(32, 'P.2426', 'Eko Budi Santoso, S.J. S.Pd., Ph.D.'),
-(33, 'P.2406', 'Septina Krismawati M.A.'),
-(34, 'T.991814', 'Stella Maris Saraswati Mere S.Pd., M.A.'),
-(35, 'T.991203', 'Cicilia Dwi Setyorini M.Hum.');
+INSERT INTO `dosen` (`idDosen`, `nip`, `nama`, `prodi`, `status`) VALUES
+(1, 'P.1193', 'Drs. Johanes Eka Priyatma M.Sc., Ph.D.', 'Informatika', 'Dosen'),
+(2, 'P.1507', 'Henricus Agung Hernawan S.T., M.Kom.', '', ''),
+(3, 'P.2053', 'Alb. Agung Hadhiatma M.T.', 'Informatika', ''),
+(4, 'P.2467', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', '', ''),
+(5, 'P.1365', 'Dr. Anastasia Rita Widiarti', 'Informatika', 'Dosen'),
+(6, 'P.1380', 'Drs. Silverio Raden Lilik Aji Sampurno M.Hum.', '', ''),
+(7, 'T.991603', 'Emmanuel Satyo Yuwono S.Psi., M.Hum.', '', ''),
+(8, 'T.991244', 'Drs. Kartono M.Hum.', '', ''),
+(9, 'T.991736', 'Martina Winarni Ekaningsih S.Pd.', '', ''),
+(10, 'T.991164', 'Diana Christanti S.Pd.', '', ''),
+(11, 'T.991755', 'Agatha Pepy Yerinta M.Hum.', '', ''),
+(12, 'T.991203', 'Cicilia Dwi Setyorini S.Pd.', '', ''),
+(13, 'T.991760', 'Angela Bayu Pertama Sari M.Pd.', '', ''),
+(14, 'T.991679', 'Catharina Brameswari S.Pd., M.Hum.', '', ''),
+(15, 'P.2449', 'Elisabeth Oseanita Pukan S.S., M.A.', '', ''),
+(16, 'P.1442', 'Maria Vianney Any Herawati M.Si.', '', ''),
+(17, 'P.1669', 'Eko Hari Parmadi S.Si., M.Kom.', '', ''),
+(18, 'P.2096', 'Puspaningtyas Sanjoyo Adi S.T., M.T.', '', ''),
+(19, 'P.2083', 'Drs. Haris Sriwindono M.Kom', '', ''),
+(20, 'P.1473', 'Agnes Maria Polina S.Kom., M.Sc.', '', ''),
+(21, 'P.1446', 'Paulina Heruningsih Prima Rosa M.Sc.', '', ''),
+(22, 'P.1885', 'JB. Budi Darmawan S.T., M.Sc.', '', ''),
+(23, 'P.1240', 'Dr. Cyprianus Kuntoro Adi, S.J. M.A., M.Sc.', 'Informatika', 'Dosen'),
+(24, 'P.2083', 'Haris Sriwindono M.Kom, Ph.D.', '', ''),
+(25, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.', '', ''),
+(26, 'P.2413', 'Febi Sanjaya M.Sc.', '', ''),
+(27, 'P.2446', 'Dewa Putu Wiadnyana Putra S.Pd., M.Sc.', '', ''),
+(28, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.  Eko Hari Parmadi S.Si., M.Kom.', '', ''),
+(29, 'P.1171', 'Drs. Y.B. Adimassana M.A.', '', ''),
+(30, 'T.991629', 'Drs. Yosephus Sudiantara B.Th., M.S.', '', ''),
+(31, 'P.2444', 'Yosep Dwi Kristanto M.Pd.', '', ''),
+(32, 'P.2426', 'Eko Budi Santoso, S.J. S.Pd., Ph.D.', '', ''),
+(33, 'P.2406', 'Septina Krismawati M.A.', '', ''),
+(34, 'T.991814', 'Stella Maris Saraswati Mere S.Pd., M.A.', '', ''),
+(35, 'T.991203', 'Cicilia Dwi Setyorini M.Hum.', '', '');
 
 -- --------------------------------------------------------
 
@@ -118,7 +123,8 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`idJadwal`, `jenisUjian`, `semester`, `tahun`) VALUES
-(1, 'UTS', 'GASAL', '2020');
+(1, 'UTS', 'GASAL', '2020'),
+(2, 'UTS', 'GASAL', '2017');
 
 -- --------------------------------------------------------
 
@@ -165,7 +171,7 @@ CREATE TABLE `mahasiswa` (
 
 INSERT INTO `mahasiswa` (`idMahasiswa`, `nim`, `nama`, `dpa`, `minat`, `status`, `ipk`, `sks`, `dosbing`, `dosbing1`) VALUES
 (1, 125314033, 'ARLEANDO MANGARA SIAGIAN', '', '', 'AKTIF', NULL, NULL, '', ''),
-(2, 125314088, 'JULIAN DWI ROSANTA', NULL, '', 'AKTIF', NULL, NULL, '', ''),
+(2, 125314088, 'JULIAN DWI ROSANTA', '', '', 'AKTIF', NULL, NULL, '', ''),
 (3, 125314092, 'LAURENSIUS ANDIKA NOVEMBRI', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (4, 125314129, 'FEBRY RHENALDY', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (5, 125314134, 'FAJAR SETYONO', NULL, '', 'AKTIF', NULL, NULL, '', ''),
@@ -386,7 +392,7 @@ INSERT INTO `mahasiswa` (`idMahasiswa`, `nim`, `nama`, `dpa`, `minat`, `status`,
 (220, 165314121, 'VALENTINA YOHANA SENDUK', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (221, 165314124, 'DODI FERNANDO TAMBUNAN', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (222, 175314001, 'STEVAN TIOVANDI', NULL, '', 'AKTIF', NULL, NULL, '', ''),
-(223, 175314002, 'EDRICK HERNANDO', NULL, '', 'AKTIF', NULL, NULL, '', ''),
+(223, 175314002, 'EDRICK HERNANDO', '', 'SC', 'AKTIF', NULL, NULL, '', ''),
 (224, 175314003, 'MARKUS PATRIK SEKAITELES', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (225, 175314004, 'CHRISTOPHER MATTEW HERMAN', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (226, 175314005, 'NICHOLAS WIMBARA', NULL, '', 'AKTIF', NULL, NULL, '', ''),
@@ -679,7 +685,6 @@ INSERT INTO `mahasiswa` (`idMahasiswa`, `nim`, `nama`, `dpa`, `minat`, `status`,
 (513, 195314139, 'ARY MAHOT TUA RUMAPEA', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (514, 195314140, 'RICARDO CLINTON SIHOTANG', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (515, 195314181, 'FEBRINA DAYANTI SIHOMBING', NULL, '', 'AKTIF', NULL, NULL, '', ''),
-(516, 125314129, 'FEBRY RENALDY', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (517, 195314141, 'SEBASTIAN IRVANDO TULUS. S', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (518, 195314142, 'AUDY VALENTIANO', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (519, 195314143, 'QUIEDO RAFAEL BILLIK', NULL, '', 'AKTIF', NULL, NULL, '', ''),
@@ -777,9 +782,9 @@ INSERT INTO `mahasiswa` (`idMahasiswa`, `nim`, `nama`, `dpa`, `minat`, `status`,
 (611, 195314075, 'MARGARETA ROSMEINI NANGUR', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (612, 195314076, 'PUTRA TIMBUL SASONGKO', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (613, 195314077, 'SESARIA WINANDA TITIS RANI', NULL, '', 'AKTIF', NULL, NULL, '', ''),
-(614, 195314078, 'MARCELLINUS R. K', NULL, '', 'AKTIF', NULL, NULL, '', '');
+(614, 195314078, 'MARCELLINUS R. K', NULL, '', 'AKTIF', NULL, NULL, '', ''),
+(615, 195314079, 'JUAN VETRIC CHRISTIAN ARITONANG', NULL, '', 'AKTIF', NULL, NULL, '', '');
 INSERT INTO `mahasiswa` (`idMahasiswa`, `nim`, `nama`, `dpa`, `minat`, `status`, `ipk`, `sks`, `dosbing`, `dosbing1`) VALUES
-(615, 195314079, 'JUAN VETRIC CHRISTIAN ARITONANG', NULL, '', 'AKTIF', NULL, NULL, '', ''),
 (616, 195314080, 'ELKANA KRISTUADJI', NULL, '', 'AKTIF', NULL, NULL, '', '');
 
 -- --------------------------------------------------------
@@ -795,7 +800,6 @@ CREATE TABLE `makul` (
   `nama` varchar(255) NOT NULL,
   `tahun` varchar(255) NOT NULL,
   `semester` varchar(255) NOT NULL,
-  `ruangan` varchar(255) NOT NULL,
   `kelas` varchar(255) NOT NULL,
   `kapasitas` varchar(255) NOT NULL,
   `idSemester` int(11) NOT NULL
@@ -805,87 +809,86 @@ CREATE TABLE `makul` (
 -- Dumping data for table `makul`
 --
 
-INSERT INTO `makul` (`idMakul`, `kodeMakul`, `tipeMakul`, `nama`, `tahun`, `semester`, `ruangan`, `kelas`, `kapasitas`, `idSemester`) VALUES
-(2, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'L.JK B FST', 'B', '24', 0),
-(3, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'LKD.C FST', 'C', '26', 0),
-(4, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'L.BD B FST', 'D', '27', 0),
-(5, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'L.BD C FST', 'E', '29', 0),
-(6, '', '', 'Analisis Sosial', '2017', 'GASAL', 'K.207', 'A', '28', 0),
-(7, '', '', 'Analisis Sosial', '2017', 'GASAL', 'K.207', 'B', '38', 0),
-(8, '', '', 'Analisis Sosial', '2017', 'GASAL', 'K.204', 'C', '35', 0),
-(9, '', '', 'Bahasa Indonesia', '2017', 'GASAL', 'K.413', 'S', '1', 0),
-(10, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'K.204', 'A', '14', 0),
-(11, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'K.205', 'B', '17', 0),
-(12, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'K.204', 'C', '17', 0),
-(13, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'K.204', 'D', '27', 0),
-(14, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'K.204', 'AD', '31', 0),
-(15, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'K.204', 'AE', '23', 0),
-(16, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'K.205', 'AF', '24', 0),
-(17, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'K.207', 'M', '23', 0),
-(18, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'K.204', 'X', '28', 0),
-(20, '', '', 'Algorithm and Programming', '2017', 'GASAL', '', 'A', '27', 0),
-(21, '', '', 'Aljabar Linear', '2017', 'GENAP', 'K.311', 'A', '43', 0),
-(22, '', '', 'Aljabar Linear', '2017', 'GENAP', 'K.414', 'B', '43', 0),
-(23, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2017', 'GENAP', 'K.205', 'B', '40', 0),
-(24, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2017', 'GENAP', 'K.207', 'C', '36', 0),
-(25, '', '', 'Analisis Proses Bisnis', '2017', 'GENAP', 'K.207', 'A', '36', 0),
-(26, '', '', 'Analisis Proses Bisnis', '2017', 'GENAP', 'K.207', 'AX', '33', 0),
-(27, '', '', 'Arsitektur dan Routing Internet', '2017', 'GENAP', 'L.JK C FST', 'A', '24', 0),
-(28, '', '', 'Basis Data Multimedia', '2017', 'GENAP', 'K.207', 'A', '31', 0),
-(29, '', '', 'Basis Data Multimedia', '2017', 'GENAP', 'L.BD B FST', 'B', '28', 0),
-(30, '', '', 'Basis Data Relasional Objek', '2017', 'GENAP', 'K.207', 'A', '57', 0),
-(31, '', '', 'Administrasi Basis Data', '2018', 'GASAL', 'L.BD B FST', 'A', '33', 0),
-(32, '', '', 'Administrasi Basis Data', '2018', 'GASAL', 'L.BD B FST', 'B', '34', 0),
-(33, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'LKD.A FST', 'A', '28', 0),
-(34, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'LKD.B FST', 'B', '30', 0),
-(35, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'LKD.C FST', 'C', '31', 0),
-(36, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'L.BD B FST', 'D', '31', 0),
-(37, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'L.BD C FST', 'E', '30', 0),
-(38, '', '', 'Algoritma Optimisasi', '2018', 'GASAL', 'K.205', 'A', '32', 0),
-(39, '', '', 'Algoritma Optimisasi', '2018', 'GASAL', 'K.207', 'B', '31', 0),
-(40, '', '', 'Analisis dan Strategi Algoritma', '2018', 'GASAL', 'K.205', 'A', '37', 0),
-(41, '', '', 'Analisis dan Strategi Algoritma', '2018', 'GASAL', 'K.312', 'B', '35', 0),
-(42, '', '', 'Analisis dan Strategi Algoritma', '2018', 'GASAL', 'K.311', 'C', '35', 0),
-(43, '', '', 'Algoritma Optimisasi', '2018', 'GENAP', 'K.205', 'A', '19', 0),
-(44, '', '', 'Aljabar Linear', '2018', 'GENAP', 'L.BD C FST', 'A', '30', 0),
-(45, '', '', 'Aljabar Linear', '2018', 'GENAP', 'K.207', 'B', '31', 0),
-(46, '', '', 'Aljabar Linear', '2018', 'GENAP', 'K.311', 'C', '29', 0),
-(47, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'K.311', 'A', '30', 0),
-(48, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'L.BD C FST', 'B', '29', 0),
-(49, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'K.204', 'C', '29', 0),
-(50, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'LKD.C FST', 'D', '24', 0),
-(51, '', '', 'Analisis Proses Bisnis', '2018', 'GENAP', 'L.BD B FST', 'A', '29', 0),
-(52, '', '', 'Analisis Proses Bisnis', '2018', 'GENAP', 'L.BD B FST', 'B', '30', 0),
-(53, '', '', 'Analisis Proses Bisnis', '2018', 'GENAP', 'L.BD B FST', 'C', '16', 0),
-(54, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'K.207', 'A', '31', 0),
-(55, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'K.311', 'B', '30', 0),
-(56, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'K.204', 'C', '30', 0),
-(57, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'K.205', 'D', '31', 0),
-(58, '', '', 'Logika Matematika', '2019', 'GASAL', 'K.207', 'C', '44', 0),
-(59, '', '', 'Logika Matematika', '2019', 'GASAL', 'K.207', 'D', '46', 0),
-(60, '', '', 'Masa Depan Informatika', '2019', 'GASAL', 'K.204', 'A', '60', 0),
-(61, '', '', 'Matematika Diskret', '2019', 'GASAL', 'K.204', 'A', '39', 0),
-(62, '', '', 'Metode Numerik', '2019', 'GASAL', 'K.413', 'B', '2', 0),
-(63, '', '', 'Metodologi Penelitian', '2019', 'GASAL', 'K.312', 'C', '21', 0),
-(64, '', '', 'Pendidikan Kewarganegaraan', '2019', 'GASAL', 'I PGSD 1', 'F', '1', 0),
-(65, '', '', 'Pendidikan Pancasila', '2019', 'GASAL', 'K.413', 'P', '1', 0),
-(66, '', '', 'Probabilitas', '2019', 'GASAL', 'K.204', 'C', '34', 0),
-(67, '', '', 'Teologi Moral', '2019', 'GASAL', 'K.416', 'U', '11', 0),
-(68, '', '', 'Teologi Moral', '2019', 'GASAL', 'K.204', 'V', '2', 0),
-(69, '', '', 'Algoritma Optimisasi', '2019', 'GENAP', 'L.BD C FST', 'A', '27', 0),
-(70, '', '', 'Aljabar Linear', '2019', 'GENAP', 'K.204', 'A', '31', 0),
-(71, '', '', 'Aljabar Linear', '2019', 'GENAP', 'K.311', 'B', '40', 0),
-(72, '', '', 'Aljabar Linear', '2019', 'GENAP', 'K.312', 'C', '40', 0),
-(73, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'K.205', 'A', '37', 0),
-(74, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'K.205', 'B', '27', 0),
-(75, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'K.312', 'C', '28', 0),
-(76, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'K.312', 'D', '30', 0),
-(77, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'K.207', 'E', '14', 0),
-(78, '', '', 'Analisis Proses Bisnis', '2019', 'GENAP', 'L.BD B FST', 'A', '28', 0),
-(79, '', '', 'Analisis Proses Bisnis', '2019', 'GENAP', 'L.BD B FST', 'B', '11', 0),
-(80, '', '', 'Bahasa Indonesia', '2019', 'GENAP', 'II', 'L', '1', 0),
-(81, '', '', 'Bahasa Inggris', '2019', 'GENAP', 'K.304', 'G', '1', 0),
-(82, '', '', 'Bahasa Inggris', '2019', 'GENAP', 'K.313', 'M', '6', 0);
+INSERT INTO `makul` (`idMakul`, `kodeMakul`, `tipeMakul`, `nama`, `tahun`, `semester`, `kelas`, `kapasitas`, `idSemester`) VALUES
+(2, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'B', '24', 1),
+(3, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'C', '26', 1),
+(4, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'D', '27', 1),
+(5, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'E', '29', 1),
+(6, '', '', 'Analisis Sosial', '2017', 'GASAL', 'A', '28', 0),
+(7, '', '', 'Analisis Sosial', '2017', 'GASAL', 'B', '38', 0),
+(8, '', '', 'Analisis Sosial', '2017', 'GASAL', 'C', '35', 0),
+(9, '', '', 'Bahasa Indonesia', '2017', 'GASAL', 'S', '1', 5),
+(10, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'A', '14', 0),
+(11, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'B', '17', 0),
+(12, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'C', '17', 0),
+(13, '', '', 'Bahasa Inggris II', '2017', 'GASAL', 'D', '27', 0),
+(14, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'AD', '31', 1),
+(15, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'AE', '23', 1),
+(16, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'AF', '24', 1),
+(17, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'M', '23', 1),
+(18, '', '', 'Bahasa Inggris', '2017', 'GASAL', 'X', '28', 1),
+(21, '', '', 'Aljabar Linear', '2017', 'GENAP', 'A', '43', 4),
+(22, '', '', 'Aljabar Linear', '2017', 'GENAP', 'B', '43', 4),
+(23, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2017', 'GENAP', 'B', '40', 4),
+(24, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2017', 'GENAP', 'C', '36', 4),
+(25, '', '', 'Analisis Proses Bisnis', '2017', 'GENAP', 'A', '36', 8),
+(26, '', '', 'Analisis Proses Bisnis', '2017', 'GENAP', 'AX', '33', 8),
+(27, '', '', 'Arsitektur dan Routing Internet', '2017', 'GENAP', 'A', '24', 6),
+(28, '', '', 'Basis Data Multimedia', '2017', 'GENAP', 'A', '31', 6),
+(29, '', '', 'Basis Data Multimedia', '2017', 'GENAP', 'B', '28', 6),
+(30, '', '', 'Basis Data Relasional Objek', '2017', 'GENAP', 'A', '57', 6),
+(31, '', '', 'Administrasi Basis Data', '2018', 'GASAL', 'A', '33', 5),
+(32, '', '', 'Administrasi Basis Data', '2018', 'GASAL', 'B', '34', 5),
+(33, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'A', '28', 1),
+(34, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'B', '30', 1),
+(35, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'C', '31', 1),
+(36, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'D', '31', 1),
+(37, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'E', '30', 1),
+(38, '', '', 'Algoritma Optimisasi', '2018', 'GASAL', 'A', '32', 6),
+(39, '', '', 'Algoritma Optimisasi', '2018', 'GASAL', 'B', '31', 6),
+(40, '', '', 'Analisis dan Strategi Algoritma', '2018', 'GASAL', 'A', '37', 5),
+(41, '', '', 'Analisis dan Strategi Algoritma', '2018', 'GASAL', 'B', '35', 5),
+(42, '', '', 'Analisis dan Strategi Algoritma', '2018', 'GASAL', 'C', '35', 5),
+(43, '', '', 'Algoritma Optimisasi', '2018', 'GENAP', 'A', '19', 6),
+(44, '', '', 'Aljabar Linear', '2018', 'GENAP', 'A', '30', 4),
+(45, '', '', 'Aljabar Linear', '2018', 'GENAP', 'B', '31', 4),
+(46, '', '', 'Aljabar Linear', '2018', 'GENAP', 'C', '29', 4),
+(47, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'A', '30', 4),
+(48, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'B', '29', 4),
+(49, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'C', '29', 4),
+(50, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2018', 'GENAP', 'D', '24', 4),
+(51, '', '', 'Analisis Proses Bisnis', '2018', 'GENAP', 'A', '29', 8),
+(52, '', '', 'Analisis Proses Bisnis', '2018', 'GENAP', 'B', '30', 8),
+(53, '', '', 'Analisis Proses Bisnis', '2018', 'GENAP', 'C', '16', 8),
+(54, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'A', '31', 3),
+(55, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'B', '30', 3),
+(56, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'C', '30', 3),
+(57, '', '', 'Konsep dan Disain Basis Data', '2019', 'GASAL', 'D', '31', 3),
+(58, '', '', 'Logika Matematika', '2019', 'GASAL', 'C', '44', 1),
+(59, '', '', 'Logika Matematika', '2019', 'GASAL', 'D', '46', 1),
+(60, '', '', 'Masa Depan Informatika', '2019', 'GASAL', 'A', '60', 1),
+(61, '', '', 'Matematika Diskret', '2019', 'GASAL', 'A', '39', 1),
+(62, '', '', 'Metode Numerik', '2019', 'GASAL', 'B', '2', 6),
+(63, '', '', 'Metodologi Penelitian', '2019', 'GASAL', 'C', '21', 7),
+(65, '', '', 'Pendidikan Pancasila', '2019', 'GASAL', 'P', '1', 7),
+(66, '', '', 'Probabilitas', '2019', 'GASAL', 'C', '34', 3),
+(67, '', '', 'Teologi Moral', '2019', 'GASAL', 'U', '11', 6),
+(68, '', '', 'Teologi Moral', '2019', 'GASAL', 'V', '2', 6),
+(69, '', '', 'Algoritma Optimisasi', '2019', 'GENAP', 'A', '27', 6),
+(70, '', '', 'Aljabar Linear', '2019', 'GENAP', 'A', '31', 4),
+(71, '', '', 'Aljabar Linear', '2019', 'GENAP', 'B', '40', 4),
+(72, '', '', 'Aljabar Linear', '2019', 'GENAP', 'C', '40', 4),
+(73, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'A', '37', 4),
+(74, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'B', '27', 4),
+(75, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'C', '28', 4),
+(76, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'D', '30', 4),
+(77, '', '', 'Analisis Kebutuhan Perangkat Lunak', '2019', 'GENAP', 'E', '14', 4),
+(78, '', '', 'Analisis Proses Bisnis', '2019', 'GENAP', 'A', '28', 8),
+(79, '', '', 'Analisis Proses Bisnis', '2019', 'GENAP', 'B', '11', 8),
+(80, '', '', 'Bahasa Indonesia', '2019', 'GENAP', 'L', '1', 5),
+(81, '', '', 'Bahasa Inggris', '2019', 'GENAP', 'G', '1', 1),
+(82, '', '', 'Bahasa Inggris', '2019', 'GENAP', 'M', '6', 1),
+(83, '', '', 'Pendidikan Kewarganegaraan', '2019', 'GASAL', 'F', '1', 8);
 
 -- --------------------------------------------------------
 
@@ -1342,33 +1345,6 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (437, 175314125, 'ARNOLDUS JANSSEN YUFIANTO', 18, 15, 18),
 (438, 175314126, 'THOMAS DANI KURNIAWAN', 18, 15, 18),
 (439, 175314127, 'ALEXANDER ADAM BAGASKARA', 18, 15, 18),
-(467, 175314001, 'STEVAN TIOVANDI', 20, 1, 20),
-(468, 175314002, 'EDRICK HERNANDO', 20, 1, 20),
-(469, 175314003, 'MARKUS PATRIK SEKAITELES', 20, 1, 20),
-(470, 175314004, 'CHRISTOPHER MATTEW HERMAN', 20, 1, 20),
-(471, 175314005, 'NICHOLAS WIMBARA', 20, 1, 20),
-(472, 175314006, 'AYUNA ARMONICA', 20, 1, 20),
-(473, 175314007, 'IGNATIUS RIKO RINALDI', 20, 1, 20),
-(474, 175314009, 'CHRISTIAN WIBOWO TRINUGROHO', 20, 1, 20),
-(475, 175314010, 'GERVASIUS TARUSMAN', 20, 1, 20),
-(476, 175314011, 'DESHA VIRIYA KSANTI PURNOMO', 20, 1, 20),
-(477, 175314012, 'PHILIPUS CHEVIN JOANITO MAGAT', 20, 1, 20),
-(478, 175314013, 'ALBERTUS IVAN ADYATMA MAHESWARA', 20, 1, 20),
-(479, 175314015, 'I GEDE DIPAYANA', 20, 1, 20),
-(480, 175314016, 'RENDY EKO PRAYOGO', 20, 1, 20),
-(481, 175314018, 'WIRYAWAN SETYA NUGROHO', 20, 1, 20),
-(482, 175314019, 'REYN KEVIN KILA', 20, 1, 20),
-(483, 175314020, 'TANDRIANTO KOKO GUNAWAN', 20, 1, 20),
-(484, 175314021, 'FLORIANUS SURYA KEVIN', 20, 1, 20),
-(485, 175314022, 'FX DONI WAHYU SB', 20, 1, 20),
-(486, 175314023, 'FELIX PRIHANTORO', 20, 1, 20),
-(487, 175314024, 'DEVIDA AURELIA YACOB', 20, 1, 20),
-(488, 175314025, 'TANGGUH PURWOAGIL', 20, 1, 20),
-(489, 175314026, 'IKHSANUDIN NUGRAHA', 20, 1, 20),
-(490, 175314027, 'MICHAEL ALVIAN DANISH PRASOJO', 20, 1, 20),
-(491, 175314028, 'WAHYU WIJANARKO', 20, 1, 20),
-(492, 175314029, 'EZEKIEL JUAN FILIPPO CAPPI ARSYADI', 20, 1, 20),
-(493, 175314030, 'FLAVIANA ABRIANI HALIM', 20, 1, 20),
 (494, 165314001, 'YAKOBUS ARIS ARVANTO', 21, 16, 21),
 (495, 165314003, 'NANANG HIMAWAN FAUZI', 21, 16, 21),
 (496, 165314004, 'GEDE RIZKY BELA DHARMA RUDYARTA', 21, 16, 21),
@@ -1869,8 +1845,7 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (991, 185314044, 'WAYAN EGY MARTEJA', 35, 21, 35),
 (992, 185314045, 'RAJENDRA LUBDHAKA MURTI', 35, 21, 35),
 (993, 185314048, 'STEPHANUS FELIX SURYANTO', 35, 21, 35),
-(994, 185314051, 'BAGUS TRI GULARSO', 35, 21, 35);
-INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
+(994, 185314051, 'BAGUS TRI GULARSO', 35, 21, 35),
 (995, 185314052, 'FERNANDO LISTANTOKO', 35, 21, 35),
 (996, 185314053, 'IGNASIUS TAGAST KRISNAPUTRA', 35, 21, 35),
 (997, 185314055, 'HIERONIMUS ANGGIT TABA', 35, 21, 35),
@@ -1896,7 +1871,8 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1017, 185314085, 'EDUARDUS ERIK', 35, 21, 35),
 (1018, 185314086, 'DAMIANUS HALILINTAR', 35, 21, 35),
 (1019, 185314088, 'STEFANUS HARDIKI KARDOS', 35, 21, 35),
-(1020, 185314090, 'VITUS DAMA JIVANOV', 35, 21, 35),
+(1020, 185314090, 'VITUS DAMA JIVANOV', 35, 21, 35);
+INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
 (1021, 125314088, 'JULIAN DWI ROSANTA', 36, 4, 36),
 (1022, 155314102, 'SEBASTIANUS RECZY.S', 36, 4, 36),
 (1023, 185314091, 'SHINE CROSSIFIXIO SIANTURI', 36, 4, 36),
@@ -2758,7 +2734,6 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1879, 165314101, 'ALFRIYANDI DWI PRADIPTA SINAGA', 63, 28, 63),
 (1880, 165314112, 'NINDA MAWARNI', 63, 28, 63),
 (1881, 165314118, 'EGIDIA YUNI SAVITRI', 63, 28, 63),
-(1882, 145314011, 'VINSENSIUS VERDIANTO PUTRA', 64, 29, 64),
 (1883, 125314129, 'FEBRY RENALDY', 65, 30, 65),
 (1884, 125314129, 'FEBRY RENALDY', 66, 31, 66),
 (1885, 155314009, 'JAVA SINDHARA', 66, 31, 66),
@@ -2777,8 +2752,7 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1898, 185314091, 'SHINE CROSSIFIXIO SIANTURI', 66, 31, 66),
 (1899, 185314092, 'NESTA LAKSANA DANISWARA', 66, 31, 66),
 (1900, 185314094, 'ALEXANDRA VELMAS DUMATUBUN', 66, 31, 66),
-(1901, 185314095, 'ANTONIUS BAGUS HENDI SAPUTRO', 66, 31, 66);
-INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
+(1901, 185314095, 'ANTONIUS BAGUS HENDI SAPUTRO', 66, 31, 66),
 (1902, 185314096, 'TIANSI MIRANDA SITINJAK', 66, 31, 66),
 (1903, 185314097, 'YOGI ERNESTO SIREKEN', 66, 31, 66),
 (1904, 185314098, 'FAJAR WASKITO', 66, 31, 66),
@@ -2804,7 +2778,8 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1924, 185314063, 'EVARISTA IRIANTI', 67, 32, 67),
 (1925, 185314064, 'CINDY YUDHITA MASSUDI', 67, 32, 67),
 (1926, 185314067, 'FELISITAS GEA NANDA ELVIONA', 67, 32, 67),
-(1927, 185314137, 'MARCHELIENE MIRYASTRI BOLO', 67, 32, 67),
+(1927, 185314137, 'MARCHELIENE MIRYASTRI BOLO', 67, 32, 67);
+INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
 (1928, 195314168, 'MARIO YULIANTO SETIADI', 67, 32, 67),
 (1929, 155314106, 'LEONARDUS PITER MAHENDRA', 68, 32, 68),
 (1930, 185314075, 'RAMOT YUSTIAN HALIM PASARIBU', 68, 32, 68),
@@ -3128,7 +3103,8 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (2248, 155314052, 'ANDREA SETYA DEWA', 82, 35, 82),
 (2249, 155314072, 'MARIO AGUSTORIUS LIODA GHETA SEDA', 82, 35, 82),
 (2250, 155314073, 'BASTIAN CHANDRA KUSUMA', 82, 35, 82),
-(2251, 155314077, 'ORNANDO TRIHANDARU SETIAJI', 82, 35, 82);
+(2251, 155314077, 'ORNANDO TRIHANDARU SETIAJI', 82, 35, 82),
+(2252, 145314011, 'VINSENSIUS VERDIANTO PUTRA', 83, 29, 83);
 
 -- --------------------------------------------------------
 
@@ -3202,7 +3178,6 @@ INSERT INTO `ruangan` (`idRuangan`, `nama`, `makul`, `hari`, `jam`) VALUES
 (16, 'K.205', '16', 'Rabu', '13:00 15:50'),
 (17, 'K.207', '17', 'Jumat', '07:00 09:50'),
 (18, 'K.204', '18', 'Jumat', '07:00 09:50'),
-(20, 'LKD.A FST', '20', 'Selasa', '07:00 09:50'),
 (21, 'K.311', '21', 'Selasa', '13:00 15:50'),
 (22, 'K.414', '22', 'Selasa', '13:00 15:50'),
 (23, 'K.205', '23', 'Kamis', '07:00 09:50'),
@@ -3246,7 +3221,6 @@ INSERT INTO `ruangan` (`idRuangan`, `nama`, `makul`, `hari`, `jam`) VALUES
 (61, 'K.204', '61', 'Kamis', '11:00 13:50'),
 (62, 'K.413', '62', 'Jumat', '12:00 14:50'),
 (63, 'K.312', '63', 'Rabu', '13:00 16:50'),
-(64, 'I PGSD 1', '64', 'Senin', '07:00 08:50'),
 (65, 'K.413', '65', 'Senin', '11:00 12:50'),
 (66, 'K.204', '66', 'Kamis', '07:00 09:50'),
 (67, 'K.416', '67', 'Senin', '07:00 08:50'),
@@ -3262,9 +3236,10 @@ INSERT INTO `ruangan` (`idRuangan`, `nama`, `makul`, `hari`, `jam`) VALUES
 (77, 'K.207', '77', 'Kamis', '07:00 09:50'),
 (78, 'L.BD B FST', '78', 'Selasa', '08:00 09:50'),
 (79, 'L.BD B FST', '79', 'Kamis', '07:00 08:50'),
-(80, 'II', '80', 'Selasa', '11:00 13:50'),
+(80, 'K.403', '80', 'Selasa', '11:00 13:50'),
 (81, 'K.304', '81', 'Rabu', '10:00 12:50'),
-(82, 'K.313', '82', 'Selasa', '09:00 11:50');
+(82, 'K.313', '82', 'Selasa', '09:00 11:50'),
+(83, 'I PGSD 1', '83', 'Senin', '07:00 08:50');
 
 -- --------------------------------------------------------
 
@@ -3369,7 +3344,7 @@ ALTER TABLE `tahun`
 -- AUTO_INCREMENT for table `detailjadwal`
 --
 ALTER TABLE `detailjadwal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `dosen`
@@ -3381,7 +3356,7 @@ ALTER TABLE `dosen`
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `idJadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idJadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `kolokium`
@@ -3399,7 +3374,7 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `makul`
 --
 ALTER TABLE `makul`
-  MODIFY `idMakul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `idMakul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `pendadaran`
@@ -3411,7 +3386,7 @@ ALTER TABLE `pendadaran`
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `idPresensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2252;
+  MODIFY `idPresensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2253;
 
 --
 -- AUTO_INCREMENT for table `ruang`
@@ -3423,7 +3398,7 @@ ALTER TABLE `ruang`
 -- AUTO_INCREMENT for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  MODIFY `idRuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `idRuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `tahun`
