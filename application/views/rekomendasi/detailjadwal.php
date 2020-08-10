@@ -46,7 +46,7 @@
                                     <td><?php echo $row['ruangan']; ?></td>
 
                                     <td>
-                                        <!--  <a href="" class="badge badge-success " data-toggle="modal" data-target="#ModalInput">Edit</a> -->
+                                         <a href="" class="badge badge-success " data-toggle="modal" data-target="#ModalInput">Edit</a>
                                         <a href="<?php echo base_url(); ?>rekomendasi/deletedetailjadwal/<?= $row['id']; ?>/<?= $row['idJadwal'] ?>"
                                             class="badge badge-danger"
                                             onclick="return confirm('Are you sure you want to delete ?');">Delete</a>
@@ -160,7 +160,7 @@
                     dataType: 'json',
                     success: function(data) {
 
-                        var html = '<option>-Tahun Ajaran-</option>';
+                        var html = '';
                         var i;
                         for (i = 0; i < data.length; i++) {
 

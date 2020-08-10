@@ -35,7 +35,7 @@ class rekomendasi extends CI_Controller
        $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
        $data['laporan']= $this->Jadwal_model->getDetailJadwal($id);
        //jumlah mahasiswa per matkul
-     
+
        $this->pdf->setPaper('Letter','portrait');
        $this->pdf->filename = "Jadwal Ujian.pdf";
        $this->pdf->load_view('rekomendasi/pdf',$data);
@@ -155,6 +155,20 @@ function detailjadwal($id) {
 
 
 }
+function cekJam($current,$start,$finish) {
+    print($current);
+    print($start);
+    print($finish);
+
+   if ($start < $current ) {
+       # code...
+       
+        return $time1;
+   }else{
+    $hasil = "Tidak";
+    return $hasil;
+   }
+}
 
 function inputjadwal() {
     $tanggal = $this->input->post('datepicker');
@@ -170,7 +184,7 @@ function inputjadwal() {
     $newtanggal = date("Y-m-d",strtotime($tanggal));
     
     $jam = substr($jam1,0,2);
-   
+
     $data = array(
        "idJadwal" => $idJadwal,
        "idMakul" => $makul,
@@ -178,14 +192,13 @@ function inputjadwal() {
        "jamMulai" => $jam1,
        "jamSelesai" => $jam2,
        "tanggal" => $newtanggal
-   );
-    $key = "";
-    $cek = $this->Jadwal_model->getDetailJadwal($key);
+   ); 
 
         // cek-er
     $cekdata = $this->Jadwal_model->getDetailJadwall($idJadwal,$newtanggal,$jam1,$ruang);
-  
-    if (empty($cek)) {
+
+
+    if (empty($cekdata)) {
             # code...
 
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
@@ -195,69 +208,77 @@ function inputjadwal() {
 
     }
     else{
-        foreach ($cekdata as $key) {
-            
+
+        foreach ($cekdata as $key) {    
+
             $time = date("G:i:s", strtotime($jam1));
+            $timeEnd = date("G:i:s", strtotime($jam2));
             $timeP = date("G:i:s", strtotime($key['jamMulai']));
+
             $timeOut =  date("G:i:s", strtotime($key['jamSelesai']));
 
-            if ($key['tanggal'] == $newtanggal && $timeP == $time ){
-               
-               
-                if($key['idRuangan'] != $ruang ) {
+            $flagJam = "";
+
+            if (($timeP <= $time && $time <= $timeOut) || ($timeP <= $timeEnd && $timeEnd <= $timeOut) ) {
+                $flagJam ="Ada";
+
+            }
+            
+            if ($key['tanggal'] == $newtanggal){
+
+                if($key['idRuangan'] != $ruang  || $flagJam != "Ada" ) {
+
 
                     $mhs1 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$key[idMakul]'")->result();
 
                     $mhs2 = $this->db->query("SELECT * FROM presensi WHERE idMakul = '$makul'")->result();
-
+                    $cek = "";
                     foreach ($mhs2 as $mhsInput) {
                         # code...
 
+
                         foreach ($mhs1 as $mhsCek) {
+
                             # code...
                             if($mhsInput->nim == $mhsCek->nim ) {
-                                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
-                                    Jadwal tidak disimpan karena ada mahasiswa yang berbenturan jadwal!</div>');
-                                redirect("rekomendasi/detailjadwal/$idJadwal");
-                            }else{
-                                $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-                                    Jadwal berhasil disimpan.</div>');
-                                $this->Jadwal_model->inputdetailjadwal($data);
-                                redirect("rekomendasi/detailjadwal/$idJadwal");
+                             $cek = "ada";
+                             break; 
                             }
                         }
-                    }
 
+                        if ($cek == "ada") {
+                            break;
+                        }
+                    }
+                    if ($cek) {
+                        # code...
+                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
+                        Jadwal tidak disimpan karena ada mahasiswa yang berbenturan jadwal!</div>');
+                        redirect("rekomendasi/detailjadwal/$idJadwal");
+                    }else{
+                        $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+                        Jadwal berhasil disimpan.</div>');
+                        $this->Jadwal_model->inputdetailjadwal($data);
+                        redirect("rekomendasi/detailjadwal/$idJadwal");
+                    }
                 }
                 else {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="danger">
-                        Jadwal tidak disimpan! Ruangan sudah terpakai pada hari dan jam yang sama! </div>');
+                    Jadwal tidak disimpan! Ruangan sudah terpakai pada hari dan jam yang sama atau ruangan masih digunakan untuk ujian pada jam itu! </div>');
                     redirect("rekomendasi/detailjadwal/$idJadwal");
                 }
             }
             else{
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
-                    Jadwal berhasil disimpan.</div>');
+                Jadwal berhasil disimpan.</div>');
                 $this->Jadwal_model->inputdetailjadwal($data);
                 redirect("rekomendasi/detailjadwal/$idJadwal");
-
             }
-
         }      
     }
 }
 
-function getIntervalJam($current,$start,$finish) {
-    $jam = array();
-    $k = 0;
-    $jamMulai = (int)$start;
-    $jamSelesai = (int)$finish;
 
-    for ($i=$jamMulai; $i <= $jamSelesai ; $i++) { 
-        $jam[$k++] = $i;
-    }
-    return $jam;
-}
 
 //edit jadwal
 function editjadwal(){
@@ -290,7 +311,8 @@ function deletedetailjadwal() {
 
         // get data untuk input jadwal
 function tahun() {
-    $data = $this->db->query("SELECT DISTINCT tahun FROM makul order by tahun asc")->result();
+
+    $data = $this->db->query("SELECT DISTINCT tahun FROM makul order by tahun desc")->result();
     echo json_encode($data);
 }
 
