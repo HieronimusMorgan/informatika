@@ -34,7 +34,7 @@
                                         <a href="<?php echo base_url(); ?>rekomendasi/detailJadwal/<?= $row['idJadwal'];  ?>"
                                             class="badge badge-success" style="color: white">Detail</a>
                                         <a href="#" class="badge badge-warning" data-toggle="modal" data-target="#ModalEdit<?php echo $row['idJadwal'];  ?>">Edit</a>
-                                         <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row['idJadwal']; ?>"
+                                         <a href="<?php echo base_url(); ?>rekomendasi/deleteJadwal/<?= $row['idJadwal']; ?>"
                                              class="badge badge-danger"
                                              onclick="return confirm('Are you sure you want to delete ?');">Delete</a>
                                          </td>

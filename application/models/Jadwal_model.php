@@ -122,6 +122,9 @@ function ceker($id){
 function del_jadwaldetail($data){
     $this->db->delete("detailjadwal",$data);
 }
+function del_jadwal($data){
+    $this->db->delete("jadwal",$data);
+}
 
     //edit jadwal
 function editjadwal($data,$id){
