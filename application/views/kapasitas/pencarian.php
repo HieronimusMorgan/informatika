@@ -96,7 +96,7 @@
                         <option value="">-</option>
                         <?php $menu = $this->kapasitas_model->tipeMakul(); ?>
                         <?php foreach ($menu as $m) : ?>
-                            <?php if ($this->input->post('tipe') == $m): ?>
+                            <?php if ($this->input->post('tipe') == $m['tipeMakul']): ?>
                                 <option value="<?= $m['tipeMakul'] ?>" selected><?= $m['tipeMakul']; ?> </option>
                             <?php else : ?>
                                 <option value="<?= $m['tipeMakul'] ?>"><?= $m['tipeMakul']; ?> </option>
@@ -165,9 +165,6 @@
     $('#makul').change(function () {
         var id = $(this).val();
         idSemester(id);
-        dosen(id);
-        tahun(id);
-        semester(id);
     });
 
     function idSemester(id) {
@@ -189,11 +186,8 @@
                 $('#idSemester').html(html);
             }
         });
-    }
-
-    function dosen(id) {
         $.ajax({
-            url: "<?php echo base_url(); ?>kapasitas/dosen",
+            url: "<?php echo base_url(); ?>kapasitas/tipe",
             method: "POST",
             data: {
                 id: id
@@ -201,18 +195,15 @@
             async: false,
             dataType: 'json',
             success: function (data) {
-                var html = '<option value="">-</option>';
+                var html = '';
                 var i;
                 for (i = 0; i < data.length; i++) {
-                    html += '<option value="' + data[i].nama + '">' + data[i].nama + '</option>';
+                    html += '<option value="' + data[i].tipeMakul + '">' + data[i].tipeMakul + '</option>';
                 }
-                $('#dosen').html(html);
+                html += '<option value="">-</option>';
+                $('#tipe').html(html);
             }
         });
-    }
-
-    function tahun(id) {
-
         $.ajax({
             url: "<?php echo base_url(); ?>kapasitas/tahun",
             method: "POST",
@@ -231,10 +222,6 @@
                 $('#tahun').html(html);
             }
         });
-    }
-
-    function semester(id) {
-
         $.ajax({
             url: "<?php echo base_url(); ?>kapasitas/semester",
             method: "POST",
@@ -247,12 +234,12 @@
                 var html = '<option value="">-</option>';
                 var i;
                 for (i = 0; i < data.length; i++) {
-
                     html += '<option value="' + data[i].semester + '">' + data[i].semester + '</option>';
                 }
                 $('#semester').html(html);
             }
         });
+
     }
 </script>
 

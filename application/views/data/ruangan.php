@@ -52,7 +52,14 @@
             "scrollY": "400px",
             "scrollCollapse": true,
             "paging": true,
-            "bAutoWidth": false
+            "bAutoWidth": false,
+            "language": {
+                "emptyTable": "Data Kosong"
+            },
+            "lengthMenu": [
+                [10, 25, 50, 100, -1],
+                [10, 25, 50, 100, "All"]
+            ],
         });
     });
     </script>

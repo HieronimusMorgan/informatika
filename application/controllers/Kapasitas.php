@@ -135,7 +135,7 @@ class kapasitas extends CI_Controller {
 
     function dosen() {
         $makul = $this->input->post('nama');
-        $data = $this->db->query("SELECT DISTINCT c.nama AS nama FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen WHERE b.nama LIKE '$makul'")->result();
+        $data = $this->db->query("SELECT DISTINCT c.nama  FROM presensi a JOIN makul b ON a.idMakul=b.idMakul JOIN dosen c ON a.idDosen=c.idDosen WHERE b.nama LIKE '$makul'")->result();
         $newdata = array();
         $index = 0;
 
@@ -146,6 +146,22 @@ class kapasitas extends CI_Controller {
             echo json_encode($newdata);
         } else {
             echo json_encode($this->kapasitas_model->dosen());
+        }
+    }
+
+    function tipe() {
+        $makul = $this->input->post('nama');
+        $data = $this->db->query("SELECT DISTINCT b.tipeMakul FROM makul b WHERE b.nama LIKE  '$makul'")->result();
+        $newdata = array();
+        $index = 0;
+
+        if ($data) {
+            foreach ($data as $key2) {
+                $newdata[$index++] = $key2;
+            }
+            echo json_encode($newdata);
+        } else {
+            echo json_encode($this->kapasitas_model->tipeMakul());
         }
     }
 
@@ -217,7 +233,7 @@ class kapasitas extends CI_Controller {
         $excel->getActiveSheet()->getStyle('A5')->applyFromArray($styleArray)->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('A6')->applyFromArray($styleArray)->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('A7')->applyFromArray($styleArray)->getFont()->setBold(TRUE);
-
+        $MAKUL = $data['makul'];
         if ($data['makul'] != "") {
             $excel->setActiveSheetIndex(0)->setCellValue('B3', ": " . $data['makul']);
             $excel->getActiveSheet()->getStyle('B3')->applyFromArray($styleArray);
@@ -299,7 +315,7 @@ class kapasitas extends CI_Controller {
         $excel->setActiveSheetIndex(0);
 
         header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-        header('Content-Disposition: attachment; filename="Kapasitas Kelas.xlsx"');
+        header('Content-Disposition: attachment; filename="Kapasitas Kelas ' . $MAKUL . '.xlsx"');
         header('Cache-Control: max-age=0');
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
@@ -357,7 +373,7 @@ class kapasitas extends CI_Controller {
         );
 
         $angkatan = $data['angkatan'];
-        $excel->getActiveSheet()->setCellValueByColumnAndRow(0,1, "KAPASITAS KELAS ANGKATAN 20" . $angkatan);
+        $excel->getActiveSheet()->setCellValueByColumnAndRow(0, 1, "KAPASITAS KELAS ANGKATAN 20" . $angkatan);
         $excel->getActiveSheet()->mergeCells('A1:D1');
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
         $excel->getActiveSheet()->getStyle('A1')->getFont()->setName('Times New Roman');
@@ -417,6 +433,8 @@ class kapasitas extends CI_Controller {
         $write->save('php://output');
     }
 
+    //AND a.Nim LIKE '18%'
+
     public function cetakAll() {
 
         $excel = new PHPExcel();
@@ -474,45 +492,58 @@ class kapasitas extends CI_Controller {
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_CENTER);
         $excel->getActiveSheet()->getStyle('A1')->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
 
-        $excel->setActiveSheetIndex(0)->setCellValue('A3', "MATA KULIAH");
+        $excel->setActiveSheetIndex(0)->setCellValue('A3', "MAHASISWA AKTIF PER ANGKATAN");
         $angkatan = $this->kapasitas_model->angkatan();
         $makul = $this->kapasitas_model->makul();
-        $col = 1;
-        $row = 3;
-        foreach ($angkatan as $a) {
-            # code...
-            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, '20'.$a['tahun']);
-            $col++;
-        }
-        $excel->getActiveSheet()->mergeCellsByColumnAndRow(0,1,$col,1);
-
         $col = 0;
         $row = 4;
+        foreach ($angkatan as $a) {
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, 4, '20' . $a['tahun']);
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, 5, $this->kapasitas_model->mhs($a['tahun']));
+
+            $col++;
+        }
+        $excel->getActiveSheet()->mergeCellsByColumnAndRow(0, 1, ($col - 1), 1);
+        $excel->getActiveSheet()->mergeCellsByColumnAndRow(0, 3, ($col - 1), 3);
+
+        $excel->setActiveSheetIndex(0)->setCellValue('A7', "MAHASISWA TELAH MENGAMBIL (PER ANGKATAN)");
+        $col = 1;
+        $row = 7;
+        foreach ($angkatan as $a) {
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, '20' . $a['tahun']);
+            $col++;
+        }
+        $col = 0;
+        $row = 8;
         foreach ($makul as $mat) {
             $colTahun = 1;
             $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $mat['nama']);
-            $excel->getActiveSheet()->getStyle($col, $row)->applyFromArray($style_col);
-            // $excel->getActiveSheet()->setCellValueByColumnAndRow($colTahun, $rowTahun, $ang['tahun']);
             foreach ($angkatan as $ang) {
-                $data = "AND a.Nim LIKE '".$ang['tahun']."%'";
+                $data = "AND a.Nim LIKE '" . $ang['tahun'] . "%'";
                 $excel->getActiveSheet()->setCellValueByColumnAndRow($colTahun, $row, $this->kapasitas_model->ambilMakulAngkatan($data, $mat['nama']));
                 $colTahun++;
             }
             $row++;
         }
-        
-        $excel->getActiveSheet()->getColumnDimension('A')->setWidth(25);
-        $excel->getActiveSheet()->getColumnDimension('B')->setWidth(28);
-        $excel->getActiveSheet()->getColumnDimension('C')->setWidth(28);
-        $excel->getActiveSheet()->getColumnDimension('D')->setWidth(28);
-
-        $excel->getActiveSheet()->getRowDimension('1')->setRowHeight(30);
-        $excel->getActiveSheet()->getRowDimension('3')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('4')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('5')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('6')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('7')->setRowHeight(20);
-        $excel->getActiveSheet()->getRowDimension('9')->setRowHeight(20);
+        $row++;
+        $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, "MAHASISWA BELUM MENGAMBIL");
+        $col = 1;
+        foreach ($angkatan as $a) {
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, '20' . $a['tahun']);
+            $col++;
+        }
+        $row++;
+        $col = 0;
+        foreach ($makul as $mat) {
+            $colTahun = 1;
+            $excel->getActiveSheet()->setCellValueByColumnAndRow($col, $row, $mat['nama']);
+            foreach ($angkatan as $ang) {
+                $data = "AND a.Nim LIKE '" . $ang['tahun'] . "%'";
+                $excel->getActiveSheet()->setCellValueByColumnAndRow($colTahun, $row, $this->kapasitas_model->belumAmbilAngkatan($data, $mat['nama']));
+                $colTahun++;
+            }
+            $row++;
+        }
 
         $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
         $excel->getActiveSheet()->getPageSetup()->setPaperSize(PHPExcel_Worksheet_PageSetup::PAPERSIZE_A4);

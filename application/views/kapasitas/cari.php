@@ -3,59 +3,69 @@
     <main>
         <div class="container-fluid">
             <h1 class="mt-4 mb-2"><?= $title ?></h1>
-            <div class="card mb-4">
-                <div class="card-header text-center  font-weight-bold">
-                    JUMLAH MAHASISWA
-                </div>
-                <div class="card-body">
-                    <div class="row ">
-                        <div class="col">
-                            <div class="card mb-1 ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold">
-                                    Aktif
+            <div id="accordion">
+                <div class="card mb-4">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0 text-center">
+                            <button class="btn btn-link font-weight-bold" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                MAHASISWA
+                            </button>
+                        </h5>
+
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="card mb-1 ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold">
+                                            Aktif
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status` LIKE 'AKTIF'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status` LIKE 'AKTIF'")->num_rows(); ?>
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold">
+                                            Tidak Aktif
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'TIDAK AKTIF'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold">
-                                    Tidak Aktif
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold ">
+                                            Drop Out
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'DO'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'TIDAK AKTIF'")->num_rows(); ?>
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold ">
+                                            Cuti
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'CUTI'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold ">
-                                    Drop Out
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'DO'")->num_rows(); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold ">
-                                    Cuti
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'CUTI'")->num_rows(); ?>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold ">
-                                    Lulus
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'LULUS'")->num_rows(); ?>
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold ">
+                                            Lulus
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'LULUS'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -26,7 +26,7 @@
                                 <label for="title">MINAT</label>
                                 <select name="minat" id="minat" class="form-control">
                                     <option value=""></option>
-                                    <?php $menu = ['SC', 'RD', 'JAR'] ?>
+                                    <?php $menu = ['Sistem Cerdas', 'Rekayasa Data', 'Jaringan Komputer'] ?>
                                     <?php foreach ($menu as $m) : ?>
                                     <?php if ($m == $data['minat']) : ?>
                                     <option value="<?= $m ?>" selected> <?= $m ?> </option>
