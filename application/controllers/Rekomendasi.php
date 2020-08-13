@@ -176,11 +176,11 @@ class rekomendasi extends CI_Controller
     // Set orientasi kertas jadi LANDSCAPE
     $excel->getActiveSheet()->getPageSetup()->setOrientation(PHPExcel_Worksheet_PageSetup::ORIENTATION_LANDSCAPE);
     // Set judul file excel nya
-    $excel->getActiveSheet(0)->setTitle("Laporan Data Siswa");
+    $excel->getActiveSheet(0)->setTitle("Rekomendasi Jadwal Ujian");
     $excel->setActiveSheetIndex(0);
     // Proses file excel
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment; filename="Data Siswa.xlsx"'); // Set nama file excel nya
+    header('Content-Disposition: attachment; filename="Rekomendasi Jadwal Ujian.xlsx"'); // Set nama file excel nya
     header('Cache-Control: max-age=0');
     $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
     $write->save('php://output');

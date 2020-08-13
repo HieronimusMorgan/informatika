@@ -164,7 +164,7 @@
     $(document).ready(function(){
         $('#tabelku').dataTable({
             
-            "paging":         false,
+            "paging":         true,
             "language": {
                 "emptyTable": "Data Kosong"
             }

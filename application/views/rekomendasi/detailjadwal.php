@@ -6,13 +6,15 @@
             </nav>
             <div class="card-body">
                 <a href="#" class="btn btn-primary mb-2" data-toggle="modal" data-target="#ModalInput">Tambah Ujian</a>
-                <div class="btn-group float-right mb-2" style="margin-right: 5%;">
+                <a href="<?= base_url() ?>rekomendasi/exportExcell2/<?= $id; ?>" class="btn btn-success float-right mb-2"><i class="fas fa-file-excel" aria-hidden="true"></i> Cetak Excell</a>
+                
+               <!--  <div class="btn-group float-right mb-2" style="margin-right: 5%;">
                     <button type="button" class="btn btn-success  dropdown-toggle " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cetak</button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" href="<?= base_url() ?>rekomendasi/exportExcell2/<?= $id; ?>"><i class="fas fa-file-excel" style="color:green;" aria-hidden="true"></i> Excell</a>
+                  
                     <a class="dropdown-item" href="<?= base_url() ?>rekomendasi/exportPdf/<?= $id; ?>" target="_blank"><i class="fas fa-file-pdf" style="color:red;" aria-hidden="true"></i> PDF</a>
                    
-                </div>
+                </div> -->
             </div>
            
             <div class="table-responsive">
@@ -373,7 +375,7 @@
         $('#tabelku').dataTable({
             "scrollY": "400px",
             "scrollCollapse": true,
-            "paging": false,
+            "paging": true,
             "language": {
                 "emptyTable": "Data Kosong"
             }
