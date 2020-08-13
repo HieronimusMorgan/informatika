@@ -16,7 +16,7 @@
                                 <label for="title">TIPE MAKUL</label>
                                 <select name="tipe" id="tipe" class="form-control">
                                     <option value=""></option>
-                                    <?php $menu = ['Wajib', 'RD', 'SC', 'JK', 'Perminatan'] ?>
+                                    <?php $menu = ['Wajib', 'Sistem Cerdas', 'Rekayasa Data', 'Jaringan Komputer', 'Perminatan'] ?>
                                     <?php foreach ($menu as $m) : ?>
                                     <?php if ($m == $data['tipeMakul']) : ?>
                                     <option value="<?= $m ?>" selected> <?= $m ?> </option>

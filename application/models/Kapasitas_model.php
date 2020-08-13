@@ -4,6 +4,7 @@ class Kapasitas_model extends CI_Model {
 
     public function makul() {
         $this->db->distinct();
+        $this->db->order_by('nama', 'ASC');
         $this->db->select('nama');
         $this->db->from('makul');
         return $this->db->get()->result_array();
@@ -41,6 +42,7 @@ class Kapasitas_model extends CI_Model {
         $this->db->distinct();
         $this->db->select('nim');
         $this->db->like('nim', $angkatan, 'after');
+        $this->db->where('status', 'AKTIF');
         return $this->db->get('mahasiswa')->num_rows();
     }
 

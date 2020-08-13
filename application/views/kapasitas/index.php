@@ -1,37 +1,82 @@
+<!-- <style>
+#tabelku tbody tr:hover td {
+    background: none repeat scroll 0 0 #C0C0C0;
+    color: #000000;
+}
+
+#tabelku tbody tr.selected td {
+    background: none repeat scroll 0 0 #C0C0C0;
+    color: #000000;
+}
+</style>
+-->
 <div id="layoutSidenav_content">
     <main>
         <div class="container-fluid">
             <h1 class="mt-4"><?= $title ?></h1>
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row ">
-                        <div class="col">
-                            <div class="card mb-1 ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold">
-                                    Jumlah Mahasiswa Aktif
+            <div id="accordion">
+                <div class="card mb-4">
+                    <div class="card-header" id="headingOne">
+                        <h5 class="mb-0 text-center">
+                            <button class="btn btn-link font-weight-bold" data-toggle="collapse"
+                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                MAHASISWA
+                            </button>
+                        </h5>
+
+                    </div>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                        <div class="card-body">
+                            <div class="row ">
+                                <div class="col">
+                                    <div class="card mb-1 ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold">
+                                            Aktif
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status` LIKE 'AKTIF'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status` LIKE 'AKTIF'")->num_rows(); ?>
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold">
+                                            Tidak Aktif
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'TIDAK AKTIF'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-1 ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold">
-                                    Jumlah Mahasiswa Tidak Aktif
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold ">
+                                            Drop Out
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'DO'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'TIDAK AKTIF'")->num_rows(); ?>
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold ">
+                                            Cuti
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'CUTI'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="card mb-1 ">
-                                <div class="card-header d-flex justify-content-center font-weight-bold ">
-                                    Jumlah Mahasiswa DO
-                                </div>
-                                <div class="card-body d-flex justify-content-center">
-                                    <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'DO'")->num_rows(); ?>
+                                <div class="col">
+                                    <div class="card ">
+                                        <div class="card-header d-flex justify-content-center font-weight-bold ">
+                                            Lulus
+                                        </div>
+                                        <div class="card-body d-flex justify-content-center">
+                                            <?php echo $this->db->query("SELECT DISTINCT * FROM mahasiswa WHERE `status`  LIKE 'LULUS'")->num_rows(); ?>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -78,6 +123,7 @@
                                         <td style="text-align:center;"><?php echo $total ?></td>
                                     </tr>
                                 </table>
+                                <hr>
                                 <a href="<?= base_url('kapasitas/cetakAll/') ?>" class="btn btn-success float-right">
                                     <i class="fas fa-file-excel" aria-hidden="true"></i> CETAK EXCEL</a>
                             </div>
@@ -87,11 +133,23 @@
                 <script type="text/javascript">
                     $(document).ready(function () {
                         $('#tabelku').dataTable({
-                            "scrollY": "400px",
+                            "scrollY": "440px",
                             "scrollCollapse": false,
-                            "paging": false,
+                            "paging": true,
                             "bAutoWidth": false,
-                            "bInfo": false
+                            "bInfo": false,
+                            "lengthMenu": [
+                                [10, 25, 50, 100, -1],
+                                [10, 25, 50, 100, "All"]
+                            ],
                         });
                     });
+                    // $(document).ready(function() {
+                    //     var table = $('#tabelku').DataTable();
+                    //     $('#tabelku tbody').on('click', 'tr', function() {
+                    //         var id = table.row(this).data();
+                    //         alert('You clicked on ' + id[1] + '\'s row');
+                    //     });
+                    // });
+                    // 
                 </script>
