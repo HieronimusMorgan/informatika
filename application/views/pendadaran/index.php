@@ -134,9 +134,11 @@
                                         <a href="<?= base_url(); ?>pendadaran/edit/<?= $pen['id']; ?>"
                                             class="badge badge-success" style="width: 50px">Edit</a>
                                         <br>
+                                        <?php if($pen['nilai']!=''): ?>
                                         <a href="<?= base_url(); ?>pendadaran/pindah/<?= $pen['id']; ?>"
                                             class="badge badge-warning" style="width: 50px"
                                             onclick="return confirm('Apakah anda yakin memindahkan data ini?');">Pindah</a>
+                                        <?php endif ?>
                                         <a href="<?= base_url(); ?>pendadaran/hapus/<?= $pen['id']; ?>"
                                             class="badge badge-danger" style="width: 50px"
                                             onclick="return confirm('Apakah anda yakin menghapus data ini?');">Hapus</a>
