@@ -42,10 +42,10 @@ class Kolokium extends CI_Controller {
         $data['start'] = $this->uri->segment(3);
         $data['kolokium'] = $this->kolokium->GetKolokium($config['per_page'], $data['start'], $data['keyword']);
         $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('kolokium/index', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('kolokium/index', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function tambah($nim) {
@@ -315,11 +315,11 @@ class Kolokium extends CI_Controller {
         $this->form_validation->set_rules('nim', 'NIM Mahasiswa', 'required|numeric');
         if ($this->form_validation->run() == FALSE) {
 
-        $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('kolokium/inputNim', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/footer', $data);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('kolokium/inputNim', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/footer', $data);
         } else {
             $postData = $this->input->post();
             $nim = $postData['nim'];
@@ -386,11 +386,11 @@ class Kolokium extends CI_Controller {
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('kolokium/edit', $data);
-        
-        $this->load->view('templates/footer', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('kolokium/edit', $data);
+
+            $this->load->view('templates/footer', $data);
         } else {
             $postData = $this->input->post();
             $nim = $postData['nim'];
@@ -669,10 +669,10 @@ class Kolokium extends CI_Controller {
         $this->form_validation->set_rules('nilai', 'Nilai', 'required');
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('kolokium/nilai', $data);
-        $this->load->view('templates/footer', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('kolokium/nilai', $data);
+            $this->load->view('templates/footer', $data);
         } else {
             $this->Kolokium_model->editNilaiKolokium();
             $this->session->set_flashdata('flash', 'Diubah');
@@ -827,12 +827,12 @@ class Kolokium extends CI_Controller {
             $data['dosen'] = $this->Dosen_model->getAllDosen();
             $data['kolokium'] = NULL;
             $data['jumlahData'] = 0;
-              $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        
-        $this->load->view('kolokium/report', $data);
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/footer', $data);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+
+            $this->load->view('kolokium/report', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/footer', $data);
         } else {
             $data['judul'] = 'Report Jadwal Kolokium';
             $data['bulan'] = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',];
@@ -902,12 +902,12 @@ class Kolokium extends CI_Controller {
                 $this->session->set_flashdata('reportKolokium', 'Data Mahasiwa Tidak Ada');
                 redirect('kolokium/report');
             }
-              $this->load->view('templates/header', $data);
-        $this->load->view('templates/sidebar', $data);
-        $this->load->view('kolokium/report', $data);
-        
-        $this->load->view('templates/topbar', $data);
-        $this->load->view('templates/footer', $data);
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('kolokium/report', $data);
+
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/footer', $data);
         }
     }
 
@@ -957,6 +957,13 @@ class Kolokium extends CI_Controller {
         );
 
         $object->setActiveSheetIndex(0);
+        if (($this->session->userdata('awal')) != NULL && ($this->session->userdata('akhir')) == NULL) {
+            $object->getActiveSheet()->setCellValue('A1', 'Dari ' . format_indo($this->session->userdata('awal')) . ' hingga akhir');
+        } elseif (($this->session->userdata('awal')) == NULL && ($this->session->userdata('akhir')) != NULL) {
+            $object->getActiveSheet()->setCellValue('A1', 'Dari awal hingga ' . format_indo($this->session->userdata('akhir')));
+        } else {
+            $object->getActiveSheet()->setCellValue('A1', 'JADWAL KOLOKIUM PERIODE ' . format_indo($this->session->userdata('awal')) . ' - ' . format_indo($this->session->userdata('akhir')));
+        }
 
         $object->getActiveSheet()->setCellValue('A1', 'JADWAL KOLOKIUM PERIODE ' . format_indo($this->session->userdata('awal')) . ' - ' . format_indo($this->session->userdata('akhir')));
         $object->getActiveSheet()->mergeCells('A1:L1');
@@ -1255,7 +1262,7 @@ class Kolokium extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        
+
         $this->load->view('kolokium/hapusKolokium', $data);
         $this->load->view('templates/footer', $data);
     }
@@ -1302,24 +1309,23 @@ class Kolokium extends CI_Controller {
 
         $data['start'] = $this->uri->segment(3);
         $data['kolokium'] = $this->kolokium->getHistoryPindahKolokium($config['per_page'], $data['start'], $data['keyword']);
- 
-        
+
+
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('kolokium/pindahKolokium', $data);
         $this->load->view('templates/footer', $data);
-
     }
 
     public function detailPindah($id) {
         $data['judul'] = 'Detail Pindah Jadwal Kolokium';
         $data['kolokium'] = $this->Kolokium_model->getPindahKolokiumByID($id);
-            $this->load->view('templates/header', $data);
+        $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
         $this->load->view('kolokium/detailPindah', $data);
-        
+
         $this->load->view('templates/footer', $data);
     }
 

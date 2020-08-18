@@ -40,14 +40,13 @@ class Pendadaran extends CI_Controller {
 
         $data['start'] = $this->uri->segment(3);
         $data['pendadaran'] = $this->pendadaran->GetPendadaran($config['per_page'], $data['start'], $data['keyword']);
-        
-        $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            
-            $this->load->view('pendadaran/index', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
 
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+
+        $this->load->view('pendadaran/index', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function tambah($nim) {
@@ -71,12 +70,11 @@ class Pendadaran extends CI_Controller {
 
             if ($this->form_validation->run() == FALSE) {
                 $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('pendadaran/tambah', $data);
-            
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
-                
+                $this->load->view('templates/sidebar', $data);
+                $this->load->view('pendadaran/tambah', $data);
+
+                $this->load->view('templates/topbar', $data);
+                $this->load->view('templates/footer', $data);
             } else {
                 $postData = $this->input->post();
                 $arraydata = array(
@@ -580,12 +578,11 @@ class Pendadaran extends CI_Controller {
         $data['pendadaran'] = $this->Pendadaran_model->getPendadaranByID($id);
 
         $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            
-            $this->load->view('pendadaran/detail', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
+        $this->load->view('templates/sidebar', $data);
 
+        $this->load->view('pendadaran/detail', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function edit($id) {
@@ -612,9 +609,9 @@ class Pendadaran extends CI_Controller {
 
 
         if ($this->form_validation->run() == FALSE) {
-$this->load->view('templates/header', $data);
+            $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
-            
+
             $this->load->view('pendadaran/edit', $data);
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/footer', $data);
@@ -1162,7 +1159,7 @@ $this->load->view('templates/header', $data);
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('pendadaran/nilai', $data);
-            
+
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/footer', $data);
         } else {
@@ -1323,7 +1320,7 @@ $this->load->view('templates/header', $data);
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('pendadaran/report', $data);
-            
+
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/footer', $data);
         } else {
@@ -1410,7 +1407,7 @@ $this->load->view('templates/header', $data);
             $this->load->view('templates/header', $data);
             $this->load->view('templates/sidebar', $data);
             $this->load->view('pendadaran/report', $data);
-            
+
             $this->load->view('templates/topbar', $data);
             $this->load->view('templates/footer', $data);
         }
@@ -1463,7 +1460,14 @@ $this->load->view('templates/header', $data);
 
         $object->setActiveSheetIndex(0);
 
-        $object->getActiveSheet()->setCellValue('A1', 'JADWAL PENDADARAN PERIODE ' . format_indo($this->session->userdata('awal')) . ' - ' . format_indo($this->session->userdata('akhir')));
+        if (($this->session->userdata('awal')) != NULL && ($this->session->userdata('akhir')) == NULL) {
+            $object->getActiveSheet()->setCellValue('A1', 'Dari ' . format_indo($this->session->userdata('awal')) . ' hingga akhir');
+        } elseif (($this->session->userdata('awal')) == NULL && ($this->session->userdata('akhir')) != NULL) {
+            $object->getActiveSheet()->setCellValue('A1', 'Dari awal hingga ' . format_indo($this->session->userdata('akhir')));
+        } else {
+            $object->getActiveSheet()->setCellValue('A1', 'JADWAL PENDADARAN PERIODE ' . format_indo($this->session->userdata('awal')) . ' - ' . format_indo($this->session->userdata('akhir')));
+        }
+
         $object->getActiveSheet()->mergeCells('A1:L1');
         $object->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE);
         $object->getActiveSheet()->getStyle('A1')->getFont()->setSize(15);
@@ -1565,7 +1569,7 @@ $this->load->view('templates/header', $data);
 
         $writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
         $writer->save('php://output');
-    } 
+    }
 
     public function excelDosen() {
         $statement = $this->session->userdata('statement');
@@ -1784,25 +1788,23 @@ $this->load->view('templates/header', $data);
 
         $data['start'] = $this->uri->segment(3);
         $data['pendadaran'] = $this->pendadaran->getHistoryHapusPendadaran($config['per_page'], $data['start'], $data['keyword']);
-$this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            
-            $this->load->view('pendadaran/hapusPendadaran', $data);
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
 
+        $this->load->view('pendadaran/hapusPendadaran', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function detailHapus($id) {
         $data['judul'] = 'Detail Hapus Jadwal Pendadaran';
         $data['pendadaran'] = $this->Pendadaran_model->getHapusPendadaranByID($id);
         $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('pendadaran/detailHapus', $data);
-            
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('pendadaran/detailHapus', $data);
 
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function hapusHistoryHapus($id) {
@@ -1839,24 +1841,23 @@ $this->load->view('templates/header', $data);
 
         $data['start'] = $this->uri->segment(3);
         $data['pendadaran'] = $this->pendadaran->getHistoryPindahPendadaran($config['per_page'], $data['start'], $data['keyword']);
-$this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('pendadaran/pindahPendadaran', $data);
-            
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('pendadaran/pindahPendadaran', $data);
+
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function detailPindah($id) {
         $data['judul'] = 'Detail Pindah Jadwal Pendadaran';
         $data['pendadaran'] = $this->Pendadaran_model->getPindahPendadaranByID($id);
         $this->load->view('templates/header', $data);
-            $this->load->view('templates/sidebar', $data);
-            $this->load->view('pendadaran/detailPindah', $data);
-            
-            $this->load->view('templates/topbar', $data);
-            $this->load->view('templates/footer', $data);
-        
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('pendadaran/detailPindah', $data);
+
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
     }
 
     public function hapusHistoryPindah($id) {
