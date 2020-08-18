@@ -24,7 +24,7 @@ class Dosen_model extends CI_model {
     }
 
     public function getDosenByID($id) {
-        return $this->db->get_where('dosen', ['id' => $id])->row_array();
+        return $this->db->get_where('dosen', ['idDosen' => $id])->row_array();
     }
 
     public function editDataDosen() {
@@ -34,7 +34,7 @@ class Dosen_model extends CI_model {
             'npp' => $this->input->post('npp', true)
         );
 
-        $this->db->where('id', $this->input->post('id'));
+        $this->db->where('idDosen', $this->input->post('id'));
         $this->db->update('dosen', $data);
     }
 

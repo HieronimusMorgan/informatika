@@ -32,7 +32,7 @@ class Kolokium extends CI_Controller {
         $this->db->or_like('nim', $data['keyword']);
         $this->db->from('kolokium');
 
-        $config['base_url'] = 'http://localhost/proyekKP/kolokium/index';
+        $config['base_url'] = 'http://localhost/informatika/kolokium/index';
         $config['total_rows'] = $this->db->count_all_results();
         $data['total_rows'] = $config['total_rows'];
         $config['per_page'] = 10;
@@ -703,8 +703,8 @@ class Kolokium extends CI_Controller {
         $mahasiswa = $data['kolokium']['nim'];
         $dosen = $this->Dosen_model->getAllDosen();
         foreach ($dosen as $d) {
-            if (strtoupper($d['status']) == 'WAKAPRODI') {
-                $idD = $d['id'];
+            if (($d['status']) == 'Wakaprodi') {
+                $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
             }
         }
@@ -727,8 +727,8 @@ class Kolokium extends CI_Controller {
         $data['kolokium'] = $this->Kolokium_model->getKolokiumByID($id);
         $dosen = $this->Dosen_model->getAllDosen();
         foreach ($dosen as $d) {
-            if (strtoupper($d['status']) == 'WAKAPRODI') {
-                $idD = $d['id'];
+            if (($d['status']) == 'Wakaprodi') {
+                $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
             }
         }
@@ -752,8 +752,8 @@ class Kolokium extends CI_Controller {
         $data['kolokium'] = $this->Kolokium_model->getKolokiumByID($id);
         $dosen = $this->Dosen_model->getAllDosen();
         foreach ($dosen as $d) {
-            if (strtoupper($d['status']) == 'WAKAPRODI') {
-                $idD = $d['id'];
+            if (($d['status']) == 'Wakaprodi') {
+                $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
             }
         }
