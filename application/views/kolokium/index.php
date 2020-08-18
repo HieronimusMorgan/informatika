@@ -117,16 +117,18 @@
                                         <a href="<?= base_url(); ?>kolokium/nilai/<?= $kol['id']; ?>"
                                             class="badge badge-secondary"><i class="fas fa-edit"></i> Nilai</a>
                                     </td>
-                                    <td style="vertical-align: middle">
+                                    <td>
                                         <a href="<?= base_url(); ?>kolokium/detail/<?= $kol['id']; ?>"
                                             class="badge badge-primary" style="width: 50px">Detail</a>
                                         <a href="<?= base_url(); ?>kolokium/edit/<?= $kol['id']; ?>"
                                             class="badge badge-success" style="width: 50px">Edit</a>
                                         <br>
+                                        <?php if($kol['nilai']!='-'): ?>
                                         <a href="<?= base_url(); ?>kolokium/pindah/<?= $kol['id']; ?>"
                                             class="badge badge-warning"
                                             onclick="return confirm('Apakah anda yakin memindahkan data ini?');"
                                             style="width: 50px">Pindah</a>
+                                        <?php endif ?>
                                         <a href="<?= base_url(); ?>kolokium/hapus/<?= $kol['id']; ?>"
                                             class="badge badge-danger"
                                             onclick="return confirm('Apakah anda yakin menghapus data ini?');"
