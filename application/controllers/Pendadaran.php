@@ -1194,8 +1194,8 @@ $this->load->view('templates/header', $data);
         $mahasiswa = $data['pendadaran']['nim'];
         $dosen = $this->Dosen_model->getAllDosen();
         foreach ($dosen as $d) {
-            if (strtoupper($d['status']) == 'WAKAPRODI') {
-                $idD = $d['id'];
+            if (($d['status']) == 'Wakaprodi') {
+                $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
             }
         }
@@ -1216,8 +1216,8 @@ $this->load->view('templates/header', $data);
         $data['pendadaran'] = $this->Pendadaran_model->getPendadaranByID($id);
         $dosen = $this->Dosen_model->getAllDosen();
         foreach ($dosen as $d) {
-            if (strtoupper($d['status']) == 'WAKAPRODI') {
-                $idD = $d['id'];
+            if (($d['status']) == 'Wakaprodi') {
+                $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
             }
         }
@@ -1241,8 +1241,8 @@ $this->load->view('templates/header', $data);
         $data['pendadaran'] = $this->Pendadaran_model->getPendadaranByID($id);
         $dosen = $this->Dosen_model->getAllDosen();
         foreach ($dosen as $d) {
-            if (strtoupper($d['status']) == 'WAKAPRODI') {
-                $idD = $d['id'];
+            if (($d['status']) == 'Wakaprodi') {
+                $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
             }
         }
