@@ -316,8 +316,6 @@ def("DOMPDF_ENABLE_PHP", false);
  * @var bool
  */
 def("DOMPDF_ENABLE_JAVASCRIPT", true);
-def("DOMPDF_ENABLE_HTML5PARSE",true);
-
 
 /**
  * Enable remote file access
@@ -430,7 +428,7 @@ else if ( !function_exists("__autoload") ) {
    *
    * @param string $class
    */
-  function __autoload($class) {
+  function spl_autoload_register($class) {
     DOMPDF_autoload($class);
   }
 }

@@ -43,21 +43,10 @@
                         <nav class="sb-sidenav-menu-nested nav">
 
                             <a class="nav-link" href="<?= base_url('rekomendasi/c_jadwal');  ?>">Manajemen Jadwal</a>
-                          
+
                         </nav>
                     </div>
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pendadaran"
-                        aria-expanded="false" aria-controls="collapseLayouts">
-                        <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
-                        Jadwal Pendadaran
-                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                    </a>
-                    <div class="collapse" id="Pendadaran" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
-                        <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Manajemen Jadwal Pendadaran</a>
-                            <a class="nav-link" href="#">Laporan Pendadaran</a>
-                        </nav>
-                    </div>
+
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Kolokium"
                         aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
@@ -66,9 +55,21 @@
                     </a>
                     <div class="collapse" id="Kolokium" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                         <nav class="sb-sidenav-menu-nested nav">
-                            <a class="nav-link" href="#">Manajemen Jadwal Kolokium</a>
-                            <a class="nav-link" href="#">Laporan Kolokium</a>
+                            <a class="nav-link" href="<?= base_url('kolokium');  ?> ">Manajemen Jadwal Kolokium</a>
                         </nav>
                     </div>
+
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#Pendadaran"
+                        aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="fas fa-folder"></i></div>
+                        Jadwal Pendadaran
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="Pendadaran" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="<?= base_url('pendadaran');  ?> ">Manajemen Jadwal Pendadaran</a>
+                        </nav>
+                    </div>
+
         </nav>
     </div>

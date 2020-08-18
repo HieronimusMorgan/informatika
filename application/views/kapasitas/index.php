@@ -19,7 +19,7 @@
                     <div class="card-header" id="headingOne">
                         <h5 class="mb-0 text-center">
                             <button class="btn btn-link font-weight-bold" data-toggle="collapse"
-                                    data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                 MAHASISWA
                             </button>
                         </h5>
@@ -104,18 +104,18 @@
                                         <?php $i = 1; ?>
                                         <?php $total = 0; ?>
                                         <?php foreach ($makul as $m): ?>
-                                            <tr>
-                                                <td style="text-align:center;"><?php echo $i ?></td>
-                                                <td><?php echo $m['nama'] ?></td>
-                                                <td style="text-align:center;"><?php
+                                        <tr>
+                                            <td style="text-align:center;"><?php echo $i ?></td>
+                                            <td><?php echo $m['nama'] ?></td>
+                                            <td style="text-align:center;"><?php
                                                     $sql = "SELECT  COUNT(DISTINCT a.Nim, a.idMakul, a.idRuangan) AS jumlah FROM presensi a JOIN makul b ON a.idMakul = b.idMakul WHERE b.nama LIKE '" . $m['nama'] . "' ";
                                                     $jumlah = $this->db->query($sql)->result_array();
                                                     echo $jumlah[0]['jumlah'];
                                                     $total += $jumlah[0]['jumlah'];
                                                     ?>
-                                                </td>
-                                            </tr>
-                                            <?php $i++; ?>
+                                            </td>
+                                        </tr>
+                                        <?php $i++; ?>
                                         <?php endforeach ?>
                                     </tbody>
                                     <tr>
@@ -131,25 +131,25 @@
                     </div>
                 </div>
                 <script type="text/javascript">
-                    $(document).ready(function () {
-                        $('#tabelku').dataTable({
-                            "scrollY": "440px",
-                            "scrollCollapse": false,
-                            "paging": true,
-                            "bAutoWidth": false,
-                            "bInfo": false,
-                            "lengthMenu": [
-                                [10, 25, 50, 100, -1],
-                                [10, 25, 50, 100, "All"]
-                            ],
-                        });
+                $(document).ready(function() {
+                    $('#tabelku').dataTable({
+                        "scrollY": "440px",
+                        "scrollCollapse": true,
+                        "paging": true,
+                        "bAutoWidth": false,
+                        "bInfo": true,
+                        "lengthMenu": [
+                            [10, 25, 50, 100, -1],
+                            [10, 25, 50, 100, "All"]
+                        ],
                     });
-                    // $(document).ready(function() {
-                    //     var table = $('#tabelku').DataTable();
-                    //     $('#tabelku tbody').on('click', 'tr', function() {
-                    //         var id = table.row(this).data();
-                    //         alert('You clicked on ' + id[1] + '\'s row');
-                    //     });
-                    // });
-                    // 
+                });
+                // $(document).ready(function() {
+                //     var table = $('#tabelku').DataTable();
+                //     $('#tabelku tbody').on('click', 'tr', function() {
+                //         var id = table.row(this).data();
+                //         alert('You clicked on ' + id[1] + '\'s row');
+                //     });
+                // });
+                // 
                 </script>

@@ -168,7 +168,7 @@ class presensi extends CI_Controller {
                                 if ($id == "") {
                                     $id = mt_rand(0, 999999);
                                 }
-                                $this->db->set('nip', $id)->where('idDosen', $idDosen)->update('dosen');
+                                $this->db->set('npp', $id)->where('idDosen', $idDosen)->update('dosen');
                             }
                         }
                         $this->PresensiModel->tambahKapasitas($idMakul, $hitung);
