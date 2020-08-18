@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 10, 2020 at 12:31 PM
+-- Generation Time: Aug 18, 2020 at 08:46 AM
 -- Server version: 10.1.32-MariaDB
 -- PHP Version: 7.2.5
 
@@ -43,12 +43,7 @@ CREATE TABLE `detailjadwal` (
 --
 
 INSERT INTO `detailjadwal` (`id`, `idJadwal`, `idMakul`, `idRuangan`, `jamMulai`, `jamSelesai`, `tanggal`) VALUES
-(3, 1, 6, '6', '11:47:00', '11:47:00', '2020-08-05'),
-(4, 1, 4, '5', '14:03:00', '14:03:00', '2020-08-05'),
-(5, 1, 7, '9', '14:03:00', '14:03:00', '2020-08-05'),
-(6, 1, 2, '6', '14:04:00', '14:04:00', '2020-08-05'),
-(7, 1, 31, '6', '14:05:00', '14:05:00', '2020-08-05'),
-(8, 1, 8, '13', '15:23:00', '17:23:00', '2020-08-05');
+(13, 1, 2, '6', '19:15:00', '21:15:00', '2020-08-13');
 
 -- --------------------------------------------------------
 
@@ -58,7 +53,7 @@ INSERT INTO `detailjadwal` (`id`, `idJadwal`, `idMakul`, `idRuangan`, `jamMulai`
 
 CREATE TABLE `dosen` (
   `idDosen` int(11) NOT NULL,
-  `nip` varchar(255) NOT NULL,
+  `npp` varchar(255) NOT NULL,
   `nama` varchar(255) NOT NULL,
   `prodi` varchar(255) NOT NULL,
   `status` varchar(255) NOT NULL
@@ -68,12 +63,11 @@ CREATE TABLE `dosen` (
 -- Dumping data for table `dosen`
 --
 
-INSERT INTO `dosen` (`idDosen`, `nip`, `nama`, `prodi`, `status`) VALUES
+INSERT INTO `dosen` (`idDosen`, `npp`, `nama`, `prodi`, `status`) VALUES
 (1, 'P.1193', 'Drs. Johanes Eka Priyatma M.Sc., Ph.D.', 'Informatika', 'Dosen'),
-(2, 'P.1507', 'Henricus Agung Hernawan S.T., M.Kom.', '', ''),
 (3, 'P.2053', 'Alb. Agung Hadhiatma M.T.', 'Informatika', ''),
-(4, 'P.2467', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', '', ''),
-(5, 'P.1365', 'Dr. Anastasia Rita Widiarti', 'Informatika', 'Dosen'),
+(4, 'P.2467', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', 'Informatika', ''),
+(5, 'P.1365', 'Dr. Anastasia Rita Widiarti', 'Informatika', ''),
 (6, 'P.1380', 'Drs. Silverio Raden Lilik Aji Sampurno M.Hum.', '', ''),
 (7, 'T.991603', 'Emmanuel Satyo Yuwono S.Psi., M.Hum.', '', ''),
 (8, 'T.991244', 'Drs. Kartono M.Hum.', '', ''),
@@ -85,25 +79,78 @@ INSERT INTO `dosen` (`idDosen`, `nip`, `nama`, `prodi`, `status`) VALUES
 (14, 'T.991679', 'Catharina Brameswari S.Pd., M.Hum.', '', ''),
 (15, 'P.2449', 'Elisabeth Oseanita Pukan S.S., M.A.', '', ''),
 (16, 'P.1442', 'Maria Vianney Any Herawati M.Si.', '', ''),
-(17, 'P.1669', 'Eko Hari Parmadi S.Si., M.Kom.', '', ''),
-(18, 'P.2096', 'Puspaningtyas Sanjoyo Adi S.T., M.T.', '', ''),
-(19, 'P.2083', 'Drs. Haris Sriwindono M.Kom', '', ''),
-(20, 'P.1473', 'Agnes Maria Polina S.Kom., M.Sc.', '', ''),
-(21, 'P.1446', 'Paulina Heruningsih Prima Rosa M.Sc.', '', ''),
-(22, 'P.1885', 'JB. Budi Darmawan S.T., M.Sc.', '', ''),
+(17, 'P.1669', 'Eko Hari Parmadi S.Si., M.Kom.', 'Informatika', ''),
+(18, 'P.2096', 'Puspaningtyas Sanjoyo Adi S.T., M.T.', 'Informatika', ''),
+(19, 'P.2083', 'Drs. Haris Sriwindono M.Kom', 'Informatika', ''),
+(20, 'P.1473', 'Agnes Maria Polina S.Kom., M.Sc.', 'Informatika', ''),
+(21, 'P.1446', 'Paulina Heruningsih Prima Rosa M.Sc.', 'Informatika', ''),
+(22, 'P.1885', 'JB. Budi Darmawan S.T., M.Sc.', 'Informatika', ''),
 (23, 'P.1240', 'Dr. Cyprianus Kuntoro Adi, S.J. M.A., M.Sc.', 'Informatika', 'Dosen'),
-(24, 'P.2083', 'Haris Sriwindono M.Kom, Ph.D.', '', ''),
-(25, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.', '', ''),
+(24, 'P.2083', 'Haris Sriwindono M.Kom, Ph.D.', 'Informatika', ''),
+(25, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.', 'Informatika', ''),
 (26, 'P.2413', 'Febi Sanjaya M.Sc.', '', ''),
 (27, 'P.2446', 'Dewa Putu Wiadnyana Putra S.Pd., M.Sc.', '', ''),
-(28, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.  Eko Hari Parmadi S.Si., M.Kom.', '', ''),
+(28, 'P.2083', 'Drs. Haris Sriwindono M.Kom, Ph.D.  Eko Hari Parmadi S.Si., M.Kom.', 'Informatika', ''),
 (29, 'P.1171', 'Drs. Y.B. Adimassana M.A.', '', ''),
 (30, 'T.991629', 'Drs. Yosephus Sudiantara B.Th., M.S.', '', ''),
 (31, 'P.2444', 'Yosep Dwi Kristanto M.Pd.', '', ''),
 (32, 'P.2426', 'Eko Budi Santoso, S.J. S.Pd., Ph.D.', '', ''),
 (33, 'P.2406', 'Septina Krismawati M.A.', '', ''),
 (34, 'T.991814', 'Stella Maris Saraswati Mere S.Pd., M.A.', '', ''),
-(35, 'T.991203', 'Cicilia Dwi Setyorini M.Hum.', '', '');
+(35, 'T.991203', 'Cicilia Dwi Setyorini M.Hum.', '', ''),
+(36, 'P.1507', 'Henricus Agung Hernawan S.T., M.Kom.', 'Informatika', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hapuskolokium`
+--
+
+CREATE TABLE `hapuskolokium` (
+  `id` int(11) NOT NULL,
+  `nim` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `dosen1` varchar(255) NOT NULL,
+  `dosen2` varchar(255) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `reviewer` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL,
+  `durasi` varchar(255) NOT NULL,
+  `ruang` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `nilai` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `hapuskolokium`
+--
+
+INSERT INTO `hapuskolokium` (`id`, `nim`, `nama`, `dosen1`, `dosen2`, `judul`, `reviewer`, `tanggal`, `durasi`, `ruang`, `keterangan`, `nilai`) VALUES
+(1, '175314080', 'HIERONIMUS FREDY MORGAN', 'Agnes Maria Polina S.Kom., M.Sc.', 'Dr. Cyprianus Kuntoro Adi, S.J. M.A., M.Sc.', 'sadsaaad', 'Eko Hari Parmadi S.Si., M.Kom.', '2020-08-18', '07.00-08.00', 'Lab Jarkom', '', '-');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hapuspendadaran`
+--
+
+CREATE TABLE `hapuspendadaran` (
+  `id` int(11) NOT NULL,
+  `nim` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `dosen1` varchar(255) NOT NULL,
+  `dosen2` varchar(255) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `reviewer` varchar(255) NOT NULL,
+  `ketuaPenguji` varchar(255) NOT NULL,
+  `sekretarisPenguji` varchar(225) NOT NULL,
+  `anggotaPenguji` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL,
+  `durasi` varchar(255) NOT NULL,
+  `ruang` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `nilai` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -123,8 +170,7 @@ CREATE TABLE `jadwal` (
 --
 
 INSERT INTO `jadwal` (`idJadwal`, `jenisUjian`, `semester`, `tahun`) VALUES
-(1, 'UTS', 'GASAL', '2020'),
-(2, 'UTS', 'GASAL', '2017');
+(1, 'UTS', 'GASAL', '2017');
 
 -- --------------------------------------------------------
 
@@ -140,11 +186,20 @@ CREATE TABLE `kolokium` (
   `dosen2` varchar(255) NOT NULL,
   `judul` varchar(255) NOT NULL,
   `reviewer` varchar(255) NOT NULL,
-  `tanggal` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL,
   `durasi` varchar(255) NOT NULL,
   `ruang` varchar(255) NOT NULL,
-  `keterangan` varchar(255) NOT NULL
+  `keterangan` varchar(255) NOT NULL,
+  `nilai` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `kolokium`
+--
+
+INSERT INTO `kolokium` (`id`, `nim`, `nama`, `dosen1`, `dosen2`, `judul`, `reviewer`, `tanggal`, `durasi`, `ruang`, `keterangan`, `nilai`) VALUES
+(2, '175314083', 'IDA BAGUS YUDISTIRA PRAMA PUTRA', 'Dr. Anastasia Rita Widiarti', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', 'dssf', 'JB. Budi Darmawan S.T., M.Sc.', '2020-08-18', '07.00-08.00', 'Lab Penelitian', '', 'A'),
+(3, '175314080', 'HIERONIMUS FREDY MORGAN', 'Alb. Agung Hadhiatma M.T.', 'Agnes Maria Polina S.Kom., M.Sc.', 'saasas', 'Puspaningtyas Sanjoyo Adi S.T., M.T.', '2020-08-18', '08.00-09.00', 'Lab Jarkom', '', 'A');
 
 -- --------------------------------------------------------
 
@@ -810,7 +865,6 @@ CREATE TABLE `makul` (
 --
 
 INSERT INTO `makul` (`idMakul`, `kodeMakul`, `tipeMakul`, `nama`, `tahun`, `semester`, `kelas`, `kapasitas`, `idSemester`) VALUES
-(2, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'B', '24', 1),
 (3, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'C', '26', 1),
 (4, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'D', '27', 1),
 (5, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'E', '29', 1),
@@ -837,7 +891,7 @@ INSERT INTO `makul` (`idMakul`, `kodeMakul`, `tipeMakul`, `nama`, `tahun`, `seme
 (28, '', '', 'Basis Data Multimedia', '2017', 'GENAP', 'A', '31', 6),
 (29, '', '', 'Basis Data Multimedia', '2017', 'GENAP', 'B', '28', 6),
 (30, '', '', 'Basis Data Relasional Objek', '2017', 'GENAP', 'A', '57', 6),
-(31, '', '', 'Administrasi Basis Data', '2018', 'GASAL', 'A', '33', 5),
+(31, '', 'Rekayasa Data', 'Administrasi Basis Data', '2018', 'GASAL', 'A', '33', 5),
 (32, '', '', 'Administrasi Basis Data', '2018', 'GASAL', 'B', '34', 5),
 (33, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'A', '28', 1),
 (34, '', '', 'Algoritma dan Pemrograman', '2018', 'GASAL', 'B', '30', 1),
@@ -888,7 +942,9 @@ INSERT INTO `makul` (`idMakul`, `kodeMakul`, `tipeMakul`, `nama`, `tahun`, `seme
 (80, '', '', 'Bahasa Indonesia', '2019', 'GENAP', 'L', '1', 5),
 (81, '', '', 'Bahasa Inggris', '2019', 'GENAP', 'G', '1', 1),
 (82, '', '', 'Bahasa Inggris', '2019', 'GENAP', 'M', '6', 1),
-(83, '', '', 'Pendidikan Kewarganegaraan', '2019', 'GASAL', 'F', '1', 8);
+(83, '', '', 'Pendidikan Kewarganegaraan', '2019', 'GASAL', 'F', '1', 8),
+(84, '', '', 'Algorithm and Programming', '2017', 'GASAL', 'A', '27', 0),
+(85, '', '', 'Algoritma dan Pemrograman', '2017', 'GASAL', 'B', '24', 0);
 
 -- --------------------------------------------------------
 
@@ -907,11 +963,73 @@ CREATE TABLE `pendadaran` (
   `ketuaPenguji` varchar(255) NOT NULL,
   `sekretarisPenguji` varchar(225) NOT NULL,
   `anggotaPenguji` varchar(255) NOT NULL,
-  `tanggal` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL,
   `durasi` varchar(255) NOT NULL,
   `ruang` varchar(255) NOT NULL,
-  `keterangan` varchar(255) NOT NULL
+  `keterangan` varchar(255) NOT NULL,
+  `nilai` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pendadaran`
+--
+
+INSERT INTO `pendadaran` (`id`, `nim`, `nama`, `dosen1`, `dosen2`, `judul`, `reviewer`, `ketuaPenguji`, `sekretarisPenguji`, `anggotaPenguji`, `tanggal`, `durasi`, `ruang`, `keterangan`, `nilai`) VALUES
+(1, '175314080', 'HIERONIMUS FREDY MORGAN', 'Alb. Agung Hadhiatma M.T.', 'Agnes Maria Polina S.Kom., M.Sc.', 'saasas', 'Puspaningtyas Sanjoyo Adi S.T., M.T.', 'Dr. Anastasia Rita Widiarti', 'Dr. Cyprianus Kuntoro Adi, S.J. M.A., M.Sc.', 'Puspaningtyas Sanjoyo Adi S.T., M.T.', '2020-08-22', '12.00-14.00', 'Lab Jarkom', '', ''),
+(4, '175314083', 'IDA BAGUS YUDISTIRA PRAMA PUTRA', 'Dr. Anastasia Rita Widiarti', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', 'dssf', 'JB. Budi Darmawan S.T., M.Sc.', 'JB. Budi Darmawan S.T., M.Sc.', 'Drs. Johanes Eka Priyatma M.Sc., Ph.D.', 'Paulina Heruningsih Prima Rosa M.Sc.', '2020-08-29', '07.00-09.00', 'Lab Jarkom', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pindahkolokium`
+--
+
+CREATE TABLE `pindahkolokium` (
+  `id` int(11) NOT NULL,
+  `nim` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `dosen1` varchar(255) NOT NULL,
+  `dosen2` varchar(255) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `reviewer` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL,
+  `durasi` varchar(255) NOT NULL,
+  `ruang` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `nilai` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pindahpendadaran`
+--
+
+CREATE TABLE `pindahpendadaran` (
+  `id` int(11) NOT NULL,
+  `nim` varchar(255) NOT NULL,
+  `nama` varchar(255) NOT NULL,
+  `dosen1` varchar(255) NOT NULL,
+  `dosen2` varchar(255) NOT NULL,
+  `judul` varchar(255) NOT NULL,
+  `reviewer` varchar(255) NOT NULL,
+  `ketuaPenguji` varchar(255) NOT NULL,
+  `sekretarisPenguji` varchar(225) NOT NULL,
+  `anggotaPenguji` varchar(255) NOT NULL,
+  `tanggal` date NOT NULL,
+  `durasi` varchar(255) NOT NULL,
+  `ruang` varchar(255) NOT NULL,
+  `keterangan` varchar(255) NOT NULL,
+  `nilai` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pindahpendadaran`
+--
+
+INSERT INTO `pindahpendadaran` (`id`, `nim`, `nama`, `dosen1`, `dosen2`, `judul`, `reviewer`, `ketuaPenguji`, `sekretarisPenguji`, `anggotaPenguji`, `tanggal`, `durasi`, `ruang`, `keterangan`, `nilai`) VALUES
+(2, '175314083', 'IDA BAGUS YUDISTIRA PRAMA PUTRA', 'Dr. Anastasia Rita Widiarti', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', 'dssf', 'JB. Budi Darmawan S.T., M.Sc.', 'Eko Hari Parmadi S.Si., M.Kom.', 'Paulina Heruningsih Prima Rosa M.Sc.', 'JB. Budi Darmawan S.T., M.Sc.', '2020-08-22', '07.00-09.00', 'Lab Penelitian', '', ''),
+(3, '175314083', 'IDA BAGUS YUDISTIRA PRAMA PUTRA', 'Dr. Anastasia Rita Widiarti', 'Eduardus Hardika Sandy Atmaja S.Kom., M.Cs.', 'dssf', 'JB. Budi Darmawan S.T., M.Sc.', 'JB. Budi Darmawan S.T., M.Sc.', 'Haris Sriwindono M.Kom, Ph.D.', '', '2020-08-29', '07.00-09.00', 'Lab Jarkom', '', '');
 
 -- --------------------------------------------------------
 
@@ -933,30 +1051,6 @@ CREATE TABLE `presensi` (
 --
 
 INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
-(28, 145314091, 'YOSEP TEKI NUGROHO', 2, 2, 2),
-(29, 145314092, 'YOHANES DICKY MAHENDRA', 2, 2, 2),
-(30, 145314094, 'JUNANDUS SIJABAT', 2, 2, 2),
-(31, 175314031, 'WIRA DINATA', 2, 2, 2),
-(32, 175314032, 'GALIH PRASETYA JATI', 2, 2, 2),
-(33, 175314033, 'RIVAN ANANDITYA PRADANA', 2, 2, 2),
-(34, 175314034, 'REENA SIMANIHURUK', 2, 2, 2),
-(35, 175314035, 'WIBOWO CAHYONO', 2, 2, 2),
-(36, 175314036, 'NOVI FITRI', 2, 2, 2),
-(37, 175314037, 'SAFIRA NURTANTIA WILOPOJATI', 2, 2, 2),
-(38, 175314038, 'JOSE PEDRO FEBIAN', 2, 2, 2),
-(39, 175314039, 'ANDRI PRASETYO WIBOWO', 2, 2, 2),
-(40, 175314040, 'MARIA SIMPLISIA WEA LAJA', 2, 2, 2),
-(41, 175314041, 'ADVENTUS DIO', 2, 2, 2),
-(42, 175314042, 'DANIEL FREDERIK', 2, 2, 2),
-(43, 175314043, 'MIKHAEL SURYA PUSPITA JAYA', 2, 2, 2),
-(44, 175314044, 'YUSUP HARIS PURNOMO', 2, 2, 2),
-(45, 175314045, 'JOSEPH RIANDY PRATAMA HUTAGALUNG', 2, 2, 2),
-(46, 175314046, 'M.IKHSAN ABIMANYU', 2, 2, 2),
-(47, 175314047, 'FRANCISCA INTAN BERTIN', 2, 2, 2),
-(48, 175314048, 'RENELDIS PUTRI TANGGU', 2, 2, 2),
-(49, 175314049, 'RIVALDI ATMA DHINATA SEMBIRING', 2, 2, 2),
-(50, 175314050, 'ANDREAS ALDYANTO NURA', 2, 2, 2),
-(51, 175314051, 'SENDHY JAYA RAHARJA', 2, 2, 2),
 (52, 135314014, 'YOHANES AGUNG NUGROHO', 3, 3, 3),
 (53, 135314045, 'STANISLAUS ADRIAN CHRISNAMURTI', 3, 3, 3),
 (54, 175314052, 'AGUNG KRISTANTO', 3, 3, 3),
@@ -1871,8 +1965,7 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1017, 185314085, 'EDUARDUS ERIK', 35, 21, 35),
 (1018, 185314086, 'DAMIANUS HALILINTAR', 35, 21, 35),
 (1019, 185314088, 'STEFANUS HARDIKI KARDOS', 35, 21, 35),
-(1020, 185314090, 'VITUS DAMA JIVANOV', 35, 21, 35);
-INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
+(1020, 185314090, 'VITUS DAMA JIVANOV', 35, 21, 35),
 (1021, 125314088, 'JULIAN DWI ROSANTA', 36, 4, 36),
 (1022, 155314102, 'SEBASTIANUS RECZY.S', 36, 4, 36),
 (1023, 185314091, 'SHINE CROSSIFIXIO SIANTURI', 36, 4, 36),
@@ -1893,7 +1986,8 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1038, 185314117, 'DESI DERIUS MILLENIYO ROWANDA', 36, 4, 36),
 (1039, 185314118, 'RADIT AGATHA PRAKOSO', 36, 4, 36),
 (1040, 185314119, 'OKTA SETYA PUTRA AGUSTIN', 36, 4, 36),
-(1041, 185314121, 'FRANCISKUS HENDARDI', 36, 4, 36),
+(1041, 185314121, 'FRANCISKUS HENDARDI', 36, 4, 36);
+INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
 (1042, 185314123, 'YULIA ARTHA ROSARI', 36, 4, 36),
 (1043, 185314126, 'RAKA PRIMANDA PUTRA', 36, 4, 36),
 (1044, 185314128, 'LAURA FALENCIA OKTAVIA PANGARIBUAN', 36, 4, 36),
@@ -2778,8 +2872,7 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1924, 185314063, 'EVARISTA IRIANTI', 67, 32, 67),
 (1925, 185314064, 'CINDY YUDHITA MASSUDI', 67, 32, 67),
 (1926, 185314067, 'FELISITAS GEA NANDA ELVIONA', 67, 32, 67),
-(1927, 185314137, 'MARCHELIENE MIRYASTRI BOLO', 67, 32, 67);
-INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
+(1927, 185314137, 'MARCHELIENE MIRYASTRI BOLO', 67, 32, 67),
 (1928, 195314168, 'MARIO YULIANTO SETIADI', 67, 32, 67),
 (1929, 155314106, 'LEONARDUS PITER MAHENDRA', 68, 32, 68),
 (1930, 185314075, 'RAMOT YUSTIAN HALIM PASARIBU', 68, 32, 68),
@@ -2800,7 +2893,8 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (1945, 175314048, 'RENELDIS PUTRI TANGGU', 69, 25, 69),
 (1946, 175314051, 'SENDHY JAYA RAHARJA', 69, 25, 69),
 (1947, 175314052, 'AGUNG KRISTANTO', 69, 25, 69),
-(1948, 175314060, 'ATANASIUS IVANNOEL RIO AJI', 69, 25, 69),
+(1948, 175314060, 'ATANASIUS IVANNOEL RIO AJI', 69, 25, 69);
+INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRuangan`) VALUES
 (1949, 175314076, 'FRISKO ADRIAN', 69, 25, 69),
 (1950, 175314080, 'HIERONIMUS FREDY MORGAN', 69, 25, 69),
 (1951, 175314083, 'IDA BAGUS YUDISTIRA PRAMA PUTRA', 69, 25, 69),
@@ -3104,7 +3198,58 @@ INSERT INTO `presensi` (`idPresensi`, `nim`, `nama`, `idMakul`, `idDosen`, `idRu
 (2249, 155314072, 'MARIO AGUSTORIUS LIODA GHETA SEDA', 82, 35, 82),
 (2250, 155314073, 'BASTIAN CHANDRA KUSUMA', 82, 35, 82),
 (2251, 155314077, 'ORNANDO TRIHANDARU SETIAJI', 82, 35, 82),
-(2252, 145314011, 'VINSENSIUS VERDIANTO PUTRA', 83, 29, 83);
+(2252, 145314011, 'VINSENSIUS VERDIANTO PUTRA', 83, 29, 83),
+(2253, 175314001, 'STEVAN TIOVANDI', 84, 1, 84),
+(2254, 175314002, 'EDRICK HERNANDO', 84, 1, 84),
+(2255, 175314003, 'MARKUS PATRIK SEKAITELES', 84, 1, 84),
+(2256, 175314004, 'CHRISTOPHER MATTEW HERMAN', 84, 1, 84),
+(2257, 175314005, 'NICHOLAS WIMBARA', 84, 1, 84),
+(2258, 175314006, 'AYUNA ARMONICA', 84, 1, 84),
+(2259, 175314007, 'IGNATIUS RIKO RINALDI', 84, 1, 84),
+(2260, 175314009, 'CHRISTIAN WIBOWO TRINUGROHO', 84, 1, 84),
+(2261, 175314010, 'GERVASIUS TARUSMAN', 84, 1, 84),
+(2262, 175314011, 'DESHA VIRIYA KSANTI PURNOMO', 84, 1, 84),
+(2263, 175314012, 'PHILIPUS CHEVIN JOANITO MAGAT', 84, 1, 84),
+(2264, 175314013, 'ALBERTUS IVAN ADYATMA MAHESWARA', 84, 1, 84),
+(2265, 175314015, 'I GEDE DIPAYANA', 84, 1, 84),
+(2266, 175314016, 'RENDY EKO PRAYOGO', 84, 1, 84),
+(2267, 175314018, 'WIRYAWAN SETYA NUGROHO', 84, 1, 84),
+(2268, 175314019, 'REYN KEVIN KILA', 84, 1, 84),
+(2269, 175314020, 'TANDRIANTO KOKO GUNAWAN', 84, 1, 84),
+(2270, 175314021, 'FLORIANUS SURYA KEVIN', 84, 1, 84),
+(2271, 175314022, 'FX DONI WAHYU SB', 84, 1, 84),
+(2272, 175314023, 'FELIX PRIHANTORO', 84, 1, 84),
+(2273, 175314024, 'DEVIDA AURELIA YACOB', 84, 1, 84),
+(2274, 175314025, 'TANGGUH PURWOAGIL', 84, 1, 84),
+(2275, 175314026, 'IKHSANUDIN NUGRAHA', 84, 1, 84),
+(2276, 175314027, 'MICHAEL ALVIAN DANISH PRASOJO', 84, 1, 84),
+(2277, 175314028, 'WAHYU WIJANARKO', 84, 1, 84),
+(2278, 175314029, 'EZEKIEL JUAN FILIPPO CAPPI ARSYADI', 84, 1, 84),
+(2279, 175314030, 'FLAVIANA ABRIANI HALIM', 84, 1, 84),
+(2280, 145314091, 'YOSEP TEKI NUGROHO', 85, 36, 85),
+(2281, 145314092, 'YOHANES DICKY MAHENDRA', 85, 36, 85),
+(2282, 145314094, 'JUNANDUS SIJABAT', 85, 36, 85),
+(2283, 175314031, 'WIRA DINATA', 85, 36, 85),
+(2284, 175314032, 'GALIH PRASETYA JATI', 85, 36, 85),
+(2285, 175314033, 'RIVAN ANANDITYA PRADANA', 85, 36, 85),
+(2286, 175314034, 'REENA SIMANIHURUK', 85, 36, 85),
+(2287, 175314035, 'WIBOWO CAHYONO', 85, 36, 85),
+(2288, 175314036, 'NOVI FITRI', 85, 36, 85),
+(2289, 175314037, 'SAFIRA NURTANTIA WILOPOJATI', 85, 36, 85),
+(2290, 175314038, 'JOSE PEDRO FEBIAN', 85, 36, 85),
+(2291, 175314039, 'ANDRI PRASETYO WIBOWO', 85, 36, 85),
+(2292, 175314040, 'MARIA SIMPLISIA WEA LAJA', 85, 36, 85),
+(2293, 175314041, 'ADVENTUS DIO', 85, 36, 85),
+(2294, 175314042, 'DANIEL FREDERIK', 85, 36, 85),
+(2295, 175314043, 'MIKHAEL SURYA PUSPITA JAYA', 85, 36, 85),
+(2296, 175314044, 'YUSUP HARIS PURNOMO', 85, 36, 85),
+(2297, 175314045, 'JOSEPH RIANDY PRATAMA HUTAGALUNG', 85, 36, 85),
+(2298, 175314046, 'M.IKHSAN ABIMANYU', 85, 36, 85),
+(2299, 175314047, 'FRANCISCA INTAN BERTIN', 85, 36, 85),
+(2300, 175314048, 'RENELDIS PUTRI TANGGU', 85, 36, 85),
+(2301, 175314049, 'RIVALDI ATMA DHINATA SEMBIRING', 85, 36, 85),
+(2302, 175314050, 'ANDREAS ALDYANTO NURA', 85, 36, 85),
+(2303, 175314051, 'SENDHY JAYA RAHARJA', 85, 36, 85);
 
 -- --------------------------------------------------------
 
@@ -3161,7 +3306,6 @@ CREATE TABLE `ruangan` (
 --
 
 INSERT INTO `ruangan` (`idRuangan`, `nama`, `makul`, `hari`, `jam`) VALUES
-(2, 'L.JK B FST', '2', 'Selasa', '07:00 09:50'),
 (3, 'LKD.C FST', '3', 'Selasa', '07:00 09:50'),
 (4, 'L.BD B FST', '4', 'Selasa', '07:00 09:50'),
 (5, 'L.BD C FST', '5', 'Selasa', '07:00 09:50'),
@@ -3239,7 +3383,29 @@ INSERT INTO `ruangan` (`idRuangan`, `nama`, `makul`, `hari`, `jam`) VALUES
 (80, 'K.403', '80', 'Selasa', '11:00 13:50'),
 (81, 'K.304', '81', 'Rabu', '10:00 12:50'),
 (82, 'K.313', '82', 'Selasa', '09:00 11:50'),
-(83, 'I PGSD 1', '83', 'Senin', '07:00 08:50');
+(83, 'I PGSD 1', '83', 'Senin', '07:00 08:50'),
+(84, 'LKD.A FST', '84', 'Selasa', '07:00 09:50'),
+(85, 'L.JK B FST', '85', 'Selasa', '07:00 09:50');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ruangsidang`
+--
+
+CREATE TABLE `ruangsidang` (
+  `idRuangan` int(11) NOT NULL,
+  `nama` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ruangsidang`
+--
+
+INSERT INTO `ruangsidang` (`idRuangan`, `nama`) VALUES
+(1, 'Lab Jarkom'),
+(2, 'Lab Penelitian'),
+(4, 'LKD.B FST');
 
 -- --------------------------------------------------------
 
@@ -3283,6 +3449,18 @@ ALTER TABLE `dosen`
   ADD PRIMARY KEY (`idDosen`);
 
 --
+-- Indexes for table `hapuskolokium`
+--
+ALTER TABLE `hapuskolokium`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hapuspendadaran`
+--
+ALTER TABLE `hapuspendadaran`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `jadwal`
 --
 ALTER TABLE `jadwal`
@@ -3313,6 +3491,18 @@ ALTER TABLE `pendadaran`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `pindahkolokium`
+--
+ALTER TABLE `pindahkolokium`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `pindahpendadaran`
+--
+ALTER TABLE `pindahpendadaran`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `presensi`
 --
 ALTER TABLE `presensi`
@@ -3331,6 +3521,12 @@ ALTER TABLE `ruangan`
   ADD PRIMARY KEY (`idRuangan`);
 
 --
+-- Indexes for table `ruangsidang`
+--
+ALTER TABLE `ruangsidang`
+  ADD PRIMARY KEY (`idRuangan`);
+
+--
 -- Indexes for table `tahun`
 --
 ALTER TABLE `tahun`
@@ -3344,25 +3540,37 @@ ALTER TABLE `tahun`
 -- AUTO_INCREMENT for table `detailjadwal`
 --
 ALTER TABLE `detailjadwal`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `dosen`
 --
 ALTER TABLE `dosen`
-  MODIFY `idDosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=36;
+  MODIFY `idDosen` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+
+--
+-- AUTO_INCREMENT for table `hapuskolokium`
+--
+ALTER TABLE `hapuskolokium`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `hapuspendadaran`
+--
+ALTER TABLE `hapuspendadaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jadwal`
 --
 ALTER TABLE `jadwal`
-  MODIFY `idJadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idJadwal` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kolokium`
 --
 ALTER TABLE `kolokium`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mahasiswa`
@@ -3374,19 +3582,31 @@ ALTER TABLE `mahasiswa`
 -- AUTO_INCREMENT for table `makul`
 --
 ALTER TABLE `makul`
-  MODIFY `idMakul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `idMakul` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
 
 --
 -- AUTO_INCREMENT for table `pendadaran`
 --
 ALTER TABLE `pendadaran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `pindahkolokium`
+--
+ALTER TABLE `pindahkolokium`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pindahpendadaran`
+--
+ALTER TABLE `pindahpendadaran`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `presensi`
 --
 ALTER TABLE `presensi`
-  MODIFY `idPresensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2253;
+  MODIFY `idPresensi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2304;
 
 --
 -- AUTO_INCREMENT for table `ruang`
@@ -3398,7 +3618,13 @@ ALTER TABLE `ruang`
 -- AUTO_INCREMENT for table `ruangan`
 --
 ALTER TABLE `ruangan`
-  MODIFY `idRuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
+  MODIFY `idRuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=86;
+
+--
+-- AUTO_INCREMENT for table `ruangsidang`
+--
+ALTER TABLE `ruangsidang`
+  MODIFY `idRuangan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tahun`
