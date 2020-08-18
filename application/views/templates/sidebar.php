@@ -19,6 +19,8 @@
                                 <span class="fas fa-book"></span> Data Makul</a>
                             <a class="nav-link" href="<?= base_url('home/ruangan'); ?>">
                                 <span class="fas fa-building"></span> Data Ruangan</a>
+                            <a class="nav-link" href="<?= base_url('home/ruanganSidang'); ?>">
+                                <span class="fas fa-building"></span> Data Ruangan Sidang</a>
                         </nav>
                     </div>
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#kapasitas"

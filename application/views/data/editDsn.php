@@ -8,7 +8,7 @@
                         <div class="modal-body">
                             <div class="form-group">
                                 <label for="nip">NPP</label>
-                                <input type="text" class="form-control" id="nip" name="nip" value="<?= $data['nip'] ?>">
+                                <input type="text" class="form-control" id="nip" name="nip" value="<?= $data['npp'] ?>">
                                 <?= form_error('nip', '<small class="text-danger pl-2">', '</small>') ?>
                             </div>
                             <div class="form-group">

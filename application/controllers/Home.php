@@ -9,6 +9,7 @@ class home extends CI_Controller {
         $this->load->library('form_validation');
         $this->load->library('pagination');
         $this->load->model('list_model');
+        $this->load->model('Ruangan_model');
         $this->load->model('data_model');
         $this->load->library('excel');
     }
@@ -128,7 +129,7 @@ class home extends CI_Controller {
             $this->load->view('templates/footer', $data);
         } else {
             $edit = [
-                'nip' => $this->input->post('nip'),
+                'npp' => $this->input->post('nip'),
                 'nama' => $this->input->post('nama'),
                 'prodi' => $this->input->post('prodi'),
                 'status' => $this->input->post('status'),
@@ -267,6 +268,67 @@ class home extends CI_Controller {
             Ruangan berhasil di update!</div>');
             redirect('home/ruangan');
         }
+    }
+    public function ruanganSidang() {
+        
+        $data['data'] = $this->list_model->get_ruanganSidang_list();
+
+        $data['title'] = 'Data Ruangan Sidang';
+
+        $this->load->view('templates/header', $data);
+        $this->load->view('templates/sidebar', $data);
+        $this->load->view('data/ruanganSidang', $data);
+        $this->load->view('templates/topbar', $data);
+        $this->load->view('templates/footer', $data);
+    }
+
+    public function tambahRuangSidang()
+    {
+        $this->Ruangan_model->tambahDataRuangan();
+         $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+            Ruangan Sidang berhasil di tambah!</div>');
+        redirect('home/ruanganSidang');
+    }
+
+    public function editRuangSidang($idRuangan) {
+        $this->session->set_tempdata('item', $idRuangan);
+        redirect('home/editRuanganSidang');
+    }
+
+    public function editRuanganSidang() {
+        $idRuangan = $this->session->tempdata('item');
+        $data['title'] = 'Edit Ruangan Sidang';
+        $data['data'] = $this->db->get_where('ruangsidang', ['idRuangan' => $idRuangan])->row_array();
+
+        $this->form_validation->set_rules('nama', 'nama', 'required');
+
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('templates/sidebar', $data);
+            $this->load->view('data/editRuangSidang', $data);
+            $this->load->view('templates/topbar', $data);
+            $this->load->view('templates/footer', $data);
+        } else {
+            $edit = [
+                'nama' => $this->input->post('nama')
+            ];
+            $this->db->where('idRuangan', $idRuangan);
+            $this->db->update('ruangsidang', $edit);
+            
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="success">
+            Ruangan Sidang berhasil di update!</div>');
+            redirect('home/ruanganSidang');
+        }
+    }
+    public function deleteRuangSidang($idRuangan)
+    {
+        $this->db->where('idRuangan',$idRuangan);
+        $this->db->delete('ruangsidang');
+
+        
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
+         Ruang Sidang berhasil di hapus!</div>');
+        redirect('home/ruanganSidang');
     }
 
     public function uploadMahasiswa() {

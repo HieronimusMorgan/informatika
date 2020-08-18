@@ -1565,7 +1565,7 @@ $this->load->view('templates/header', $data);
 
         $writer = PHPExcel_IOFactory::createwriter($object, 'Excel2007');
         $writer->save('php://output');
-    }
+    } 
 
     public function excelDosen() {
         $statement = $this->session->userdata('statement');

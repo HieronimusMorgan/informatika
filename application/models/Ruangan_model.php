@@ -11,16 +11,16 @@ class Ruangan_model extends CI_model {
         $data = array(
             'nama' => $this->input->post('nama', true)
         );
-        $this->db->insert('ruangan', $data);
+        $this->db->insert('ruangsidang', $data);
     }
 
     public function hapusDataRuangan($id) {
         $this->db->where('idRuangan', $id);
-        $this->db->delete('ruangan');
+        $this->db->delete('ruangsidang');
     }
 
     public function getRuanganByID($id) {
-        return $this->db->get_where('ruangan', ['idRuangan' => $id])->row_array();
+        return $this->db->get_where('ruangsidang', ['idRuangan' => $id])->row_array();
     }
 
     public function editDataRuangan() {

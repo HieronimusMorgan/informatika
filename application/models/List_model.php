@@ -35,6 +35,11 @@ class List_model extends CI_Model {
         $query = $this->db->get('ruangan');
         return $query;
     }
+    function get_ruanganSidang_list() {
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get('ruangsidang');
+        return $query;
+    }
 
     function get_makul_list() {
         $this->db->order_by('nama', 'ASC');
