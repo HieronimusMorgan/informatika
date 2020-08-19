@@ -55,10 +55,10 @@ class rekomendasi extends CI_Controller
     // Settingan awal fil excel
     $excel->getProperties()->setCreator('My Notes Code')
     ->setLastModifiedBy('My Notes Code')
-    ->setTitle("Data Siswa")
-    ->setSubject("Siswa")
-    ->setDescription("Laporan Semua Data Siswa")
-    ->setKeywords("Data Siswa");
+    ->setTitle("Rekomendasi Jadwal")
+    ->setSubject("Ujian")
+    ->setDescription("Rekomendasi Jadwal Ujian")
+    ->setKeywords("Jadwal Ujian");
     // Buat sebuah variabel untuk menampung pengaturan style dari header tabel
     $style_col = array(
       'font' => array('bold' => true), // Set font nya jadi bold
@@ -99,7 +99,7 @@ class rekomendasi extends CI_Controller
         'left' => array('style'  => PHPExcel_Style_Border::BORDER_THIN) // Set border left dengan garis tipis
     )
   );
-    $excel->setActiveSheetIndex(0)->setCellValue('A1', "DATA SISWA"); // Set kolom A1 dengan tulisan "DATA SISWA"
+    $excel->setActiveSheetIndex(0)->setCellValue('A1', "Rekomendasi Jadwal Ujian"); // Set kolom A1 dengan tulisan "DATA SISWA"
     $excel->getActiveSheet()->mergeCells('A1:E1'); // Set Merge Cell pada kolom A1 sampai E1
     $excel->getActiveSheet()->getStyle('A1')->getFont()->setBold(TRUE); // Set bold kolom A1
     $excel->getActiveSheet()->getStyle('A1')->getFont()->setSize(15); // Set font size 15 untuk kolom A1
