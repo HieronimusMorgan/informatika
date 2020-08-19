@@ -129,10 +129,12 @@
                                             onclick="return confirm('Apakah anda yakin memindahkan data ini?');"
                                             style="width: 50px">Pindah</a>
                                         <?php endif ?>
+                                        <?php if($kol['nilai']=='-'): ?>
                                         <a href="<?= base_url(); ?>kolokium/hapus/<?= $kol['id']; ?>"
                                             class="badge badge-danger"
                                             onclick="return confirm('Apakah anda yakin menghapus data ini?');"
                                             style="width: 50px">Hapus</a>
+                                        <?php endif ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>

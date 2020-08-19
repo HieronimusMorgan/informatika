@@ -429,5 +429,20 @@ class home extends CI_Controller {
         $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
         $write->save('php://output');
     }
+    
+    public function formatdosen() {
+        $excel = new PHPExcel();
+        $excel->getProperties()->setTitle("Format Dosen");
+        $excel->setActiveSheetIndex(0)->setCellValue('A1', "NPP"); 
+        $excel->setActiveSheetIndex(0)->setCellValue('B1', "NAMA");
+        $excel->getActiveSheet(0)->setTitle("Format Dosen");
+        $excel->setActiveSheetIndex(0);
+        
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="Format Dosen.xlsx"'); 
+        header('Cache-Control: max-age=0');
+        $write = PHPExcel_IOFactory::createWriter($excel, 'Excel2007');
+        $write->save('php://output');
+    }
 
 }

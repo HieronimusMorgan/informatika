@@ -67,6 +67,7 @@
                         <input type="file" class="form-control-file" id="file" name="file[]" multiple>
                     </div>
                     <div class="modal-footer">
+                        <a class="btn btn-success" href="<?php echo base_url(); ?>home/formatdosen">Format</a>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Import</button>
                     </div>
