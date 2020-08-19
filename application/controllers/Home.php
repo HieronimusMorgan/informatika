@@ -394,7 +394,7 @@ class home extends CI_Controller {
                         $nim = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                         $nama = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                         if ($this->db->get_where('dosen', ['nama' => $nama])->num_rows() == 0) {
-                            $data[] = array('nip' => $nim, 'nama' => $nama);
+                            $data[] = array('npp' => $nim, 'nama' => $nama);
                         }
                     }
                 }

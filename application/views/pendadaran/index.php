@@ -139,9 +139,11 @@
                                             class="badge badge-warning" style="width: 50px"
                                             onclick="return confirm('Apakah anda yakin memindahkan data ini?');">Pindah</a>
                                         <?php endif ?>
+                                        <?php if($pen['nilai']==''): ?>
                                         <a href="<?= base_url(); ?>pendadaran/hapus/<?= $pen['id']; ?>"
                                             class="badge badge-danger" style="width: 50px"
                                             onclick="return confirm('Apakah anda yakin menghapus data ini?');">Hapus</a>
+                                        <?php endif ?>
                                     </td>
                                 </tr>
                                 <?php endforeach; ?>
