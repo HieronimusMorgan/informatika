@@ -147,7 +147,7 @@ class rekomendasi extends CI_Controller
         $excel->setActiveSheetIndex(0)->setCellValue('B'.$numrow, $time);
         $excel->setActiveSheetIndex(0)->setCellValue('C'.$numrow, $row["nama"]);
         $excel->setActiveSheetIndex(0)->setCellValue('D'.$numrow, $row["kelas"]);
-        $excel->setActiveSheetIndex(0)->setCellValue('E'.$numrow, $row["semester"]);
+        $excel->setActiveSheetIndex(0)->setCellValue('E'.$numrow, $row["idSemester"]);
         $excel->setActiveSheetIndex(0)->setCellValue('F'.$numrow, $row["dosen_nama"]);
         $excel->setActiveSheetIndex(0)->setCellValue('G'.$numrow, $row["ruangan"]);
         $excel->setActiveSheetIndex(0)->setCellValue('H'.$numrow, $row["kapasitas"]);
@@ -462,6 +462,7 @@ function detailjadwal($id) {
 
      //load view
  $data['semesterGas_Gen'] = $semester;
+ $data['tahunAjaran'] = $tahun;
  $data['title'] = 'Data '.$jenisUjian.' semester '.$semester.' tahun '.$tahun;
  $this->load->view('templates/header');
  $this->load->view('templates/sidebar', $data);

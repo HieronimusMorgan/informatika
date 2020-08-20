@@ -89,7 +89,7 @@
                             <label class="control-label col-sm-1">:</label>
                             <div class="col-sm-7">
                                 <select name="tahun" id="tahun" class="form-control">
-
+                                     <option><?= $tahunAjaran; ?></option>
                                 </select>
                             </div>
                         </div>
@@ -273,11 +273,12 @@
             dataType: 'json',
             success: function(data) {
 
-                var html = '';
+                var html = '<option>'+<?php echo $tahunAjaran ?>+'</option>';
                 var i;
                 for (i = 0; i < data.length; i++) {
-
-                    html += '<option >' + data[i].tahun + '</option>';
+                     if (<?php echo $tahunAjaran; ?> != data[i].tahun) {
+                            html += '<option >' + data[i].tahun + '</option>';
+                    }
                 }
                 $('#tahun').html(html);
             }
