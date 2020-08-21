@@ -30,7 +30,9 @@ Atas perhatian dan kerjasama Bapak/Ibu saya ucapkan terima kasih.
                                         
                                         
                                         (Wakaprodi)
-                                        <?= $dosen['nama']; ?><?= '' ?>
+                                        <?php if ($dosen != NULL): ?>
+                                        <?= $dosen['nama']; ?>
+                                        <?php endif; ?>
 <?php else: ?>
 Yth. <?= $pendadaran['dosen1']; ?><?= '' ?> 
      <?= $pendadaran['ketuaPenguji']; ?><?= '' ?> 
@@ -59,6 +61,8 @@ Atas perhatian dan kerjasama Bapak/Ibu saya ucapkan terima kasih.
                                         
                                         
                                         (Wakaprodi)
-                                        <?= $dosen['nama']; ?><?= '' ?>
+                                        <?php if ($dosen != NULL): ?>
+                                        <?= $dosen['nama']; ?>
+                                        <?php endif; ?>
 <?php endif; ?>
 

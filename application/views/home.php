@@ -2,11 +2,12 @@
     <main>
         <div class="container-fluid">
             
-            <CENTER>
+            <CENTER >
             	
-            	<img src="<?= base_url('assets/') ?>img/img/fst.png"  style="width:20%;height: 20%">
-            	<H1 class="mt-4">
-            		SELAMAT DATANG DI SISTEM INFORMASI PRODI INFORMATIKA
+            	<img src="<?= base_url('assets/') ?>img/img/fst.png"  style="width:20%;height: 20%;margin-top: 50px">
+                <H1 class="mt-4" >
+            		SISTEM INFORMASI PENJADWALAN <br>
+                        PROGRAM STUDI INFORMATIKA
             	</H1>
             	
             </CENTER>

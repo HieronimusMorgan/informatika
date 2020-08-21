@@ -11,7 +11,7 @@
                             <div class="card-body">
                                 <table>
                                     <tr>
-                                        <td width="110">
+                                        <td width="130">
                                             <img src="http://exelsa.usd.ac.id/lihatGambar.php?act=nim&nim=<?= $kolokium['nim']; ?>"
                                                 width="100">
                                         </td>

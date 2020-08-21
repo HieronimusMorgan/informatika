@@ -1194,7 +1194,9 @@ class Pendadaran extends CI_Controller {
             if (($d['status']) == 'Wakaprodi') {
                 $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
+                break;
             }
+            $data['dosen'] = NULL;
         }
         $data['tanggal'] = format_indo(date("Y-m-d"));
         $filename = 'Undangan_Pendadaran_' . $mahasiswa . '.pdf';
@@ -1216,7 +1218,9 @@ class Pendadaran extends CI_Controller {
             if (($d['status']) == 'Wakaprodi') {
                 $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
+                break;
             }
+            $data['dosen'] = NULL;
         }
         $data['tanggal'] = format_indo(date("Y-m-d"));
         $mahasiswa = $data['pendadaran']['nim'];
@@ -1241,7 +1245,9 @@ class Pendadaran extends CI_Controller {
             if (($d['status']) == 'Wakaprodi') {
                 $idD = $d['idDosen'];
                 $data['dosen'] = $this->Dosen_model->getDosenById($idD);
+                break;
             }
+            $data['dosen'] = NULL;
         }
         $data['tanggal'] = format_indo(date("Y-m-d"));
         $mahasiswa = $data['pendadaran']['nim'];
@@ -1259,7 +1265,11 @@ class Pendadaran extends CI_Controller {
             $template->setValue('tanggal', format_indo($data['pendadaran']['tanggal']));
             $template->setValue('jam', $data['pendadaran']['durasi']);
             $template->setValue('date', $data['tanggal']);
-            $template->setValue('wakaprodi', $data['dosen']['nama']);
+            if ($data['dosen'] != NULL) {
+                $template->setValue('wakaprodi', $data['dosen']['nama']);
+            } else {
+                $template->setValue('wakaprodi', '');
+            }
 
             $temp_filename = 'Undangan_Pendadaran_' . $mahasiswa . '.docx';
             $template->saveAs($temp_filename);
@@ -1289,7 +1299,11 @@ class Pendadaran extends CI_Controller {
             $template->setValue('tanggal', format_indo($data['pendadaran']['tanggal']));
             $template->setValue('jam', $data['pendadaran']['durasi']);
             $template->setValue('date', $data['tanggal']);
-            $template->setValue('wakaprodi', $data['dosen']['nama']);
+            if ($data['dosen'] != NULL) {
+                $template->setValue('wakaprodi', $data['dosen']['nama']);
+            } else {
+                $template->setValue('wakaprodi', '');
+            }
 
             $temp_filename = 'Undangan_Pendadaran_' . $mahasiswa . '.docx';
             $template->saveAs($temp_filename);

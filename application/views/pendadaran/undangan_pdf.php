@@ -124,7 +124,9 @@
             Yogyakarta, <?= $tanggal; ?>
             <br><br><br>
             (Wakaprodi)<br>
-            <?= $dosen['nama']; ?>
+            <?php if ($dosen != NULL): ?>
+                <?= $dosen['nama']; ?>
+            <?php endif; ?>
         </p>
     <?php else: ?>
         <table>
@@ -218,7 +220,9 @@
             Yogyakarta, <?= $tanggal; ?>
             <br><br><br>
             (Wakaprodi)<br>
-            <?= $dosen['nama']; ?>
+            <?php if ($dosen != NULL): ?>
+                <?= $dosen['nama']; ?>
+            <?php endif; ?>
         </p>
     <?php endif; ?>
 

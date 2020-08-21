@@ -11,9 +11,9 @@
                             <div class="card-body">
                                 <table>
                                     <tr>
-                                        <td width="110">
+                                        <td width="130">
                                             <img src="http://exelsa.usd.ac.id/lihatGambar.php?act=nim&nim=<?= $kolokium['nim']; ?>"
-                                                width="100">
+                                                 width="100">
                                         </td>
                                         <td>
                                             <h5 class="card-title"><?= $kolokium['nama']; ?></h5>
@@ -93,7 +93,7 @@
                                                 <p class="card-text">Nilai:</p>
                                             </td>
                                             <td>
-                                                <p class="card-text"><?=$kolokium['nilai'];?></p>
+                                                <p class="card-text"><?= $kolokium['nilai']; ?></p>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -102,19 +102,19 @@
                                 <a href="<?= base_url() ?>kolokium" class="btn btn-danger float-right"><i
                                         class="fas fa-arrow-left "></i> Kembali</a>
                                 <a href="<?= base_url() ?>kolokium/pdf/<?= $kolokium['id']; ?>"
-                                    class="btn btn-primary"><i class="fas fa-file-pdf"></i> Detail</a>
+                                   class="btn btn-primary"><i class="fas fa-file-pdf"></i> Detail</a>
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown"
-                                        aria-haspopup="true" aria-expanded="false">
+                                            aria-haspopup="true" aria-expanded="false">
                                         <i class="fas fa-download"></i> Cetak Undangan
                                     </button>
                                     <div class="dropdown-menu">
                                         <a href="<?= base_url() ?>kolokium/undangan/<?= $kolokium['id']; ?>"
-                                            class="dropdown-item"><i class="fas fa-file-pdf"></i> Undangan PDF</a>
+                                           class="dropdown-item"><i class="fas fa-file-pdf"></i> Undangan PDF</a>
                                         <a href="<?= base_url() ?>kolokium/undangantxt/<?= $kolokium['id']; ?>"
-                                            class="dropdown-item"><i class="fas fa-file-alt"></i> Undangan TXT</a>
+                                           class="dropdown-item"><i class="fas fa-file-alt"></i> Undangan TXT</a>
                                         <a href="<?= base_url() ?>kolokium/undanganWord/<?= $kolokium['id']; ?>"
-                                            class="dropdown-item"><i class="fas fa-file-word"></i> Undangan WORD</a>
+                                           class="dropdown-item"><i class="fas fa-file-word"></i> Undangan WORD</a>
                                     </div>
                                 </div>
                             </div>
