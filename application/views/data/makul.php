@@ -42,7 +42,7 @@
                                         class="badge badge-success">Edit</a>
                                     <a href="<?php echo base_url(); ?>home/deleteMakul/<?= $row->idMakul; ?>"
                                         class="badge badge-danger"
-                                        onclick="return confirm('Are you sure you want to delete <?= $row->idMakul; ?>?');">Delete</a>
+                                        onclick="return confirm('Are you sure you want to delete <?= $row->nama; ?>, present <?= $row->nama; ?> and <?= $row->ruangan; ?>?');">Delete</a>
                                 </td>
                             </tr>
                             <?php $i++; ?>

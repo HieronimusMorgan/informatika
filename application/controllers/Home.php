@@ -269,6 +269,34 @@ class home extends CI_Controller {
             redirect('home/ruangan');
         }
     }
+
+    public function deleteRuang($idRuangan)
+    {
+        $this->db->select("idMakul");
+        $this->db->where('idRuangan',$idRuangan);
+        $this->db->from('presensi');
+        $idMakul = $this->db->get()->row();
+
+        #delete presensi
+        $this->db->where('idRuangan',$idRuangan);
+        $this->db->delete('presensi');
+
+
+        #delete makul
+        $this->db->where('idMakul',$idMakul->idMakul);
+        $this->db->delete('makul');
+
+        $hapus = array (
+            "idRuangan" => $idRuangan
+        );
+        $this->db->delete('ruangan', $hapus);
+
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="success">
+        Ruangan berhasil di hapus!</div>');
+        redirect('home/ruangan');
+    }
+
+
     public function ruanganSidang() {
         
         $data['data'] = $this->list_model->get_ruanganSidang_list();

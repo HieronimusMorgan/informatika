@@ -50,7 +50,7 @@
                                     <i class="fas fa-edit"></i> Edit Presensi</a>
                                 <a type="button" class="btn btn-danger"
                                     href="<?= base_url('presensi/deletePresensi/'.$makul->idMakul); ?>"
-                                    onclick="return confirm('Are you sure you want to delete <?= $makul->nama; ?>?');">
+                                    onclick="return confirm('Are you sure you want to delete present <?= $makul->nama; ?>?');">
                                     <i class="far fa-trash-alt"></i> Hapus Presensi</a>
                             </div>
                         </div>
