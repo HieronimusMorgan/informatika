@@ -66,6 +66,7 @@ class presensi extends CI_Controller {
             $this->load->view('templates/footer', $data);
         } else {
             $edit = [
+                'kodeMakul' => $this->input->post('kode'),
                 'tipeMakul' => $this->input->post('tipe'),
                 'nama' => $this->input->post('nama'),
                 'tahun' => $this->input->post('tahun'),
